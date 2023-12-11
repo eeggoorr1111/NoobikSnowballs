@@ -1,0 +1,52 @@
+[Bb]in/
+[Oo]bj/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ibrary/
+
+ProjectSettings/Packages
+UserSettings/
+
+# Custom
+UserSettings/AndroidLogcatSettings.asset
+
+# Android builds
+.apk
+.aab
+
+# Visual Studio
+.vs
+.vsconfig
+*.pidb
+*.userprefs
+*.user
+*.suo
+*.dwlt
+*.log
+*.cache
+*.umbracache
+
+# Visual C++ cache files
+*/ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# OS
+*.DS_Store
+
+*.sln
+*.csproj
+Assembly*
