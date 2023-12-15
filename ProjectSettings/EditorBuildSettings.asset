@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_NoobikSnowballs/Scenes/Main.unity
+    path: Assets/_ProjectAssets/Scenes/Main.unity
     guid: ad22df1988d19544caf3c102ad615d4a
+  - enabled: 1
+    path: Assets/_ProjectAssets/Scenes/Level.unity
+    guid: d6c5f3a7b9d37aa488f5b33c4022fa1d
   m_configObjects: {}
