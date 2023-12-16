@@ -568,6 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainWindow: {fileID: 1712742613}
+  _deviceType: {fileID: 1377223574}
   _isShowMainMenuOnFirstLaunch: 1
   _isShowMainMenuAfterTransion: 1
   _openingShop: 0
@@ -576,8 +577,6 @@ MonoBehaviour:
   _levelCounter: {fileID: 11400000, guid: 2f5699bbe8476b74f82b7deccfc11771, type: 2}
   _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
   _levelsLoader: {fileID: 2119252918}
-  _winAwardGiving: {fileID: 0}
-  _loseAwardGiving: {fileID: 0}
   _firstLaunch:
     m_PersistentCalls:
       m_Calls: []
