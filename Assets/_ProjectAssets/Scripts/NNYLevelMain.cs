@@ -3,18 +3,16 @@ using Narratore.Abstractions;
 
 public sealed class NNYLevelMain : LevelMain
 {
-    public NNYLevelMain(IPreparedUpdatables preparedUpdatables,
-                        IBeginnedUpdatables beginnedUpdatables,
-                        LevelConfig config,
-                        NNYLevelProgress progress) : base(preparedUpdatables, beginnedUpdatables, config)
+    public NNYLevelMain(IUpdatables preparedUpdatables,
+                        IUpdatables beginnedUpdatables,
+                        LevelConfig config) : base(preparedUpdatables, beginnedUpdatables, config)
     {
-        _progress = progress;
-
-        UnityEngine.Debug.LogError("KEK");
+        UnityEngine.Debug.LogError($"{preparedUpdatables == null} {beginnedUpdatables == null}");
     }
 
-    public override Progress Progress => _progress;
 
+    public override void Dispose()
+    {
 
-    private readonly NNYLevelProgress _progress;
+    }
 }
