@@ -7,7 +7,6 @@ public sealed class NNYLevelMain : LevelMain
                         IUpdatables beginnedUpdatables,
                         LevelConfig config) : base(preparedUpdatables, beginnedUpdatables, config)
     {
-        UnityEngine.Debug.LogError($"{preparedUpdatables == null} {beginnedUpdatables == null}");
     }
 
 

@@ -1,5 +1,6 @@
 using Narratore.Interfaces;
 using Narratore.Solutions.Battle;
+using Narratore.Extensions;
 using System;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
 
     public void Tick()
     {
-        if (Input.GetMouseButton(0) && _data.Gun.IsCanTodoAction)
+        if (Input.GetMouseButton(0))
         {
             // Исходим из того, что террейн находиться в 0 точке и так как камера под углом 
             // то высоты недостаточно, поэтому умножаем на 2 - такой небольшой костыль)
@@ -37,10 +38,11 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
 
             if (Physics.Raycast(ray, out RaycastHit hit, distance, _layerMask))
             {
-                Vector3 direction = (hit.point - _data.GunTransform.position).normalized;
-
+                Vector3 direction = (hit.point - _data.GunTransform.position).WithY(0).normalized;
                 _data.GunTransform.forward = direction;
-                _data.Gun.Shoot();
+
+                if (_data.Gun.IsCanTodoAction)
+                    _data.Gun.Shoot();
             }
         }
     }

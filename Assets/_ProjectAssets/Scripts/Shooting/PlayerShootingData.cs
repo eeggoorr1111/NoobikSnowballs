@@ -1,5 +1,5 @@
 ﻿using Narratore.Solutions.Battle;
-using Narratore.UpgradableStats;
+using Narratore.MetaGame;
 using UnityEngine;
 
 public class PlayerShootingData

@@ -1,10 +1,9 @@
-﻿using Narratore.Interfaces;
+﻿using Narratore.MetaGame;
 using Narratore.Solutions.Battle;
-using Narratore.UpgradableStats;
 using System;
 using UnityEngine;
 using VContainer;
-
+using ITickable = VContainer.Unity.ITickable;
 
 namespace Narratore.DI
 {
@@ -24,13 +23,13 @@ namespace Narratore.DI
             base.Configure(builder, config);
 
             builder.RegisterInstance(new PlayerShootingData(_playerGun, _damage, _gunTransform, _playerUnitId, PlayersIds.LocalPlayerId));
-            builder.RegisterInstance(Camera.current);
+            builder.RegisterInstance(Camera.main);
 
             if (config.DeviceType == DeviceType.Desktop)
             {
                 builder.Register<DesktopPlayerShooting>(Lifetime.Singleton)
                     .WithParameter(_desktopShootLayerMask)
-                    .As<IUpdatable, IDisposable>();
+                    .As<ITickable, IDisposable>();
                 
             }
             else

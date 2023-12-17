@@ -1625,6 +1625,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2023210846}
   - component: {fileID: 2023210845}
+  - component: {fileID: 2023210847}
+  - component: {fileID: 2023210848}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1671,6 +1673,33 @@ Transform:
   - {fileID: 1952645111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2023210847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023210844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12979dadec608824182c7479df98221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetFPS: 60
+--- !u!114 &2023210848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023210844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304d9d77f51faa3419e2c00e9faddaea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handleSeed: 0
+  _isUseHandleSeed: 0
 --- !u!1 &2119252912
 GameObject:
   m_ObjectHideFlags: 0
