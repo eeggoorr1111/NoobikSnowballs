@@ -1,4 +1,5 @@
-﻿using Narratore.MetaGame;
+﻿using Narratore.Helpers;
+using Narratore.MetaGame;
 using Narratore.Solutions.Battle;
 using System;
 using UnityEngine;
@@ -10,10 +11,7 @@ namespace Narratore.DI
     public class NNYShootingConfigurator : ShootingConfigurator
     {
         [Header("NNY SHOOTING")]
-        [SerializeField] private Gun _playerGun;
-        [SerializeField] private Transform _gunTransform;
-        [SerializeField] private IntStat _damage;
-        [SerializeField] private int _playerUnitId;
+        [SerializeField] private PlayerUnitSpawner _unitSpawner;
 
         [Header("DESKTOP")]
         [SerializeField] private LayerMask _desktopShootLayerMask;
@@ -22,7 +20,14 @@ namespace Narratore.DI
         {
             base.Configure(builder, config);
 
-            builder.RegisterInstance(new PlayerShootingData(_playerGun, _damage, _gunTransform, _playerUnitId, PlayersIds.LocalPlayerId));
+            if (!_unitSpawner.TrySpawn() || !_unitSpawner.Current.GunSpawner.TrySpawn()) return;
+
+            PlayerUnitRoster unitRoster = _unitSpawner.Current;
+            PlayerGunRoster gunRoster = unitRoster.GunSpawner.Current;
+
+            gunRoster.Recoil.SetTarget(unitRoster.GunRecoilTarget);
+
+            builder.RegisterInstance(new PlayerShootingData(gunRoster.Gun, gunRoster.Damage, unitRoster.Root, IDGenerator.NewID(), PlayersIds.LocalPlayerId));
             builder.RegisterInstance(Camera.main);
 
             if (config.DeviceType == DeviceType.Desktop)
