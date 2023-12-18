@@ -10,12 +10,14 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
     public DesktopPlayerShooting(   PlayerShootingData data, 
                                     ShellsLifetime shellsLifetime, 
                                     Camera camera, 
-                                    LayerMask layerMask)
+                                    LayerMask layerMask,
+                                    IUnitRotator unitRotator)
     {
         _data = data;
         _shellsLifetime = shellsLifetime;
         _camera = camera;
         _layerMask = layerMask;
+        _unitRotator = unitRotator;
 
         _data.Gun.Shooted += OnShooted;
     }
@@ -26,6 +28,7 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
     private readonly ShellsLifetime _shellsLifetime;
     private readonly Camera _camera;
     private readonly LayerMask _layerMask;
+    private readonly IUnitRotator _unitRotator;
 
     public void Tick()
     {
@@ -39,8 +42,8 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
             if (Physics.Raycast(ray, out RaycastHit hit, distance, _layerMask))
             {
                 Vector3 direction = (hit.point - _data.GunTransform.position).WithY(0).normalized;
-                _data.GunTransform.forward = direction;
 
+                _unitRotator.Rotate(direction);
                 if (_data.Gun.IsCanTodoAction)
                     _data.Gun.Shoot();
             }
