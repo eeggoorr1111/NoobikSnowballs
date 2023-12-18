@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _key
       value: 
       objectReference: {fileID: 11400000, guid: 7818cec5c13c6e84683719b11cf57d5c, type: 2}
+    - target: {fileID: 5233603848909863823, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _distance
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 6188870364713457004, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

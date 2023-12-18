@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94207c3c0b5811d459d0519c39c2e615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 150
+  _speed: 22.5
   _scatterAngle: 0
   _maxDistance: 50
   _shootVFXPrefabs: []
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523235e7fe450b498018fe9f9d97241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.5, y: 0.5, z: 0.5}
+  _size: {x: 0.15, y: 0.15, z: 0.15}
   _offset: {x: 0, y: 0, z: 0}
   _transform: {fileID: 8627044900386752431}
   _isActive: 1
