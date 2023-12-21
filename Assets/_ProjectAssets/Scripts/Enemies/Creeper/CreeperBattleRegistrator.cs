@@ -1,5 +1,4 @@
 using Narratore.Solutions.Battle;
-using Narratore.UnitsRepository;
 using UnityEngine;
 
 public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRoster>
