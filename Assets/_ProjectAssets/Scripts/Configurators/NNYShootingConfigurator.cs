@@ -1,6 +1,7 @@
 ﻿using Narratore.Helpers;
 using Narratore.Input;
 using Narratore.Solutions.Battle;
+using Narratore.UnityUpdate;
 using System;
 using UnityEngine;
 using VContainer;
@@ -17,10 +18,9 @@ namespace Narratore.DI
         [Header("DESKTOP")]
         [SerializeField] private LayerMask _desktopShootLayerMask;
 
-        public override void Configure(IContainerBuilder builder, LevelConfig config)
+        public override void Configure(IContainerBuilder builder, LevelConfig config, Updatables prepared, Updatables beginned)
         {
-            base.Configure(builder, config);
-
+            base.Configure(builder, config, prepared, beginned);
 
             if (config.DeviceType == DeviceType.Desktop)
                 _joystick.SetAxisMode();
@@ -31,14 +31,13 @@ namespace Narratore.DI
 
             PlayerUnitRoster unitRoster = _unitSpawner.Current;
             PlayerGunRoster gunRoster = unitRoster.GunSpawner.Current;
-            PlayerMover mover = new PlayerMover(_joystick, unitRoster.Root, unitRoster.MoveSpeed);
 
             gunRoster.Recoil.SetTarget(unitRoster.GunRecoilTarget);
 
             builder.RegisterInstance(new PlayerShootingData(gunRoster.Gun, gunRoster.Damage, unitRoster.Root, IDGenerator.NewID(), PlayersIds.LocalPlayerId));
+            builder.RegisterInstance(new PlayerMover(_joystick, unitRoster.Root, unitRoster.MoveSpeed)).As<ITickable, IUnitRotator>();
             builder.RegisterInstance(Camera.main);
-            builder.RegisterInstance(mover).As<ITickable, IUnitRotator>();
-
+            
             if (config.DeviceType == DeviceType.Desktop)
             {
                 builder.Register<DesktopPlayerShooting>(Lifetime.Singleton)
@@ -51,6 +50,9 @@ namespace Narratore.DI
 
             }
         }
+
+
+        protected override Type GetCombineUnitsDeathSource() => typeof(NNYCombineUnitsDeath);
     }
 }
 
