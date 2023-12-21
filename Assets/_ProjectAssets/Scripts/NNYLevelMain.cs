@@ -11,6 +11,7 @@ public sealed class NNYLevelMain : LevelMain
                         LevelConfig config) : base(preparedUpdatables, beginnedUpdatables, config)
     {
         spawner.Spawn(PlayersIds.GetBotId(1), points.Get());
+        spawner.Spawn(PlayersIds.GetBotId(1), points.Get());
     }
 
 

@@ -16,8 +16,9 @@ public class CreeperRoster : EntityRoster
     public Hp Hp => _hp;
     public IReadOnlyList< MovableBounds > Bounds => _bounds;
     public ReadValue<float> Speed => _speed;
-    public IShootingUnitDeath ShootingDeath => _death;
-    public IExplosionUnitDeath ExplosionDeath => _death;
+    public IShootingKillable ShootingKillable => _death;
+    public IExplosionKillable ExplosionKillable => _death;
+    public ExplosionUnitDeath ExplosionDeath => _death;
 
 
     [SerializeField] private Hp _hp;

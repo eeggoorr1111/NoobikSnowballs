@@ -52,7 +52,9 @@ namespace Narratore.DI
         }
 
 
+        protected override Type GetCombineDamageReciving() => typeof(NNYDamageReciving);
         protected override Type GetCombineUnitsDeathSource() => typeof(NNYCombineUnitsDeath);
+        protected override Type GetCombineExplosionSource() => typeof(NNYExplosionSource);
     }
 }
 

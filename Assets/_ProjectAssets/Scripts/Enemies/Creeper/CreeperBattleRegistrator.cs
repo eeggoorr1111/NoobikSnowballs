@@ -5,27 +5,33 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
 {
     public CreeperBattleRegistrator(    PlayerEntitiesIds playerUnitsIds, 
                                         EntitiesAspects<Transform> transforms, 
-                                        EntitiesAspects<IShootingUnitDeath> shootingDeath, 
-                                        EntitiesAspects<IExplosionUnitDeath> explosionDeath, 
-                                        UnitsListsBounds bounds, 
+                                        EntitiesAspects<IShootingKillable> shootingKillable, 
+                                        EntitiesAspects<IExplosionKillable> explosionKillable, 
+                                        EntitiesAspects<ExplosionUnitDeath> explosionDeath, 
+                                        EntitiesListsBounds bounds, 
                                         EntitiesAspects<Hp> hps, 
-                                        EntitiesAspects<ReadHp> readHps) : base(playerUnitsIds)
+                                        EntitiesAspects<ReadHp> readHps,
+                                        MultyExplosionSource explosionSource) : base(playerUnitsIds)
     {
         _transforms = transforms;
-        _shootingDeath = shootingDeath;
+        _shootingKillable = shootingKillable;
+        _explosionKillable = explosionKillable;
         _explosionDeath = explosionDeath;
         _bounds = bounds;
         _hps = hps;
         _readHps = readHps;
+        _explosionSource = explosionSource;
     }
 
 
-    private readonly EntitiesAspects<IShootingUnitDeath> _shootingDeath;
-    private readonly EntitiesAspects<IExplosionUnitDeath> _explosionDeath;
+    private readonly EntitiesAspects<IShootingKillable> _shootingKillable;
+    private readonly EntitiesAspects<IExplosionKillable> _explosionKillable;
+    private readonly EntitiesAspects<ExplosionUnitDeath> _explosionDeath;
     private readonly EntitiesAspects<Transform> _transforms;
-    private readonly UnitsListsBounds _bounds;
+    private readonly EntitiesListsBounds _bounds;
     private readonly EntitiesAspects<Hp> _hps;
     private readonly EntitiesAspects<ReadHp> _readHps;
+    private readonly MultyExplosionSource _explosionSource;
 
 
     protected override void UnregisterImpl(CreeperRoster unit)
@@ -34,8 +40,11 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _bounds.Remove(unit.Id);
         _readHps.Remove(unit.Id);
         _hps.Remove(unit.Id);
-        _shootingDeath.Remove(unit.Id);
+        _shootingKillable.Remove(unit.Id);
+        _explosionKillable.Remove(unit.Id);
         _explosionDeath.Remove(unit.Id);
+
+        _explosionSource.Remove(unit.ExplosionDeath);
     }
 
     protected override void RegisterImpl(CreeperRoster unit)
@@ -44,7 +53,10 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _bounds.Set(unit.Id, unit.Bounds);
         _readHps.Set(unit.Id, unit.Hp);
         _hps.Set(unit.Id, unit.Hp);
-        _shootingDeath.Set(unit.Id, unit.ShootingDeath);
+        _shootingKillable.Set(unit.Id, unit.ShootingKillable);
+        _explosionKillable.Set(unit.Id, unit.ExplosionKillable);
         _explosionDeath.Set(unit.Id, unit.ExplosionDeath);
+
+        _explosionSource.TryAdd(unit.ExplosionDeath);
     }
 }
