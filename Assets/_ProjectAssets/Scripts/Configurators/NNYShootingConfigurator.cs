@@ -34,6 +34,8 @@ namespace Narratore.DI
 
             gunRoster.Recoil.SetTarget(unitRoster.GunRecoilTarget);
 
+            builder.RegisterInstance(unitRoster).As<IPlayerUnitRoot>();
+
             builder.RegisterInstance(new PlayerShootingData(gunRoster.Gun, gunRoster.Damage, unitRoster.Root, IDGenerator.NewID(), PlayersIds.LocalPlayerId));
             builder.RegisterInstance(new PlayerMover(_joystick, unitRoster.Root, unitRoster.MoveSpeed)).As<ITickable, IUnitRotator>();
             builder.RegisterInstance(Camera.main);

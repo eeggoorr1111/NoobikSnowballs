@@ -4,7 +4,13 @@ using Narratore.Solutions.Battle;
 using UnityEngine;
 
 
-public class PlayerUnitRoster : UpgradableShopItem
+public interface IPlayerUnitRoot
+{
+    Transform Root { get; }
+}
+
+
+public class PlayerUnitRoster : UpgradableShopItem, IPlayerUnitRoot
 {
     public Transform Root => _root;
     public Transform GunRecoilTarget => _gunRecoilTarget;

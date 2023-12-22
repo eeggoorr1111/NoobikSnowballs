@@ -7,7 +7,8 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
                                         EntitiesAspects<Transform> transforms, 
                                         EntitiesAspects<IShootingKillable> shootingKillable, 
                                         EntitiesAspects<IExplosionKillable> explosionKillable, 
-                                        EntitiesAspects<ExplosionUnitDeath> explosionDeath, 
+                                        EntitiesAspects<ExplosionUnitDeath> explosionDeath,
+                                        EntitiesAspects<BotRoster> bots,
                                         EntitiesListsBounds bounds, 
                                         EntitiesAspects<Hp> hps, 
                                         EntitiesAspects<ReadHp> readHps,
@@ -21,6 +22,7 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _hps = hps;
         _readHps = readHps;
         _explosionSource = explosionSource;
+        _bots = bots;
     }
 
 
@@ -28,6 +30,7 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
     private readonly EntitiesAspects<IExplosionKillable> _explosionKillable;
     private readonly EntitiesAspects<ExplosionUnitDeath> _explosionDeath;
     private readonly EntitiesAspects<Transform> _transforms;
+    private readonly EntitiesAspects<BotRoster> _bots;
     private readonly EntitiesListsBounds _bounds;
     private readonly EntitiesAspects<Hp> _hps;
     private readonly EntitiesAspects<ReadHp> _readHps;
@@ -43,6 +46,7 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _shootingKillable.Remove(unit.Id);
         _explosionKillable.Remove(unit.Id);
         _explosionDeath.Remove(unit.Id);
+        _bots.Remove(unit.Id);
 
         _explosionSource.Remove(unit.ExplosionDeath);
     }
@@ -56,6 +60,7 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _shootingKillable.Set(unit.Id, unit.ShootingKillable);
         _explosionKillable.Set(unit.Id, unit.ExplosionKillable);
         _explosionDeath.Set(unit.Id, unit.ExplosionDeath);
+        _bots.Set(unit.Id, unit.Bot);
 
         _explosionSource.TryAdd(unit.ExplosionDeath);
     }

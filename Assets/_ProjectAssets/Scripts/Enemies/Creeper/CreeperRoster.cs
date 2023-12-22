@@ -19,10 +19,12 @@ public class CreeperRoster : EntityRoster
     public IShootingKillable ShootingKillable => _death;
     public IExplosionKillable ExplosionKillable => _death;
     public ExplosionUnitDeath ExplosionDeath => _death;
+    public BotRoster Bot => _bot;
 
 
     [SerializeField] private Hp _hp;
     [SerializeField] private MovableBounds[] _bounds;
     [SerializeField] private ExplosionUnitDeath _death;
     [SerializeField] private ReadValue<float> _speed;
+    [SerializeField] private BotRoster _bot;
 }
