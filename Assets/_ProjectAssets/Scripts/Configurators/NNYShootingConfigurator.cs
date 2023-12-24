@@ -34,10 +34,10 @@ namespace Narratore.DI
 
             gunRoster.Recoil.SetTarget(unitRoster.GunRecoilTarget);
 
-            builder.RegisterInstance(unitRoster).As<IPlayerUnitRoot>();
+            builder.RegisterInstance(unitRoster).As<IPlayerUnitRoot, IPlayerMovableUnit>();
 
             builder.RegisterInstance(new PlayerShootingData(gunRoster.Gun, gunRoster.Damage, unitRoster.Root, IDGenerator.NewID(), PlayersIds.LocalPlayerId));
-            builder.RegisterInstance(new PlayerMover(_joystick, unitRoster.Root, unitRoster.MoveSpeed)).As<ITickable, IUnitRotator>();
+            builder.Register<PlayerCharacterMover>(Lifetime.Singleton).As<ITickable, IUnitRotator>().WithParameter(_joystick);
             builder.RegisterInstance(Camera.main);
             
             if (config.DeviceType == DeviceType.Desktop)

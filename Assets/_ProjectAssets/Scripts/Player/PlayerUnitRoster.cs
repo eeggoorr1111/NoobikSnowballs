@@ -9,8 +9,13 @@ public interface IPlayerUnitRoot
     Transform Root { get; }
 }
 
+public interface IPlayerMovableUnit : IPlayerUnitRoot
+{
+    ReadValue<float> MoveSpeed { get; }
+}
 
-public class PlayerUnitRoster : UpgradableShopItem, IPlayerUnitRoot
+
+public class PlayerUnitRoster : UpgradableShopItem, IPlayerMovableUnit
 {
     public Transform Root => _root;
     public Transform GunRecoilTarget => _gunRecoilTarget;

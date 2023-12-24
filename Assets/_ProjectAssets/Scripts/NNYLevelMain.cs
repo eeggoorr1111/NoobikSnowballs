@@ -4,24 +4,25 @@ using Narratore.Solutions.Battle;
 
 public sealed class NNYLevelMain : LevelMain
 {
-    public NNYLevelMain(IUnitsSpawner<CreeperRoster> spawner,
-                        IHeldPoints points,
+    public NNYLevelMain(IUnitsWavesSpawner spawner,
                         IUpdatables preparedUpdatables,
                         IUpdatables beginnedUpdatables,
                         LevelConfig config) : base(preparedUpdatables, beginnedUpdatables, config)
     {
-        _spawnPoints = points;
         _spawner = spawner;
     }
 
 
-    private readonly IHeldPoints _spawnPoints;
-    private readonly IUnitsSpawner<CreeperRoster> _spawner;
+    private readonly IUnitsWavesSpawner _spawner;
 
+
+    protected override void BeginGameImpl()
+    {
+        _spawner.Spawn();
+    }
 
     protected override void UpdateImpl()
     {
-        _spawner.Spawn(PlayersIds.GetBotId(1), _spawnPoints.Get());
     }
 
 
