@@ -5,7 +5,8 @@ using Narratore.Input;
 using Narratore.Interfaces;
 using UnityEngine;
 using Narratore.CameraTools;
-
+using System;
+using Narratore.Components;
 
 public interface IUnitRotator
 {
@@ -15,6 +16,9 @@ public interface IUnitRotator
 
 public class PlayerCharacterMover : IUpdatable, IUnitRotator
 {
+    public event Action Moved;
+
+
     public PlayerCharacterMover(Joystick joystick, IPlayerMovableUnit unit, ICurrentCameraGetter camera)
     {
         _joystick = joystick;
@@ -28,6 +32,7 @@ public class PlayerCharacterMover : IUpdatable, IUnitRotator
     private readonly IPlayerMovableUnit _unit;
     private readonly ICurrentCameraGetter _camera;
     private readonly Vector3 _cameraOffset;
+    private bool _isMoving;
     
 
     public void Tick()
@@ -38,6 +43,19 @@ public class PlayerCharacterMover : IUpdatable, IUnitRotator
 
             _unit.Root.position += direction * _unit.MoveSpeed.Get() * Time.deltaTime;
             _camera.Transform.position = _unit.Root.position + _cameraOffset;
+
+            if (!_isMoving)
+            {
+                _unit.FootsAnimator.Enable();
+                _isMoving = true;
+            }
+
+            Moved?.Invoke();
+        }
+        else if (_isMoving)
+        {
+            _unit.FootsAnimator.Disable();
+            _isMoving = false;
         }
     }
 

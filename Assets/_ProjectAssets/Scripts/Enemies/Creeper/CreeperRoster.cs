@@ -1,4 +1,5 @@
 using Narratore.Data;
+using Narratore.DI;
 using Narratore.Solutions.Battle;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,13 @@ public class CreeperRoster : EntityRoster
     public ReadValue<float> Speed => _speed;
     public IShootingKillable ShootingKillable => _death;
     public IExplosionKillable ExplosionKillable => _death;
-    public ExplosionUnitDeath ExplosionDeath => _death;
-    public BotRoster Bot => _bot;
+    public CreeperDeathExplosion CreeperDeath => _death;
+    public MovableBot Bot => _bot;
 
 
     [SerializeField] private Hp _hp;
     [SerializeField] private MovableBounds[] _bounds;
-    [SerializeField] private ExplosionUnitDeath _death;
+    [SerializeField] private CreeperDeathExplosion _death;
     [SerializeField] private ReadValue<float> _speed;
-    [SerializeField] private BotRoster _bot;
+    [SerializeField] private MovableBot _bot;
 }

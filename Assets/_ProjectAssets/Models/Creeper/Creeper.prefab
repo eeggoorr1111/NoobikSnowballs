@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7891395295030419645}
-  - component: {fileID: 6397331537059574474}
+  - component: {fileID: 8291292015823504149}
   m_Layer: 0
   m_Name: Death
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6403056360883612740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6397331537059574474
+--- !u!114 &8291292015823504149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234816646974251842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16e8d9f358383244ab3b99b64f957a20, type: 3}
+  m_Script: {fileID: 11500000, guid: dabbdccf347d86342b4de7b307d8336a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _begun:
@@ -54,7 +54,6 @@ MonoBehaviour:
   _physic: {fileID: 0}
   _powerScale: 0
   _duration: 0
-  _unitRoster: {fileID: 1907050368612226214}
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
     _radius: 5
@@ -292,7 +291,7 @@ MonoBehaviour:
   _hp: {fileID: 4862311035975394423}
   _bounds:
   - {fileID: 2506775721259041116}
-  _death: {fileID: 6397331537059574474}
+  _death: {fileID: 8291292015823504149}
   _speed: {fileID: 1826218313034245340}
   _bot: {fileID: 7469900648602172146}
 --- !u!114 &2506775721259041116 stripped

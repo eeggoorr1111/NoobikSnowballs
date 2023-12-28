@@ -1,11 +1,16 @@
+using Narratore.DI;
 using Narratore.Solutions.Battle;
 
 
-public class NNYCombineUnitsDeath : CombineUnitsDeath
+public class NNYCombineUnitsDeath : CombineUnitsDeathSource
 {
-    public NNYCombineUnitsDeath(ShootingDeathSource shooting, ExplosionDeathSource explosion, DeadUnitsIds deadUnitsIds) : base(deadUnitsIds)
+    public NNYCombineUnitsDeath(ShootingDeathSource shooting, 
+                                ExplosionDeathSource explosion, 
+                                CreeperSelfExplosionDeathSource creepersSelfExplosion, 
+                                DeadUnitsIds deadUnitsIds) : base(deadUnitsIds)
     {
         TryAdd(shooting);
         TryAdd(explosion);
+        TryAdd(creepersSelfExplosion);
     }
 }

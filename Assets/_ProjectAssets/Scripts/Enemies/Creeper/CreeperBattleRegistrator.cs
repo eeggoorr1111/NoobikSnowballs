@@ -1,18 +1,21 @@
+using Narratore.DI;
 using Narratore.Solutions.Battle;
 using UnityEngine;
 
 public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRoster>
 {
-    public CreeperBattleRegistrator(    PlayerEntitiesIds playerUnitsIds, 
-                                        EntitiesAspects<Transform> transforms, 
-                                        EntitiesAspects<IShootingKillable> shootingKillable, 
-                                        EntitiesAspects<IExplosionKillable> explosionKillable, 
+    public CreeperBattleRegistrator(    PlayerEntitiesIds playerUnitsIds,
+                                        EntitiesAspects<Transform> transforms,
+                                        EntitiesAspects<IShootingKillable> shootingKillable,
+                                        EntitiesAspects<IExplosionKillable> explosionKillable,
                                         EntitiesAspects<ExplosionUnitDeath> explosionDeath,
-                                        EntitiesAspects<BotRoster> bots,
-                                        EntitiesListsBounds bounds, 
-                                        EntitiesAspects<Hp> hps, 
+                                        EntitiesAspects<MovableBot> bots,
+                                        EntitiesListsBounds bounds,
+                                        EntitiesAspects<Hp> hps,
                                         EntitiesAspects<ReadHp> readHps,
-                                        MultyExplosionSource explosionSource) : base(playerUnitsIds)
+                                        MultyExplosionSource explosionSource,
+                                        EntitiesAspects<CreeperDeathExplosion> creeperDeath,
+                                        EntitiesAspects<EntityRoster> rosters) : base(playerUnitsIds, rosters)
     {
         _transforms = transforms;
         _shootingKillable = shootingKillable;
@@ -23,14 +26,16 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _readHps = readHps;
         _explosionSource = explosionSource;
         _bots = bots;
+        _creeperDeath = creeperDeath;
     }
 
 
     private readonly EntitiesAspects<IShootingKillable> _shootingKillable;
     private readonly EntitiesAspects<IExplosionKillable> _explosionKillable;
     private readonly EntitiesAspects<ExplosionUnitDeath> _explosionDeath;
+    private readonly EntitiesAspects<CreeperDeathExplosion> _creeperDeath;
     private readonly EntitiesAspects<Transform> _transforms;
-    private readonly EntitiesAspects<BotRoster> _bots;
+    private readonly EntitiesAspects<MovableBot> _bots;
     private readonly EntitiesListsBounds _bounds;
     private readonly EntitiesAspects<Hp> _hps;
     private readonly EntitiesAspects<ReadHp> _readHps;
@@ -47,8 +52,9 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _explosionKillable.Remove(unit.Id);
         _explosionDeath.Remove(unit.Id);
         _bots.Remove(unit.Id);
+        _creeperDeath.Remove(unit.Id);
 
-        _explosionSource.Remove(unit.ExplosionDeath);
+        _explosionSource.Remove(unit.CreeperDeath);
     }
 
     protected override void RegisterImpl(CreeperRoster unit)
@@ -59,9 +65,10 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _hps.Set(unit.Id, unit.Hp);
         _shootingKillable.Set(unit.Id, unit.ShootingKillable);
         _explosionKillable.Set(unit.Id, unit.ExplosionKillable);
-        _explosionDeath.Set(unit.Id, unit.ExplosionDeath);
+        _explosionDeath.Set(unit.Id, unit.CreeperDeath);
+        _creeperDeath.Set(unit.Id, unit.CreeperDeath);
         _bots.Set(unit.Id, unit.Bot);
 
-        _explosionSource.TryAdd(unit.ExplosionDeath);
+        _explosionSource.TryAdd(unit.CreeperDeath);
     }
 }

@@ -10,9 +10,6 @@ using VContainer.Unity;
 
 namespace Narratore.DI
 {
-
-
-
     public class NNYEnemiesConfigurator : Configurator
     {
         [Header("WAVES")]
@@ -21,11 +18,12 @@ namespace Narratore.DI
         [Header("SPAWN POINTS")]
         [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig;
 
-        [Header("UNITS POOLS")]
+        [Header("CREEPERS")]
         [SerializeField] private CreeperPoolConfig _creeperPoolConfig;
+        [SerializeField] private float _creeperExplosionDistance;
 
 
-        public override void Configure(IContainerBuilder builder, LevelConfig config, Updatables prepared, Updatables beginned)
+        public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             builder.Register<UnitsWavesSpawner>(Lifetime.Singleton).As<IUnitsWavesSpawner>().WithParameter(PlayersIds.GetBotId(1));
             builder.RegisterInstance(_waves).As<IReadOnlyList<SpawnWavesConfig>>();
@@ -34,7 +32,7 @@ namespace Narratore.DI
             RegisterEnemiesMove(builder);
             RegisterEntitiesAspects(builder);
 
-            RegisterCreepers(builder);
+            RegisterCreepers(builder, sampleData);
         }
 
 
@@ -51,15 +49,18 @@ namespace Narratore.DI
 
         private void RegisterEntitiesAspects(IContainerBuilder builder)
         {
-            builder.Register<EntitiesAspects<BotRoster>>(Lifetime.Singleton).AsSelf().As<IEntitiesAspects<BotRoster>>();
+            builder.Register<EntitiesAspects<MovableBot>>(Lifetime.Singleton).AsSelf().As<IEntitiesAspects<MovableBot>>();
+            builder.Register<EntitiesAspects<CreeperDeathExplosion>>(Lifetime.Singleton).AsSelf().As<IEntitiesAspects<CreeperDeathExplosion>>();
         }
 
-        private void RegisterCreepers(IContainerBuilder builder)
+        private void RegisterCreepers(IContainerBuilder builder, SampleData sampleData)
         {
-            builder.RegisterInstance(new MBPool<CreeperRoster>(_creeperPoolConfig)).As<IDisposable>().AsSelf();
+            builder.RegisterInstance(new MBPool<CreeperRoster>(_creeperPoolConfig, sampleData)).As<IDisposable>().AsSelf();
             builder.Register<CreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<CreeperRoster>>();
             builder.Register<PoolBattleEntitiesSource<CreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<CreeperRoster>, IDisposable>();
             builder.Register<UnitsSpawner<CreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<CreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100);
+
+            builder.Register<CreeperSelfExplosionDeathSource>(Lifetime.Singleton).AsSelf().As<ITickable, IDisposable>().WithParameter(_creeperExplosionDistance);
         }
     }
 }

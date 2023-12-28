@@ -15,4 +15,6 @@ MonoBehaviour:
   _isUseDebugState: 1
   _money:
   - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
-    _value: 0
+    _value: 100
+  - _currency: {fileID: 11400000, guid: d5a0449a2ce0b484cab219ec5ac1bee3, type: 2}
+    _value: 1

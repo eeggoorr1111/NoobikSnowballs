@@ -3,25 +3,40 @@ using Narratore.Solutions.Battle;
 using Narratore.Extensions;
 using System;
 using UnityEngine;
+using Narratore.UI;
 
-
-public class DesktopPlayerShooting : IUpdatable, IDisposable
+public interface IPlayerShooting
 {
-    public DesktopPlayerShooting(   PlayerShootingData data, 
-                                    ShellsLifetime shellsLifetime, 
-                                    Camera camera, 
+    event Action GettedCommandShoot;
+    event Action StartedShoot;
+    event Action EndedShoot;
+}
+
+
+public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
+{
+    public event Action GettedCommandShoot;
+    public event Action StartedShoot;
+    public event Action EndedShoot;
+
+
+    public DesktopPlayerShooting(PlayerShootingData data,
+                                    ShellsLifetime shellsLifetime,
+                                    Camera camera,
                                     LayerMask layerMask,
-                                    IUnitRotator unitRotator)
+                                    IUnitRotator unitRotator,
+                                    ITouchArea touchArea)
     {
         _data = data;
         _shellsLifetime = shellsLifetime;
         _camera = camera;
         _layerMask = layerMask;
         _unitRotator = unitRotator;
+        _touchArea = touchArea;
 
         _data.Gun.Shooted += OnShooted;
     }
-        
+
 
 
     private readonly PlayerShootingData _data;
@@ -29,10 +44,12 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
     private readonly Camera _camera;
     private readonly LayerMask _layerMask;
     private readonly IUnitRotator _unitRotator;
+    private readonly ITouchArea _touchArea;
+    private bool _isShooting;
 
     public void Tick()
     {
-        if (Input.GetMouseButton(0))
+        if (_touchArea.IsHold)
         {
             // Исходим из того, что террейн находиться в 0 точке и так как камера под углом 
             // то высоты недостаточно, поэтому умножаем на 2 - такой небольшой костыль)
@@ -47,6 +64,13 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
                 if (_data.Gun.IsCanTodoAction)
                     _data.Gun.Shoot();
             }
+
+            GettedCommandShoot?.Invoke();
+        }
+        else if (_isShooting)
+        {
+            _isShooting = false;
+            EndedShoot?.Invoke();
         }
     }
 
@@ -54,7 +78,6 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
     {
         _data.Gun.Shooted -= OnShooted;
     }
-
 
     private void OnShooted()
     {
@@ -64,6 +87,11 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable
                                 _data.PlayerId,
                                 _data.PlayerUnitId, 
                                 _data.Damage);
-    }
 
+        if (!_isShooting)
+        {
+            _isShooting = true;
+            StartedShoot?.Invoke();
+        }
+    }
 }

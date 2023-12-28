@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class EnemiesMover : IUpdatable
 {
-    public EnemiesMover(IEntitiesAspects<BotRoster> bots, SeekSteering seek, IPlayerUnitRoot playerUnit)
+    public EnemiesMover(IEntitiesAspects<MovableBot> bots, SeekSteering seek, IPlayerUnitRoot playerUnit)
     {
         _bots = bots;
         _rootCharacter = playerUnit.Root;
@@ -16,7 +16,7 @@ public class EnemiesMover : IUpdatable
     }
 
 
-    private readonly IEntitiesAspects<BotRoster> _bots;
+    private readonly IEntitiesAspects<MovableBot> _bots;
     private readonly Transform _rootCharacter;
     private readonly SeekSteering _seek;
     
@@ -26,7 +26,9 @@ public class EnemiesMover : IUpdatable
         Vector2 targetPoint = _rootCharacter.position.To2D(TwoAxis.XZ);
         foreach (var pair in _bots.All)
         {
-            BotRoster bot = pair.Value;
+            MovableBot bot = pair.Value;
+            if (bot.IsStun) continue;
+
             Vector2 position = bot.Root.position.To2D(TwoAxis.XZ);
             Vector2 forward = bot.Root.forward.To2D(TwoAxis.XZ);
             Vector2 seek = _seek.Get(position, targetPoint, forward);

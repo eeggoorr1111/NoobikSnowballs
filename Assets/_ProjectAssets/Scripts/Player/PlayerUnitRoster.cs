@@ -1,6 +1,7 @@
 using Narratore.Data;
 using Narratore.MetaGame;
 using Narratore.Solutions.Battle;
+using Narratore.Components;
 using UnityEngine;
 
 
@@ -12,6 +13,7 @@ public interface IPlayerUnitRoot
 public interface IPlayerMovableUnit : IPlayerUnitRoot
 {
     ReadValue<float> MoveSpeed { get; }
+    LoopedRotators FootsAnimator { get; }
 }
 
 
@@ -22,6 +24,7 @@ public class PlayerUnitRoster : UpgradableShopItem, IPlayerMovableUnit
     public MovableBounds Bounds => _bounds;
     public PlayerGunSpawner GunSpawner => _gunSpawner;
     public ReadValue<float> MoveSpeed => _moveSpeed;
+    public LoopedRotators FootsAnimator => _footsAnimator;
 
 
     [SerializeField] private Transform _root;
@@ -29,4 +32,5 @@ public class PlayerUnitRoster : UpgradableShopItem, IPlayerMovableUnit
     [SerializeField] private MovableBounds _bounds;
     [SerializeField] private PlayerGunSpawner _gunSpawner;
     [SerializeField] private ReadValue<float> _moveSpeed;
+    [SerializeField] private LoopedRotators _footsAnimator;
 }
