@@ -1041,8 +1041,8 @@ MonoBehaviour:
   _shootingPushConfig:
   - _shell: {fileID: 927877317090461971, guid: 39b62a037c8441c4eb458728adcd77a9, type: 3}
     _entity: {fileID: 1907050368612226214, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-    _stunDuration: 0.25
-    _pushDistance: 1
+    _stunDuration: 0.05
+    _pushDistance: 0.75
   _unitSpawner: {fileID: 1701308246}
   _joystick: {fileID: 3150971687997830389}
   _shootScreenArea: {fileID: 2028007581}
@@ -1128,7 +1128,7 @@ MonoBehaviour:
     _isCustomActivateDeactivate: 0
     _startItemsCount: 2
     _startItems: []
-  _creeperExplosionDistance: 1
+  _creeperExplosionDistance: 0.5
 --- !u!1 &734349709
 GameObject:
   m_ObjectHideFlags: 0
