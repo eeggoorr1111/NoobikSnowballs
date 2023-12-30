@@ -18,8 +18,8 @@ public class PlayerUnitBattleRoster : EntityRoster
     public Transform GunRecoilTarget => _gunRecoilTarget;
     public Transform GunAttach => _gunAttach;
     public IReadOnlyList<MovableBounds> Bounds => _bounds;
-    public ReadValue<float> MoveSpeed => _moveSpeed;
-    public LoopedRotators FootsAnimator => _footsAnimator;
+    public StatValue<float> MoveSpeed => _moveSpeed;
+    public TwoLegsLoopedRotators FootsAnimator => _footsAnimator;
     public Hp Hp => _hp;
     public StubUnitDeath Death => _death;
 
@@ -27,8 +27,8 @@ public class PlayerUnitBattleRoster : EntityRoster
     [SerializeField] private Transform _gunRecoilTarget;
     [SerializeField] private Transform _gunAttach;
     [SerializeField] private MovableBounds[] _bounds;
-    [SerializeField] private ReadValue<float> _moveSpeed;
-    [SerializeField] private LoopedRotators _footsAnimator;
+    [SerializeField] private StatValue<float> _moveSpeed;
+    [SerializeField] private TwoLegsLoopedRotators _footsAnimator;
     [SerializeField] private Hp _hp;
     [SerializeField] private StubUnitDeath _death;
 }

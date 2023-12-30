@@ -12,7 +12,7 @@ public interface IPlayerUnitRoot
 public interface IPlayerMovableUnit : IPlayerUnitRoot
 {
     ReadValue<float> MoveSpeed { get; }
-    LoopedRotators FootsAnimator { get; }
+    TwoLegsLoopedRotators FootsAnimator { get; }
 }
 
 public interface IPlayerUnitShooting
@@ -66,7 +66,7 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     private PlayerGunRoster _gun;
 
     public Transform Root => _unit.Root;
-    public LoopedRotators FootsAnimator => _unit.FootsAnimator;
+    public TwoLegsLoopedRotators FootsAnimator => _unit.FootsAnimator;
     public ReadValue<float> MoveSpeed => _unit.MoveSpeed;
     public IImpact Damage => new ShellDamage(PlayersIds.LocalPlayerId, _gunSpawner.Current.Damage.Get());
     public Vector3 GunDirection => _gun.Gun.Direction;
@@ -136,6 +136,8 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
 
         _gun.Root.localPosition = Vector3.zero;
         _gun.Root.localRotation = Quaternion.identity;
+
+        _unit.MoveSpeed.SetStat(_gun.MoveSpeed);
     }
 
     private void OnShooted() => Shooted?.Invoke();

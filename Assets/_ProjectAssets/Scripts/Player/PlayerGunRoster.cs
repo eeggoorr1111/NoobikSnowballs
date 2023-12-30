@@ -8,10 +8,12 @@ public class PlayerGunRoster : UpgradableShopItem
     public Gun Gun => _gun;
     public LocalPositionRecoil Recoil => _recoil;
     public IntStat Damage => _damage;
+    public FloatStat MoveSpeed => _moveSpeed;
 
 
     [SerializeField] private Transform _root;
     [SerializeField] private Gun _gun;
     [SerializeField] private LocalPositionRecoil _recoil;
     [SerializeField] private IntStat _damage;
+    [SerializeField] private FloatStat _moveSpeed;
 }

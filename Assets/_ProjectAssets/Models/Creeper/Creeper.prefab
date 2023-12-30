@@ -57,8 +57,8 @@ MonoBehaviour:
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
     _radius: 5
-    _minDamage: 5
-    _maxDamage: 5
+    _minDamage: 2
+    _maxDamage: 2
 --- !u!1 &6580645306886047064
 GameObject:
   m_ObjectHideFlags: 0
