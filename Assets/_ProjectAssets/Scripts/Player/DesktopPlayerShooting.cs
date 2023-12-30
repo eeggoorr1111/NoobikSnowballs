@@ -4,6 +4,7 @@ using Narratore.Extensions;
 using System;
 using UnityEngine;
 using Narratore.UI;
+using Narratore.CameraTools;
 
 public interface IPlayerShooting
 {
@@ -20,30 +21,30 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
     public event Action EndedShoot;
 
 
-    public DesktopPlayerShooting(PlayerShootingData data,
+    public DesktopPlayerShooting( IPlayerUnitShooting shooting,
                                     ShellsLifetime shellsLifetime,
-                                    Camera camera,
+                                    ICurrentCameraGetter camera,
                                     LayerMask layerMask,
-                                    IUnitRotator unitRotator,
+                                    IPlayerUnitRotator unitRotator,
                                     ITouchArea touchArea)
     {
-        _data = data;
+        _unitShooting = shooting;
         _shellsLifetime = shellsLifetime;
         _camera = camera;
         _layerMask = layerMask;
         _unitRotator = unitRotator;
         _touchArea = touchArea;
 
-        _data.Gun.Shooted += OnShooted;
+        _unitShooting.Shooted += OnShooted;
     }
 
 
 
-    private readonly PlayerShootingData _data;
+    private readonly IPlayerUnitShooting _unitShooting;
     private readonly ShellsLifetime _shellsLifetime;
-    private readonly Camera _camera;
+    private readonly ICurrentCameraGetter _camera;
     private readonly LayerMask _layerMask;
-    private readonly IUnitRotator _unitRotator;
+    private readonly IPlayerUnitRotator _unitRotator;
     private readonly ITouchArea _touchArea;
     private bool _isShooting;
 
@@ -53,16 +54,15 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
         {
             // Исходим из того, что террейн находиться в 0 точке и так как камера под углом 
             // то высоты недостаточно, поэтому умножаем на 2 - такой небольшой костыль)
-            float distance = _camera.transform.position.y * 2;
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            float distance = _camera.Transform.position.y * 2;
+            Ray ray = _camera.Get.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, distance, _layerMask))
             {
-                Vector3 direction = (hit.point - _data.GunTransform.position).WithY(0).normalized;
+                Vector3 direction = (hit.point - _unitShooting.Position).WithY(0).normalized;
 
                 _unitRotator.Rotate(direction);
-                if (_data.Gun.IsCanTodoAction)
-                    _data.Gun.Shoot();
+                _unitShooting.TryShoot();
             }
 
             GettedCommandShoot?.Invoke();
@@ -76,17 +76,17 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
 
     public void Dispose()
     {
-        _data.Gun.Shooted -= OnShooted;
+        _unitShooting.Shooted -= OnShooted;
     }
 
     private void OnShooted()
     {
-        _shellsLifetime.Shoot(  _data.Gun.CurrentShell,
-                                _data.Gun.ShootPoint,
-                                _data.Gun.Direction,
-                                _data.PlayerId,
-                                _data.PlayerUnitId, 
-                                _data.Damage);
+        _shellsLifetime.Shoot(  _unitShooting.Shell,
+                                _unitShooting.ShootPoint,
+                                _unitShooting.GunDirection,
+                                _unitShooting.PlayerId,
+                                _unitShooting.PlayerUnitId, 
+                                _unitShooting.Damage);
 
         if (!_isShooting)
         {

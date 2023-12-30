@@ -15,7 +15,7 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
                                         EntitiesAspects<ReadHp> readHps,
                                         MultyExplosionSource explosionSource,
                                         EntitiesAspects<CreeperDeathExplosion> creeperDeath,
-                                        EntitiesAspects<EntityRoster> rosters) : base(playerUnitsIds, rosters)
+                                        EntitiesAspects<EntityRoster> entities) : base(playerUnitsIds, entities, transforms)
     {
         _transforms = transforms;
         _shootingKillable = shootingKillable;
@@ -65,8 +65,8 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
         _bounds.Set(unit.Id, unit.Bounds);
         _readHps.Set(unit.Id, unit.Hp);
         _hps.Set(unit.Id, unit.Hp);
-        _shootingKillable.Set(unit.Id, unit.ShootingKillable);
-        _explosionKillable.Set(unit.Id, unit.ExplosionKillable);
+        _shootingKillable.Set(unit.Id, unit.CreeperDeath);
+        _explosionKillable.Set(unit.Id, unit.CreeperDeath);
         _explosionDeath.Set(unit.Id, unit.CreeperDeath);
         _creeperDeath.Set(unit.Id, unit.CreeperDeath);
         _bots.Set(unit.Id, unit.Bot);

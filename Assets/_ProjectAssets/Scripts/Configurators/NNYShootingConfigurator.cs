@@ -12,6 +12,7 @@ using ITickable = VContainer.Unity.ITickable;
 
 namespace Narratore.DI
 {
+
     public class NNYShootingConfigurator : ShootingConfigurator
     {
         [Header("PUSH CONFIGS")]
@@ -19,6 +20,7 @@ namespace Narratore.DI
 
         [Header("NNY SHOOTING")]
         [SerializeField] private PlayerUnitSpawner _unitSpawner;
+        [SerializeField] private PlayerGunSpawner _gunSpawner;
 
         [Header("INPUT")]
         [SerializeField] private Joystick _joystick;
@@ -36,22 +38,22 @@ namespace Narratore.DI
             else
                 _joystick.SetTouchMode();
 
-            if (!_unitSpawner.TrySpawn() || !_unitSpawner.Current.GunSpawner.TrySpawn()) return;
+            if (!_unitSpawner.TrySpawn())
+                throw new Exception("Error frist spawn unit");
 
-            PlayerUnitRoster unitRoster = _unitSpawner.Current;
-            PlayerGunRoster gunRoster = unitRoster.GunSpawner.Current;
+            if (!_gunSpawner.TrySpawn())
+                throw new Exception("Error frist spawn gun");
 
-            gunRoster.Recoil.SetTarget(unitRoster.GunRecoilTarget);
 
             builder.RegisterEntryPoint<EnemiesPushing>(Lifetime.Singleton).WithParameter<IReadOnlyList<ShootingPushConfig>>(_shootingPushConfig);
-
-            builder.RegisterInstance(unitRoster).As<IPlayerUnitRoot, IPlayerMovableUnit>();
             builder.RegisterInstance(_shootScreenArea).As<ITouchArea>();
 
-            builder.RegisterInstance(new PlayerShootingData(gunRoster.Gun, gunRoster.Damage, unitRoster.Root, IDGenerator.NewID(), PlayersIds.LocalPlayerId));
-            builder.Register<PlayerCharacterMover>(Lifetime.Singleton).AsSelf().As<ITickable, IUnitRotator>().WithParameter(_joystick);
-            builder.RegisterInstance(Camera.main);
-            
+
+            builder.Register<PlayerUnitBattleRegistrator>(Lifetime.Singleton);
+            builder.Register<PlayerCharacterMover>(Lifetime.Singleton).AsSelf().As<ITickable, IPlayerUnitRotator>().WithParameter(_joystick);
+            builder.Register<PlayerUnitFacade>(Lifetime.Singleton).As<IPlayerUnitRoot, IPlayerMovableUnit, IPlayerUnitShooting, IDisposable>()
+                .WithParameter(_unitSpawner)
+                .WithParameter(_gunSpawner);
             if (config.DeviceType == DeviceType.Desktop)
             {
                 builder.Register<DesktopPlayerShooting>(Lifetime.Singleton)

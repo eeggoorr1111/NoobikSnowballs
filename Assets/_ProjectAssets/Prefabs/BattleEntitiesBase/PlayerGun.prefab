@@ -288,7 +288,6 @@ MonoBehaviour:
   _changedLevel:
     m_PersistentCalls:
       m_Calls: []
-  _provider: {fileID: 0}
   _current: 0
   _onSettedLevel: 10
   _onChangedLevel: 10
@@ -301,6 +300,7 @@ MonoBehaviour:
   _decreased:
     m_PersistentCalls:
       m_Calls: []
+  _provider: {fileID: 0}
 --- !u!1 &7518005290315529587
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _key: {fileID: 0}
   _stats: {fileID: 7176928308288677450}
+  _root: {fileID: 6188870364713457004}
   _gun: {fileID: 2271578865352791947}
   _recoil: {fileID: 5233603848909863823}
   _damage: {fileID: 6836209799539693328}

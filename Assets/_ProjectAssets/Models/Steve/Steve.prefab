@@ -586,6 +586,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &9190971681175698804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4783322086843844194}
+  m_Layer: 0
+  m_Name: GunAttachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4783322086843844194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190971681175698804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.42, y: 9.5, z: -0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8828777935096142670}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5119887232711650266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -598,6 +629,10 @@ PrefabInstance:
       propertyPath: _key
       value: 
       objectReference: {fileID: 11400000, guid: dec776d34c3c132499f7ca54109e4894, type: 2}
+    - target: {fileID: 660723351475266599, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _gunSpawner
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3186847004717769852, guid: f481107acb654234ab9bfef86011b148, type: 3}
       propertyPath: _provider
       value: 
@@ -606,6 +641,10 @@ PrefabInstance:
       propertyPath: _defaultValue
       value: 3.75
       objectReference: {fileID: 0}
+    - target: {fileID: 4111883107280429908, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _gunAttach
+      value: 
+      objectReference: {fileID: 4783322086843844194}
     - target: {fileID: 4434744423726952596, guid: f481107acb654234ab9bfef86011b148, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.15
@@ -618,6 +657,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 4715304806625368994, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _provider
+      value: 
+      objectReference: {fileID: 11400000, guid: c00acaec68201b0418416d3069f6d011, type: 2}
     - target: {fileID: 6325512889853861363, guid: f481107acb654234ab9bfef86011b148, type: 3}
       propertyPath: m_Name
       value: Steve
@@ -695,7 +738,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1103304130003174772, guid: f481107acb654234ab9bfef86011b148, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6635370704255154728, guid: f481107acb654234ab9bfef86011b148, type: 3}
       insertIndex: -1
@@ -718,6 +762,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4434744423726952596, guid: f481107acb654234ab9bfef86011b148, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2453726249747650939}
+    - targetCorrespondingSourceObject: {fileID: 4434744423726952596, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4783322086843844194}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f481107acb654234ab9bfef86011b148, type: 3}
 --- !u!4 &1952570130038559218 stripped

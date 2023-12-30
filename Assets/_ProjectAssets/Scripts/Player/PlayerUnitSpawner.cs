@@ -1,6 +1,8 @@
 ﻿using Narratore.MetaGame;
 
-public class PlayerUnitSpawner : ShopItemSpawner<PlayerUnitRoster>
+
+
+public class PlayerUnitSpawner : ShopItemSpawner<PlayerUnitShopItemRoster>
 {
 
 }

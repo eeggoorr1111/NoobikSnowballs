@@ -17,8 +17,6 @@ public class CreeperRoster : EntityRoster
     public Hp Hp => _hp;
     public IReadOnlyList< MovableBounds > Bounds => _bounds;
     public ReadValue<float> Speed => _speed;
-    public IShootingKillable ShootingKillable => _death;
-    public IExplosionKillable ExplosionKillable => _death;
     public CreeperDeathExplosion CreeperDeath => _death;
     public MovableBot Bot => _bot;
 

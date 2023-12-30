@@ -8,13 +8,13 @@ using Narratore.CameraTools;
 using System;
 using Narratore.Components;
 
-public interface IUnitRotator
+public interface IPlayerUnitRotator
 {
     void Rotate(Vector3 forward);
 }
 
 
-public class PlayerCharacterMover : IUpdatable, IUnitRotator
+public class PlayerCharacterMover : IUpdatable, IPlayerUnitRotator
 {
     public event Action Moved;
 
