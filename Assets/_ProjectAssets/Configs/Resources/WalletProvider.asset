@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2659fb2c47fa13e4580d2347b6404ec1, type: 3}
-  m_Name: Wallet
+  m_Script: {fileID: 11500000, guid: bc28f70b5277a984dab6f06491588ba6, type: 3}
+  m_Name: WalletProvider
   m_EditorClassIdentifier: 
-  _isUseDebugState: 1
+  _desiredEditorDataSource: 0
+  _desiredBuildDataSource: 2
   _money:
   - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
-    _value: 100
+    _value: 0
   - _currency: {fileID: 11400000, guid: d5a0449a2ce0b484cab219ec5ac1bee3, type: 2}
-    _value: 1
+    _value: 0

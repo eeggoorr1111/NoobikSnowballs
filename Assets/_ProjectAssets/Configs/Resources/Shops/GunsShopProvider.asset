@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10dfa2a664257143a30b3c28f58006c, type: 3}
-  m_Name: PlayerUnitsProvider
+  m_Script: {fileID: 11500000, guid: 7e3fc8f28194f2949b4f6c413233b2ad, type: 3}
+  m_Name: GunsShopProvider
   m_EditorClassIdentifier: 
-  _isUseDebugState: 1
-  _defaultItem: {fileID: 11400000, guid: dec776d34c3c132499f7ca54109e4894, type: 2}
+  _desiredEditorDataSource: 0
+  _desiredBuildDataSource: 2
+  _defaultItem: {fileID: 11400000, guid: 7818cec5c13c6e84683719b11cf57d5c, type: 2}
   _items:
-  - _descriptor: {fileID: 11400000, guid: dec776d34c3c132499f7ca54109e4894, type: 2}
+  - _descriptor: {fileID: 11400000, guid: 7818cec5c13c6e84683719b11cf57d5c, type: 2}
     _status: 1
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}

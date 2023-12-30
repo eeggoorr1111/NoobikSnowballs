@@ -44,10 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71f25b423dcdb943894b40d38144a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _descriptor: {fileID: 11400000, guid: 015b0935807dffe4e946ff6e1b5123f8, type: 2}
   _level: 0
-  _defaultValue: 10
-  _upgrading: 
+  _settedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _changedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _provider: {fileID: 0}
 --- !u!1 &2070216681074453543
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +104,7 @@ MonoBehaviour:
   - {fileID: 6836209799539693328}
   - {fileID: 8669851669368262711}
   - {fileID: 3541889368917775602}
-  - {fileID: 5276518769332452278}
+  - {fileID: 6627821533974216007}
 --- !u!1 &2098492516931018977
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,10 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d32a8a6cda263488702c15faf4c1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _descriptor: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _level: 0
-  _defaultValue: 0.1
-  _upgrading: []
+  _settedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _changedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _provider: {fileID: 0}
 --- !u!114 &2783914196522226649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,10 +216,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d32a8a6cda263488702c15faf4c1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _descriptor: {fileID: 11400000, guid: 667c592587ca81f478ac5afe4d1ff403, type: 2}
   _level: 0
-  _defaultValue: 0.5
-  _upgrading: []
+  _settedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _changedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _provider: {fileID: 0}
 --- !u!114 &8245853052463631881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,8 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1080666002126363073}
-  - component: {fileID: 2971460650649002110}
-  - component: {fileID: 5276518769332452278}
+  - component: {fileID: 6627821533974216007}
   m_Layer: 0
   m_Name: MagazineSize
   m_TagString: Untagged
@@ -258,7 +269,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 117847202761974972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2971460650649002110
+--- !u!114 &6627821533974216007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,12 +278,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669543250322063723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aeb7072ad1e98045a8e04f8cb91ae0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 657a3adfc38edd94f83a387a8601849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stat: {fileID: 5276518769332452278}
+  _level: 0
+  _settedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _changedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _provider: {fileID: 0}
   _current: 0
-  _isRecoveryOnAwake: 1
+  _onSettedLevel: 10
+  _onChangedLevel: 10
   _changed:
     m_PersistentCalls:
       m_Calls: []
@@ -282,22 +301,6 @@ MonoBehaviour:
   _decreased:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5276518769332452278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4669543250322063723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71f25b423dcdb943894b40d38144a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _descriptor: {fileID: 11400000, guid: d9f10b49576c95c49983b22976ecbc1b, type: 2}
-  _level: 0
-  _defaultValue: 30
-  _upgrading: 
 --- !u!1 &7518005290315529587
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 6188870364713457004}
-  _recharcheTimer: {fileID: 0}
   _magazines:
   - {fileID: 5145321040541491472}
   _magazineIndex: 0
@@ -384,7 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shell: {fileID: 927877317090461971, guid: 39b62a037c8441c4eb458728adcd77a9, type: 3}
-  _size: {fileID: 2971460650649002110}
+  _size: {fileID: 6627821533974216007}
   _shootInterval: {fileID: 2783914196522226649}
   _rechargeDuration: {fileID: 8245853052463631881}
 --- !u!114 &5233603848909863823

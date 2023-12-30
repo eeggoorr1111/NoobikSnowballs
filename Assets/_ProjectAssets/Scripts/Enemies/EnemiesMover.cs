@@ -39,7 +39,7 @@ public class EnemiesMover : IUpdatable
             float dot = Vector2.Dot(forward, (targetPoint - position).normalized);
             float axceleration = Mathf.Lerp(bot.AxselerationRange.x, bot.AxselerationRange.y, dot.Normalized(0.95f, 1));
 
-            float newSpeed = Mathf.Clamp(bot.Speed.Get() + axceleration, bot.MinSpeedMove, bot.MaxSpeedMove);
+            float newSpeed = Mathf.Clamp(bot.Speed.Current + axceleration, bot.Speed.Min, bot.Speed.Max);
             float rotateSpeed = Mathf.Lerp(bot.MaxRotateSpeed, bot.MinRotateSpeed, newSpeed.Normalized(bot.MinSpeedMove, bot.MaxSpeedMove));
             Vector3 direction3d = Vector3.RotateTowards(bot.Root.forward, forward.To3D(TwoAxis.XZ), rotateSpeed, 1f);
             float distance = (targetPoint - position).magnitude;

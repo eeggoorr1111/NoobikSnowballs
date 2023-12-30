@@ -744,6 +744,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGunSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4709703270656625163, guid: ddcc280852663914abb4e67509c1560d, type: 3}
+      propertyPath: _upgradesDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f9b9e8677be22148afa3a07ea4c631e, type: 2}
+    - target: {fileID: 5306406021470129094, guid: ddcc280852663914abb4e67509c1560d, type: 3}
+      propertyPath: _database
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
     - target: {fileID: 8574260259220255962, guid: ddcc280852663914abb4e67509c1560d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2064,6 +2072,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUnitSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4709703270656625163, guid: 90673812de4889f46b7a2ae774ae1895, type: 3}
+      propertyPath: _upgradesDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f9b9e8677be22148afa3a07ea4c631e, type: 2}
+    - target: {fileID: 5306406021470129094, guid: 90673812de4889f46b7a2ae774ae1895, type: 3}
+      propertyPath: _database
+      value: 
+      objectReference: {fileID: 11400000, guid: 66d56858059e61243b73760e9b2aa2c8, type: 2}
     - target: {fileID: 8574260259220255962, guid: 90673812de4889f46b7a2ae774ae1895, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3174,7 +3190,7 @@ MonoBehaviour:
   _openAnimation: {fileID: 0}
   _closeAnimation: {fileID: 0}
   _isOpened: 0
-  _shopInfo: {fileID: 11400000, guid: 694b5e2d9cea45544b601330fc2043ab, type: 2}
+  _shopInfo: {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
   _shopActivator: {fileID: 340054616}
   _shopBuying: {fileID: 8957411272682460676}
   _sample: {fileID: 7340238383587705808, guid: 2a92983e52313574c8d770564a373146, type: 3}
@@ -3556,7 +3572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c8107a741ce7742a6431f1a66dc548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shopDatabase: {fileID: 11400000, guid: 694b5e2d9cea45544b601330fc2043ab, type: 2}
+  _shopDatabase: {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
   _playerWallet: {fileID: 11400000, guid: 39fef53b78a1c8b4f9c92971f16edaed, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

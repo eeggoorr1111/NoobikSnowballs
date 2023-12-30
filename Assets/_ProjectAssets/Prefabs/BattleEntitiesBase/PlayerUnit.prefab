@@ -241,10 +241,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d32a8a6cda263488702c15faf4c1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _descriptor: {fileID: 11400000, guid: b8907adf18cb7d74582fa5f905c07478, type: 2}
   _level: 0
-  _defaultValue: 25
-  _upgrading: []
+  _settedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _changedLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  _provider: {fileID: 0}
 --- !u!114 &7263120245963214812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +274,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGunSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4709703270656625163, guid: ddcc280852663914abb4e67509c1560d, type: 3}
+      propertyPath: _upgradesDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f9b9e8677be22148afa3a07ea4c631e, type: 2}
+    - target: {fileID: 5306406021470129094, guid: ddcc280852663914abb4e67509c1560d, type: 3}
+      propertyPath: _database
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
     - target: {fileID: 8574260259220255962, guid: ddcc280852663914abb4e67509c1560d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -59,6 +59,8 @@ public sealed class CreeperBattleRegistrator : EntityBattleRegistrator<CreeperRo
 
     protected override void RegisterImpl(CreeperRoster unit)
     {
+        unit.Hp.Maximize();
+
         _transforms.Set(unit.Id, unit.Root);
         _bounds.Set(unit.Id, unit.Bounds);
         _readHps.Set(unit.Id, unit.Hp);

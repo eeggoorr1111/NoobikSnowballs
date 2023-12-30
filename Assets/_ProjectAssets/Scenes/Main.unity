@@ -1344,7 +1344,7 @@ MonoBehaviour:
   _openingShop: 0
   _upgradeChecker: {fileID: 0}
   _audioListener: {fileID: 0}
-  _levelCounter: {fileID: 11400000, guid: 2f5699bbe8476b74f82b7deccfc11771, type: 2}
+  _levelCounter: {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
   _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
   _levelsLoader: {fileID: 2119252918}
   _firstLaunch:
@@ -1472,9 +1472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2744,7 +2744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb873fd0c301a749ba9309c641d880a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelCounter: {fileID: 11400000, guid: 2f5699bbe8476b74f82b7deccfc11771, type: 2}
+  _levelCounter: {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
   _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
   _label: {fileID: 1906894996}
 --- !u!114 &1906894996
@@ -2934,8 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64109ae2320a824ba3798e2221157f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initiables: {fileID: 1942716194}
-  _isFirstLaunch: {fileID: 11400000, guid: 90db031368922594ea80526f61a963e1, type: 2}
+  _isFirstLaunch: {fileID: 11400000, guid: 1a846a97296a5a54b853678b456953b0, type: 2}
   _gameLoop: {fileID: 637804354}
   _gameReady: {fileID: 415817497}
   _langAdapter: {fileID: 1966585092}
@@ -3484,9 +3483,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
