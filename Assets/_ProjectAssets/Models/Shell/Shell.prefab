@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 25
-  _scatterAngle: 0
+  _scatterDegreezAmplitude: {x: 0, y: 90, z: 0}
   _maxDistance: 50
+  _shattersCount: 5
   _shootVFXPrefabs: []
   _hitVFXPrefabs: []
   _overrideHitPrefabs: []
@@ -108,6 +109,8 @@ MonoBehaviour:
   _surface: {fileID: 0}
   _bounds: {fileID: 494580870198196194}
   _isCanHitWithShell: 0
+  _isDestroyOnUnitHit: 1
+  _isDestroyOnObstacleHit: 1
   _sqrErrorDisanceScaling: 0.05
   _collider: {fileID: 0}
   _shellView: []
