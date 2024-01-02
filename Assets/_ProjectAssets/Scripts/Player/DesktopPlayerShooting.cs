@@ -79,11 +79,11 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
         _unitShooting.Shooted -= OnShooted;
     }
 
-    private void OnShooted()
+    private void OnShooted(Gun gun)
     {
-        _shellsLifetime.Shoot(  _unitShooting.Shell,
-                                _unitShooting.ShootPoint,
-                                _unitShooting.GunDirection,
+        _shellsLifetime.Shoot(  gun.CurrentShell,
+                                gun.ShootPoint,
+                                gun.Direction,
                                 _unitShooting.PlayerId,
                                 _unitShooting.PlayerUnitId, 
                                 _unitShooting.Damage);

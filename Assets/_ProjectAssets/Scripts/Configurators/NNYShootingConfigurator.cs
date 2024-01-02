@@ -20,7 +20,9 @@ namespace Narratore.DI
 
         [Header("NNY SHOOTING")]
         [SerializeField] private PlayerUnitSpawner _unitSpawner;
-        [SerializeField] private PlayerGunSpawner _gunSpawner;
+        [SerializeField] private PlayerGunSpawner _mainGunSpawner;
+        [SerializeField] private PlayerGunSpawner _secondGunSpawner;
+        [SerializeField] private ReadBoolProvider _isShootingWith2Hands;
 
         [Header("INPUT")]
         [SerializeField] private Joystick _joystick;
@@ -41,7 +43,7 @@ namespace Narratore.DI
             if (!_unitSpawner.TrySpawn())
                 throw new Exception("Error frist spawn unit");
 
-            if (!_gunSpawner.TrySpawn())
+            if (!_mainGunSpawner.TrySpawn())
                 throw new Exception("Error frist spawn gun");
 
 
@@ -53,7 +55,10 @@ namespace Narratore.DI
             builder.Register<PlayerCharacterMover>(Lifetime.Singleton).AsSelf().As<ITickable, IPlayerUnitRotator>().WithParameter(_joystick);
             builder.Register<PlayerUnitFacade>(Lifetime.Singleton).As<IPlayerUnitRoot, IPlayerMovableUnit, IPlayerUnitShooting, IDisposable>()
                 .WithParameter(_unitSpawner)
-                .WithParameter(_gunSpawner);
+                .WithParameter("mainGunSpawner", _mainGunSpawner)
+                .WithParameter("secondGunSpawner", _secondGunSpawner)
+                .WithParameter(_isShootingWith2Hands);
+
             if (config.DeviceType == DeviceType.Desktop)
             {
                 builder.Register<DesktopPlayerShooting>(Lifetime.Singleton)

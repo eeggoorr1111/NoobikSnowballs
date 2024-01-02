@@ -3,6 +3,8 @@ using Narratore.Components;
 using UnityEngine;
 using Narratore.Solutions.Battle;
 using System;
+using Narratore;
+using System.Collections.Generic;
 
 public interface IPlayerUnitRoot
 {
@@ -17,13 +19,10 @@ public interface IPlayerMovableUnit : IPlayerUnitRoot
 
 public interface IPlayerUnitShooting
 {
-    event Action Shooted;
+    event Action<Gun> Shooted;
 
 
     IImpact Damage { get; }
-    Vector3 GunDirection { get; }
-    Vector3 ShootPoint { get; }
-    Shell Shell { get; }
     Vector3 Position { get; }
     int PlayerId { get; }
     int PlayerUnitId { get; }
@@ -34,23 +33,32 @@ public interface IPlayerUnitShooting
 
 
 /// <summary>
-/// Скрывает сложность того, что юнит и пушка являются респавнящимися
+/// Скрывает сложность того, что юнит и пушка являются респавнящимися, а также то, что пушки может быть 2
 /// </summary>
 public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDisposable
 {
-    public event Action Shooted;
+    public event Action<Gun> Shooted;
 
 
-    public PlayerUnitFacade(PlayerUnitSpawner unit, PlayerGunSpawner gunSpawner, PlayerUnitBattleRegistrator registrator)
+    public PlayerUnitFacade(PlayerUnitSpawner unit,
+                            PlayerGunSpawner mainGunSpawner,
+                            PlayerGunSpawner secondGunSpawner,
+                            PlayerUnitBattleRegistrator registrator,
+                            ReadBoolProvider isShootingWith2Hand)
     {
         _unitSpawner = unit;
-        _gunSpawner = gunSpawner;
+        _mainGunSpawner = mainGunSpawner;
         _registrator = registrator;
         _playerId = PlayersIds.LocalPlayerId;
+        _secondGunSpawner = secondGunSpawner;
+        _isShootingWith2Hand = isShootingWith2Hand;
 
         _unitSpawner.Spawned += OnRespawnedUnit;
         _unitSpawner.Spawning += OnRespawningUnit;
-        _gunSpawner.Spawned += OnRespawnedGun;
+        _mainGunSpawner.Spawned += OnRespawnedGun;
+        _isShootingWith2Hand.Changed += OnChangedCountHands;
+
+        _guns = new(2);
 
         OnRespawnedGunWithoutCommonRespawn();
         OnRespawnedUnit();
@@ -58,21 +66,19 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
 
 
     private readonly PlayerUnitSpawner _unitSpawner;
-    private readonly PlayerGunSpawner _gunSpawner;
+    private readonly PlayerGunSpawner _mainGunSpawner;
+    private readonly PlayerGunSpawner _secondGunSpawner;
     private readonly PlayerUnitBattleRegistrator _registrator;
+    private readonly ReadBoolProvider _isShootingWith2Hand;
     private readonly int _playerId;
 
     private PlayerUnitBattleRoster _unit;
-    private PlayerGunRoster _gun;
+    private List<PlayerGunRoster> _guns;
 
     public Transform Root => _unit.Root;
     public TwoLegsLoopedRotators FootsAnimator => _unit.FootsAnimator;
     public ReadValue<float> MoveSpeed => _unit.MoveSpeed;
-    public IImpact Damage => new ShellDamage(PlayersIds.LocalPlayerId, _gunSpawner.Current.Damage.Get());
-    public Vector3 GunDirection => _gun.Gun.Direction;
-    public Vector3 ShootPoint => _gun.Gun.ShootPoint;
-    public bool IsCanTodoAction => _gun.Gun.IsCanTodoAction;
-    public Shell Shell => _gun.Gun.CurrentShell;
+    public IImpact Damage => new ShellDamage(PlayersIds.LocalPlayerId, _mainGunSpawner.Current.Damage.Get());
     public Vector3 Position => Root.position;
     public int PlayerId => _playerId;
     public int PlayerUnitId => _unit.Id;
@@ -80,20 +86,24 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
 
     public void TryShoot()
     {
-        if (_gun.Gun.IsCanTodoAction)
-            _gun.Gun.Shoot();
+        for (int i = 0; i < _guns.Count; i++)
+            if (_guns[i].Gun.IsCanTodoAction)
+                _guns[i].Gun.Shoot();
     }
 
     public void Dispose()
     {
         _unitSpawner.Spawned -= OnRespawnedUnit;
         _unitSpawner.Spawning -= OnRespawningUnit;
-        _gunSpawner.Spawned -= OnRespawnedGun;
+        _mainGunSpawner.Spawned -= OnRespawnedGun;
+        _isShootingWith2Hand.Changed -= OnChangedCountHands;
 
-        if (_gun != null)
-            _gun.Gun.Shooted -= OnShooted;
+        for (int i = 0; i < _guns.Count; i++)
+            _guns[i].Gun.ShootedGun -= OnShooted;
     }
 
+
+    private void OnChangedCountHands() => _mainGunSpawner.TrySpawn();
 
     private void OnRespawnedGun()
     {
@@ -103,17 +113,20 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
 
     private void OnRespawnedGunWithoutCommonRespawn()
     {
-        if (_gun != null)
-            _gun.Gun.Shooted -= OnShooted;
+        foreach (var gun in _guns)
+            gun.Gun.ShootedGun -= OnShooted;
+        _guns.Clear();
 
-        _gun = _gunSpawner.Current;
-        _gun.Gun.Shooted += OnShooted;
+        _guns.Add(_mainGunSpawner.Current);
+        if (_isShootingWith2Hand.Value && _secondGunSpawner.TrySpawn())
+            _guns.Add(_secondGunSpawner.Current);
+
+        foreach (var gun in _guns)
+            gun.Gun.ShootedGun += OnShooted;
     }
 
     private void OnRespawnedUnit()
     {
-        
-
         _unit = _unitSpawner.Current.BattleRoster;
         _registrator.Register(_unit, _playerId);
 
@@ -125,20 +138,35 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
         if (_unit != null)
         {
             _registrator.Unregister(_unit);
-            _gun.Root.SetParent(null);
+
+            foreach (var gun in _guns)
+                gun.Root.SetParent(null);
         }
     }
 
     private void OnRespawned()
     {
-        _gun.Recoil.SetTarget(_unit.GunRecoilTarget);
-        _gun.Root.SetParent(_unit.GunAttach);
+        PlayerGunRoster mainGun = _guns[0];
+        SecondHandState.StateKey state = _guns.Count > 1 ? SecondHandState.StateKey.WithGun : SecondHandState.StateKey.Free;
 
-        _gun.Root.localPosition = Vector3.zero;
-        _gun.Root.localRotation = Quaternion.identity;
 
-        _unit.MoveSpeed.SetStat(_gun.MoveSpeed);
+        mainGun.Root.SetParent(_unit.MainGunAttach);
+        mainGun.Root.localPosition = Vector3.zero;
+        mainGun.Root.localRotation = Quaternion.identity;
+
+        if (state == SecondHandState.StateKey.WithGun)
+        {
+            PlayerGunRoster secondGun = _guns[1];
+
+            secondGun.Root.SetParent(_unit.SecondGunAttach);
+            secondGun.Root.localPosition = Vector3.zero;
+            secondGun.Root.localRotation = Quaternion.identity;
+        }
+
+        _unit.SecondHandState.Switch(state);
+        _unit.MoveSpeed.SetStat(mainGun.MoveSpeed);
+        mainGun.Recoil.SetTarget(_unit.GunRecoilTarget);
     }
 
-    private void OnShooted() => Shooted?.Invoke();
+    private void OnShooted(Gun gun) => Shooted?.Invoke(gun);
 }

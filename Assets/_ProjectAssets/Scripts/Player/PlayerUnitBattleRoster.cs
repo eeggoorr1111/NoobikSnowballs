@@ -1,10 +1,8 @@
-﻿using Narratore.Data;
-using Narratore.MetaGame;
+﻿using Narratore.Components;
 using Narratore.Solutions.Battle;
-using Narratore.Components;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
 
 public class PlayerUnitBattleRoster : EntityRoster
 {
@@ -16,19 +14,23 @@ public class PlayerUnitBattleRoster : EntityRoster
 
 
     public Transform GunRecoilTarget => _gunRecoilTarget;
-    public Transform GunAttach => _gunAttach;
+    public Transform MainGunAttach => _mainGunAttach;
+    public Transform SecondGunAttach => _secondGunAttach;
     public IReadOnlyList<MovableBounds> Bounds => _bounds;
     public StatValue<float> MoveSpeed => _moveSpeed;
     public TwoLegsLoopedRotators FootsAnimator => _footsAnimator;
+    public SecondHandState SecondHandState => _secondHandState;
     public Hp Hp => _hp;
     public StubUnitDeath Death => _death;
 
 
     [SerializeField] private Transform _gunRecoilTarget;
-    [SerializeField] private Transform _gunAttach;
+    [SerializeField] private Transform _mainGunAttach;
+    [SerializeField] private Transform _secondGunAttach;
     [SerializeField] private MovableBounds[] _bounds;
     [SerializeField] private StatValue<float> _moveSpeed;
     [SerializeField] private TwoLegsLoopedRotators _footsAnimator;
+    [SerializeField] private SecondHandState _secondHandState;
     [SerializeField] private Hp _hp;
     [SerializeField] private StubUnitDeath _death;
 }
