@@ -52,7 +52,6 @@ MonoBehaviour:
   _changedLevel:
     m_PersistentCalls:
       m_Calls: []
-  _provider: {fileID: 0}
   _current: 0
   _onSettedLevel: 5
   _onChangedLevel: 5
@@ -65,6 +64,7 @@ MonoBehaviour:
   _decreased:
     m_PersistentCalls:
       m_Calls: []
+  _provider: {fileID: 0}
 --- !u!114 &1932804876776917504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +125,11 @@ MonoBehaviour:
   _hp: {fileID: 79376681914568657}
   _shaderIntensityProp: _Intensity
   _shaderColorProp: _Color
+  _hitMaterial: {fileID: 0}
   _hpRenderers: []
-  _damageColor: {r: 0.8113208, g: 0, b: 0, a: 1}
-  _duration: 0.25
-  _ease: 3
+  _damageColor: {r: 1, g: 1, b: 1, a: 1}
+  _duration: 0.15
+  _ease: 22
   _maxIntensity: 1
   _deathRenderers: []
   _death: {fileID: 0}
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523235e7fe450b498018fe9f9d97241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.7, y: 1.9, z: 0.7}
+  _size: {x: 1, y: 1.9, z: 1}
   _offset: {x: 0, y: 0, z: 0}
   _transform: {fileID: 1600034206500586877}
   _isActive: 1
@@ -263,7 +264,6 @@ MonoBehaviour:
   _changedLevel:
     m_PersistentCalls:
       m_Calls: []
-  _provider: {fileID: 0}
   _current: 0
   _onSettedLevel: 10
   _onChangedLevel: 10
@@ -276,6 +276,7 @@ MonoBehaviour:
   _decreased:
     m_PersistentCalls:
       m_Calls: []
+  _provider: {fileID: 0}
   _changedVisibility:
     m_PersistentCalls:
       m_Calls: []

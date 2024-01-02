@@ -577,7 +577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -119.2, y: -61.4}
+  m_AnchoredPosition: {x: -119.19995, y: -61.399902}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &308977784
@@ -2608,7 +2608,7 @@ GameObject:
   - component: {fileID: 1906894994}
   - component: {fileID: 1906894993}
   - component: {fileID: 1906894996}
-  - component: {fileID: 1906894995}
+  - component: {fileID: 1906894997}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -2732,21 +2732,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906894991}
   m_CullTransparentMesh: 1
---- !u!114 &1906894995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906894991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edb873fd0c301a749ba9309c641d880a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelCounter: {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
-  _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
-  _label: {fileID: 1906894996}
 --- !u!114 &1906894996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2767,6 +2752,21 @@ MonoBehaviour:
   _on: 
   _before: 
   _after: 
+--- !u!114 &1906894997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906894991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb873fd0c301a749ba9309c641d880a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelCounter: {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
+  _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
+  _label: {fileID: 1906894996}
 --- !u!1 &1942716193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,9 +3445,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3b0652c2e02494c821a04c690636cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _changedDirection:
+    m_PersistentCalls:
+      m_Calls: []
   _target: {fileID: 7349105255969644201}
-  _startAngle: -3
-  _endAngle: 3
+  _currentLocalAngleDelta: {x: -3, y: 3}
   _axis: 2
   _ease: 3
   _speed: {fileID: 7349105255969644208}

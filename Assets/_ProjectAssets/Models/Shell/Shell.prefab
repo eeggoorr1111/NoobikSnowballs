@@ -98,8 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94207c3c0b5811d459d0519c39c2e615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sample: {fileID: 927877317090461971}
-  _speed: 22.5
+  _speed: 25
   _scatterAngle: 0
   _maxDistance: 50
   _shootVFXPrefabs: []
