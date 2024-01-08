@@ -5,46 +5,87 @@ using Narratore.Solutions.Battle;
 using System;
 using Narratore;
 using System.Collections.Generic;
+using Narratore.Pools;
 
 public interface IPlayerUnitRoot
 {
     Transform Root { get; }
 }
 
+public interface IPlayerUnitRootAndHp : IPlayerUnitRoot
+{
+    Hp Hp { get; }
+}
+
 public interface IPlayerMovableUnit : IPlayerUnitRoot
 {
     ReadValue<float> MoveSpeed { get; }
     TwoLegsLoopedRotators FootsAnimator { get; }
+    bool IsCanMove { get; }
+}
+
+public interface IPlayerPushableUnit : IPlayerUnitRoot
+{
+    bool IsCanMove { get; set; }
+    int UnitId { get; }
+}
+
+public interface IWithHp
+{
+    event Action DecreasedHp;
+    event Action ChangedHp;
+
+
+    int UnitId { get; }
+    Hp Hp { get; }
 }
 
 public interface IPlayerUnitShooting
 {
-    event Action<Gun> Shooted;
+    event Action<Gun> ShootedGun;
+    event Action Shooted;
+    event Action RechargeTick;
+    event Action Recharged;
 
 
     IImpact Damage { get; }
     Vector3 Position { get; }
     int PlayerId { get; }
     int PlayerUnitId { get; }
+    int LeftBullets { get; }
+    int MaxBullets { get; }
+    float RechargeProgress { get; }
 
 
     void TryShoot();
+    void Recharge();
 }
 
 
 /// <summary>
 /// Скрывает сложность того, что юнит и пушка являются респавнящимися, а также то, что пушки может быть 2
 /// </summary>
-public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDisposable
+public class PlayerUnitFacade : IPlayerUnitRoot, 
+                                IPlayerMovableUnit, 
+                                IPlayerUnitShooting, 
+                                IPlayerPushableUnit, 
+                                IPlayerUnitRootAndHp, 
+                                IWithHp, 
+                                IDisposable
 {
-    public event Action<Gun> Shooted;
-
+    public event Action<Gun> ShootedGun;
+    public event Action Shooted;
+    public event Action RechargeTick;
+    public event Action Recharged;
+    public event Action DecreasedHp;
+    public event Action ChangedHp;
 
     public PlayerUnitFacade(PlayerUnitSpawner unit,
                             PlayerGunSpawner mainGunSpawner,
                             PlayerGunSpawner secondGunSpawner,
                             PlayerUnitBattleRegistrator registrator,
-                            ReadBoolProvider isShootingWith2Hand)
+                            IsShootingWith2Hands isShootingWith2Hand,
+                            SampleData sampleData)
     {
         _unitSpawner = unit;
         _mainGunSpawner = mainGunSpawner;
@@ -52,6 +93,7 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
         _playerId = PlayersIds.LocalPlayerId;
         _secondGunSpawner = secondGunSpawner;
         _isShootingWith2Hand = isShootingWith2Hand;
+        _sampleData = sampleData;
 
         _unitSpawner.Spawned += OnRespawnedUnit;
         _unitSpawner.Spawning += OnRespawningUnit;
@@ -70,10 +112,12 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     private readonly PlayerGunSpawner _secondGunSpawner;
     private readonly PlayerUnitBattleRegistrator _registrator;
     private readonly ReadBoolProvider _isShootingWith2Hand;
+    private readonly SampleData _sampleData;
     private readonly int _playerId;
 
     private PlayerUnitBattleRoster _unit;
     private List<PlayerGunRoster> _guns;
+
 
     public Transform Root => _unit.Root;
     public TwoLegsLoopedRotators FootsAnimator => _unit.FootsAnimator;
@@ -82,6 +126,12 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     public Vector3 Position => Root.position;
     public int PlayerId => _playerId;
     public int PlayerUnitId => _unit.Id;
+    public int UnitId => PlayerUnitId;
+    public Hp Hp => _unit.Hp;
+    public bool IsCanMove { get; set; }
+    public int LeftBullets => _guns[0].Gun.Magazine.Size.Current;
+    public int MaxBullets => _guns[0].Gun.Magazine.Size.Max;
+    public float RechargeProgress => _guns[0].RechargeTimer.Progress;
 
 
     public void TryShoot()
@@ -91,12 +141,24 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
                 _guns[i].Gun.Shoot();
     }
 
+    public void Recharge()
+    {
+        for (int i = 0; i < _guns.Count; i++)
+            _guns[i].Gun.Recharge();
+    }
+
     public void Dispose()
     {
         _unitSpawner.Spawned -= OnRespawnedUnit;
         _unitSpawner.Spawning -= OnRespawningUnit;
         _mainGunSpawner.Spawned -= OnRespawnedGun;
         _isShootingWith2Hand.Changed -= OnChangedCountHands;
+
+        if (_unit != null)
+        {
+            _unit.Hp.Decreased -= OnDecresedHp;
+            _unit.Hp.Changed -= OnChangedHp;
+        }
 
         for (int i = 0; i < _guns.Count; i++)
             _guns[i].Gun.ShootedGun -= OnShooted;
@@ -115,9 +177,19 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     {
         foreach (var gun in _guns)
             gun.Gun.ShootedGun -= OnShooted;
-        _guns.Clear();
 
+        if (_guns.Count > 0)
+        {
+            _guns[0].RechargeTimer.Ticked -= OnRechargeTick;
+            _guns[0].RechargeTimer.Elapsed -= OnRecharged;
+        }
+
+        _guns.Clear();
         _guns.Add(_mainGunSpawner.Current);
+
+        _guns[0].RechargeTimer.Ticked += OnRechargeTick;
+        _guns[0].RechargeTimer.Elapsed += OnRecharged;
+
         if (_isShootingWith2Hand.Value && _secondGunSpawner.TrySpawn())
             _guns.Add(_secondGunSpawner.Current);
 
@@ -128,7 +200,10 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     private void OnRespawnedUnit()
     {
         _unit = _unitSpawner.Current.BattleRoster;
+        _unit.Hp.Decreased += OnDecresedHp;
+        _unit.Hp.Changed += OnChangedHp;
         _registrator.Register(_unit, _playerId);
+        _sampleData.Set(_unit, _unitSpawner.CurrentPrefab.BattleRoster);
 
         OnRespawned();
     }
@@ -137,7 +212,10 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
     {
         if (_unit != null)
         {
+            _unit.Hp.Decreased -= OnDecresedHp;
+            _unit.Hp.Changed -= OnChangedHp;
             _registrator.Unregister(_unit);
+            _sampleData.Remove(_unit);
 
             foreach (var gun in _guns)
                 gun.Root.SetParent(null);
@@ -165,8 +243,18 @@ public class PlayerUnitFacade : IPlayerMovableUnit, IPlayerUnitShooting, IDispos
 
         _unit.SecondHandState.Switch(state);
         _unit.MoveSpeed.SetStat(mainGun.MoveSpeed);
+
         mainGun.Recoil.SetTarget(_unit.GunRecoilTarget);
     }
 
-    private void OnShooted(Gun gun) => Shooted?.Invoke(gun);
+    private void OnShooted(Gun gun)
+    {
+        ShootedGun?.Invoke(gun);
+        Shooted?.Invoke();
+    }
+    private void OnDecresedHp() => DecreasedHp?.Invoke();
+    private void OnChangedHp() => ChangedHp?.Invoke();
+
+    private void OnRechargeTick() => RechargeTick?.Invoke();
+    private void OnRecharged() => Recharged?.Invoke();
 }

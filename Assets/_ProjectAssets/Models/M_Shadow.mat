@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3010
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -88,7 +88,7 @@ Material:
     - _SunRadius: 100
     - _SunX: 0
     - _SunZ: 0
-    - _SurfaceOffset: 0
+    - _SurfaceOffset: -0.02
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

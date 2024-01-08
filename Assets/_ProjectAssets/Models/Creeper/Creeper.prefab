@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1234816646974251842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.216, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,9 +56,14 @@ MonoBehaviour:
   _duration: 0
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
-    _radius: 5
+    _radius: 1.5
     _minDamage: 2
     _maxDamage: 2
+  _vfx:
+  - {fileID: 4027315242708229750, guid: e4c7d62d57774c1459d9d2790b9ee068, type: 3}
+  - {fileID: 5276286569851536162, guid: 76c6ab805e917de4ebc53dee43e2ca2a, type: 3}
+  - {fileID: 3383948878581359678, guid: 71ce46f0427378b4a8a621d213b763a1, type: 3}
+  - {fileID: 7662639815776158940, guid: 4cf1f66a11ad34f458aa419965705d06, type: 3}
 --- !u!1 &6580645306886047064
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +92,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6510230110707968823}
@@ -275,17 +280,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 6965306894446095098, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
-      propertyPath: _size.y
-      value: 2.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7326352272393008056, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: _ease
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7326352272393008056, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: _duration
-      value: 0.18
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7326352272393008056, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: _hitMaterial
@@ -388,6 +389,14 @@ MonoBehaviour:
   _death: {fileID: 8291292015823504149}
   _speed: {fileID: 6391405293428777382}
   _bot: {fileID: 7469900648602172146}
+  _dropLoot:
+    _lootSamples:
+    - _item1: {fileID: 8628644474817721858, guid: 216bddeb5176f3d4da81769005095a45, type: 3}
+      _item2: 1
+    - _item1: {fileID: 6824013783450091575, guid: 0eff44418453c5843bec41a3bea3fa52, type: 3}
+      _item2: 1
+    - _item1: {fileID: 0}
+      _item2: 8
 --- !u!114 &1999408012256351303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6475952469480177633, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}

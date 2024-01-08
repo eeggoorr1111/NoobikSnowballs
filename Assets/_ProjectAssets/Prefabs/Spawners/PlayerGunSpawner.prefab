@@ -63,11 +63,11 @@ PrefabInstance:
     - target: {fileID: 7173369775443551983, guid: a26d27760103c6a4da58f8897ecdc29e, type: 3}
       propertyPath: _upgradesDatabase
       value: 
-      objectReference: {fileID: 11400000, guid: 26afb5583fa7347418335d567cc4eef7, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7743081731360909090, guid: a26d27760103c6a4da58f8897ecdc29e, type: 3}
       propertyPath: _database
       value: 
-      objectReference: {fileID: 11400000, guid: 694b5e2d9cea45544b601330fc2043ab, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97,6 +97,15 @@ MonoBehaviour:
   _activator: {fileID: 5306406021470129094}
   _items:
   - {fileID: 8977742051500295910, guid: d16143f114bf42b4caf2e04188af959f, type: 3}
+  - {fileID: 8977742051500295910, guid: f7a418501bf19e14aaa0189fe70843b8, type: 3}
+  - {fileID: 8977742051500295910, guid: e5d713260413d094fbe612da88d2e78d, type: 3}
+  - {fileID: 8977742051500295910, guid: 25fffd39f10dd7f47918b4ae1220f16b, type: 3}
+  - {fileID: 8977742051500295910, guid: 533fa51ef9a8d214f803e5cffe5b24f2, type: 3}
+  - {fileID: 8977742051500295910, guid: 7f4b36991ae5baf4f8bb2bdbe6abf2e9, type: 3}
+  - {fileID: 8977742051500295910, guid: a71cf96e2403b5949a55a02afba8678f, type: 3}
+  - {fileID: 8977742051500295910, guid: 22dba701fa85d1f49a9e0cf2c6646d72, type: 3}
+  - {fileID: 8977742051500295910, guid: bdcf48d25bc5f964eb0458830a22d5a0, type: 3}
+  - {fileID: 8977742051500295910, guid: c1eec369fc2d99d4d89191eec6728978, type: 3}
   _current: {fileID: 0}
   _currentPrefab: {fileID: 0}
 --- !u!114 &5306406021470129094 stripped

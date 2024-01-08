@@ -24,6 +24,3 @@ MonoBehaviour:
     - _key: (True) Level
       _isActive: 1
       _isBoss: 0
-    - _key: (True) Level
-      _isActive: 1
-      _isBoss: 0

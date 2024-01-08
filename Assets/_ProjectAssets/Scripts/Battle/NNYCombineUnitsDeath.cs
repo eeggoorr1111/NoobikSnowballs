@@ -2,7 +2,7 @@ using Narratore.DI;
 using Narratore.Solutions.Battle;
 
 
-public class NNYCombineUnitsDeath : CombineUnitsDeathSource
+public class NNYCombineUnitsDeath : CombineDeathSource
 {
     public NNYCombineUnitsDeath(ShootingDeathSource shooting, 
                                 ExplosionDeathSource explosion, 

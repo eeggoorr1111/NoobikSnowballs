@@ -1,10 +1,82 @@
-using Narratore.Interfaces;
-using Narratore.Solutions.Battle;
-using Narratore.Extensions;
-using System;
-using UnityEngine;
-using Narratore.UI;
+using Narratore;
 using Narratore.CameraTools;
+using Narratore.Extensions;
+using Narratore.Helpers;
+using Narratore.Solutions.Battle;
+using Narratore.UI;
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using VContainer.Unity;
+
+
+public class PlayerBulletsUiObserver : IInitializable, IDisposable, IBeginnedUpdatable
+{
+    public PlayerBulletsUiObserver( IPlayerUnitShooting unit, 
+                                    TMP_Text leftBulletsLabel, 
+                                    Slider rechargeSlider, 
+                                    RectTransform bulletsInfoPanel, 
+                                    ICurrentCameraGetter camera, 
+                                    Canvas canvas)
+    {
+        _unit = unit;
+        _leftBulletsLabel = leftBulletsLabel;
+        _rechargeSlider = rechargeSlider;
+        _bulletsInfoPanel = bulletsInfoPanel;
+        _camera = camera;
+        _canvas = canvas;
+    }
+
+
+    private readonly IPlayerUnitShooting _unit;
+    private readonly TMP_Text _leftBulletsLabel;
+    private readonly Slider _rechargeSlider;
+    private readonly RectTransform _bulletsInfoPanel;
+    private readonly ICurrentCameraGetter _camera;
+    private readonly Canvas _canvas;
+
+
+
+    public void Tick()
+    {
+        _bulletsInfoPanel.anchoredPosition = (UiHelper.Convert(_unit.Position, _camera.Get, _camera.Transform, _canvas.scaleFactor) + new Vector3(0, 150, 0)).To2D();
+    }
+
+    public void Dispose()
+    {
+        _unit.Shooted -= OnShooted;
+        _unit.RechargeTick -= OnTickTimerRecharge;
+        _unit.Recharged -= Recharged;
+    }
+
+    public void Initialize()
+    {
+        _unit.Shooted += OnShooted;
+        _unit.RechargeTick += OnTickTimerRecharge;
+        _unit.Recharged += Recharged;
+
+        _leftBulletsLabel.text = _unit.MaxBullets.ToString();
+    }
+
+
+    private void OnTickTimerRecharge()
+    {
+        if (!_rechargeSlider.gameObject.activeSelf)
+            _rechargeSlider.gameObject.SetActive(true);
+
+        _rechargeSlider.value = _unit.RechargeProgress;
+    }
+
+    private void Recharged()
+    {
+        _leftBulletsLabel.text = _unit.MaxBullets.ToString();
+        _rechargeSlider.gameObject.SetActive(false);
+    }
+
+    private void OnShooted() => _leftBulletsLabel.text = _unit.LeftBullets.ToString();
+}
+
 
 public interface IPlayerShooting
 {
@@ -13,8 +85,7 @@ public interface IPlayerShooting
     event Action EndedShoot;
 }
 
-
-public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
+public class DesktopPlayerShooting : IPreparedUpdatable, IDisposable, IPlayerShooting
 {
     public event Action GettedCommandShoot;
     public event Action StartedShoot;
@@ -22,29 +93,20 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
 
 
     public DesktopPlayerShooting( IPlayerUnitShooting shooting,
-                                    ShellsLifetime shellsLifetime,
-                                    ICurrentCameraGetter camera,
-                                    LayerMask layerMask,
-                                    IPlayerUnitRotator unitRotator,
-                                    ITouchArea touchArea)
+                                  ShellsLifetime shellsLifetime,
+                                  ITouchArea touchArea)
     {
         _unitShooting = shooting;
         _shellsLifetime = shellsLifetime;
-        _camera = camera;
-        _layerMask = layerMask;
-        _unitRotator = unitRotator;
         _touchArea = touchArea;
 
-        _unitShooting.Shooted += OnShooted;
+        _unitShooting.ShootedGun += OnShooted;
     }
 
 
 
     private readonly IPlayerUnitShooting _unitShooting;
     private readonly ShellsLifetime _shellsLifetime;
-    private readonly ICurrentCameraGetter _camera;
-    private readonly LayerMask _layerMask;
-    private readonly IPlayerUnitRotator _unitRotator;
     private readonly ITouchArea _touchArea;
     private bool _isShooting;
 
@@ -52,19 +114,7 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
     {
         if (_touchArea.IsHold)
         {
-            // Исходим из того, что террейн находиться в 0 точке и так как камера под углом 
-            // то высоты недостаточно, поэтому умножаем на 2 - такой небольшой костыль)
-            float distance = _camera.Transform.position.y * 2;
-            Ray ray = _camera.Get.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, distance, _layerMask))
-            {
-                Vector3 direction = (hit.point - _unitShooting.Position).WithY(0).normalized;
-
-                _unitRotator.Rotate(direction);
-                _unitShooting.TryShoot();
-            }
-
+            _unitShooting.TryShoot();
             GettedCommandShoot?.Invoke();
         }
         else if (_isShooting)
@@ -72,18 +122,21 @@ public class DesktopPlayerShooting : IUpdatable, IDisposable, IPlayerShooting
             _isShooting = false;
             EndedShoot?.Invoke();
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            _unitShooting.Recharge();
     }
 
     public void Dispose()
     {
-        _unitShooting.Shooted -= OnShooted;
+        _unitShooting.ShootedGun -= OnShooted;
     }
 
     private void OnShooted(Gun gun)
     {
         _shellsLifetime.Shoot(  gun.CurrentShell,
                                 gun.ShootPoint,
-                                gun.Direction,
+                                gun.Direction.WithY(0).normalized,
                                 _unitShooting.PlayerId,
                                 _unitShooting.PlayerUnitId, 
                                 _unitShooting.Damage);

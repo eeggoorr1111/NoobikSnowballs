@@ -18,4 +18,4 @@ MonoBehaviour:
   _stat: {fileID: 11400000, guid: b8907adf18cb7d74582fa5f905c07478, type: 2}
   _values:
   - _item1: 0.1
-    _item2: 5
+    _item2: 8

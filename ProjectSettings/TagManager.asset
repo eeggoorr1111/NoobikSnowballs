@@ -17,9 +17,9 @@ TagManager:
   - Props
   - PlayerUnit
   - Enemy
-  - 
-  - 
-  - 
+  - LootCollector
+  - Loot
+  - ShootingLevel
   - 
   - 
   - 

@@ -22,6 +22,7 @@ public class PlayerUnitBattleRoster : EntityRoster
     public SecondHandState SecondHandState => _secondHandState;
     public Hp Hp => _hp;
     public StubUnitDeath Death => _death;
+    public Collider LootCollider => _lootCollider;
 
 
     [SerializeField] private Transform _gunRecoilTarget;
@@ -33,4 +34,5 @@ public class PlayerUnitBattleRoster : EntityRoster
     [SerializeField] private SecondHandState _secondHandState;
     [SerializeField] private Hp _hp;
     [SerializeField] private StubUnitDeath _death;
+    [SerializeField] private Collider _lootCollider;
 }

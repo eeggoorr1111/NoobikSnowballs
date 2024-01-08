@@ -15,17 +15,15 @@ namespace Narratore.DI
     public class NNYLevelAreaConfigurator : Configurator
     {
         [SerializeField] private MeshFrame _area;
-        [SerializeField] private EntityCount _outEnemies;
         [SerializeField] private LoopedTextFadeAnimation _warning;
-        [SerializeField] private float _spawnDelay;
+        [SerializeField] private LevelAreaConfig _config;
 
         public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
-            builder.RegisterEntryPoint<LevelAreaHandler>(Lifetime.Singleton).As<ITickable>()
+            builder.Register<LevelAreaHandler>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces()
                 .WithParameter(_area)
-                .WithParameter(_outEnemies)
-                .WithParameter(_warning)
-                .WithParameter(_spawnDelay);
+                .WithParameter(_config)
+                .WithParameter(_warning);
         }
     }
 }
