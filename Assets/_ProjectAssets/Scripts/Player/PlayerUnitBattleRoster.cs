@@ -23,6 +23,7 @@ public class PlayerUnitBattleRoster : EntityRoster
     public Hp Hp => _hp;
     public StubUnitDeath Death => _death;
     public Collider LootCollider => _lootCollider;
+    public DamageProtection ResurrectShield => _resurrectShield;
 
 
     [SerializeField] private Transform _gunRecoilTarget;
@@ -35,4 +36,5 @@ public class PlayerUnitBattleRoster : EntityRoster
     [SerializeField] private Hp _hp;
     [SerializeField] private StubUnitDeath _death;
     [SerializeField] private Collider _lootCollider;
+    [SerializeField] private DamageProtection _resurrectShield;
 }

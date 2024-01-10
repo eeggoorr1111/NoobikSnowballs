@@ -48,7 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 30
   _scatterDegreezAmplitude: {x: 0, y: 10, z: 0}
-  _maxDistance: 10
   _shattersCount: 1
   _shootVFXPrefabs:
   - {fileID: 4367124024206514592, guid: e2ac95d68649d0343928f0a040650277, type: 3}
@@ -84,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523235e7fe450b498018fe9f9d97241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.15, y: 0.15, z: 0.15}
+  _size: {x: 0.25, y: 0.25, z: 0.25}
   _offset: {x: 0, y: 0, z: 0}
   _transform: {fileID: 8627044900386752431}
   _isActive: 1

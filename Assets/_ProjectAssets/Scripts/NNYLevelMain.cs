@@ -25,7 +25,8 @@ public sealed class NNYLevelMain : LevelMain
                         WalletProvider wallet,
                         CurrencyDescriptor currency,
                         IsShootingWith2Hands isShootingWith2Hands,
-                        GameStateEvents events) : base(config, updatables, events)
+                        GameStateEvents events,
+                        ShieldResurrection shield) : base(config, updatables, events)
     {
         _spawner = spawner;
         _playerMover = playerMover;
@@ -44,6 +45,7 @@ public sealed class NNYLevelMain : LevelMain
         _wallet = wallet;
         _currency = currency;
         _isShootingWith2Hands = isShootingWith2Hands;
+        _shield = shield;
     }
 
 
@@ -55,6 +57,7 @@ public sealed class NNYLevelMain : LevelMain
     private readonly LoseWindow _loseWindow;
     private readonly WinWindow _winWindow;
     private readonly IsShootingWith2Hands _isShootingWith2Hands;
+    private readonly ShieldResurrection _shield;
 
     private readonly LevelResultData _resultData;
     private readonly WalletProvider _wallet;
@@ -104,12 +107,16 @@ public sealed class NNYLevelMain : LevelMain
 
                     _loseConditionUnit.Hp.Maximize();
                 }
-               
+
+                _shield.Create();
                 ContinueGame();
             }
             else
             {
                 _isEndedGame = true;
+
+                if (!Application.isEditor && FullscreenAds.Instance.TryShow())
+                    await FullscreenAds.Instance.ShowingTask;
 
                 // Need return time scale before go to main menu
                 ContinueGame();
@@ -165,6 +172,9 @@ public sealed class NNYLevelMain : LevelMain
             
             isCanceled = await UniTaskHelper.Delay(1f, true, _cts.Token);
             if (isCanceled) return;
+
+            if (!Application.isEditor && result == WinWindow.Result.Continue && FullscreenAds.Instance.TryShow())
+                await FullscreenAds.Instance.ShowingTask;
 
             _winWindow.Close();
             _isShootingWith2Hands.Set(false);

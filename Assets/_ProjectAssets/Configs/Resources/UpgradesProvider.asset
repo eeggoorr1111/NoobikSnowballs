@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UpgradesProvider
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 1
   _upgrades: []

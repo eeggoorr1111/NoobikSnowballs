@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoubleGun_Damage
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 9d6ebd769028ed742833843b6a7c06f3, type: 2}
   _stat: {fileID: 11400000, guid: 015b0935807dffe4e946ff6e1b5123f8, type: 2}
   _values: 0a000000

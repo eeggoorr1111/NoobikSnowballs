@@ -840,7 +840,7 @@ PrefabInstance:
     - target: {fileID: 3541889368917775602, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: d58bd11f89fe35345aacdd058fec15e7, type: 2}
+      objectReference: {fileID: 11400000, guid: 605370eade014cc479166bf884b82256, type: 2}
     - target: {fileID: 4831656641867303641, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _key
       value: 
@@ -929,6 +929,14 @@ PrefabInstance:
       propertyPath: _distance
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 5233603848909863823, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _isDoubleRecoil
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233603848909863823, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _returnDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6188870364713457004, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -972,15 +980,19 @@ PrefabInstance:
     - target: {fileID: 6394945732855238522, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: d07892d9dc31af5489090c990667e357, type: 2}
+      objectReference: {fileID: 11400000, guid: a9b6601328242b74c83958db842955f1, type: 2}
     - target: {fileID: 6627821533974216007, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 1abc545b9b275ba4d8216655e8bbded0, type: 2}
+      objectReference: {fileID: 11400000, guid: 87a74c97a872e304081b630ec6f6a8f7, type: 2}
     - target: {fileID: 6836209799539693328, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 9f64e3c6c577ef540b85ee6521c6b51d, type: 2}
+      objectReference: {fileID: 11400000, guid: e7f9e35fa3ad9f34eac5d726070d248d, type: 2}
+    - target: {fileID: 7336091105486263062, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _value
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7518005290315529587, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_Name
       value: Colt
@@ -1000,7 +1012,7 @@ PrefabInstance:
     - target: {fileID: 8669851669368262711, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 1248bd7df7ceb3544b5619c15c7a55c4, type: 2}
+      objectReference: {fileID: 11400000, guid: f13d7dc2372acc448b084b50f32af886, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

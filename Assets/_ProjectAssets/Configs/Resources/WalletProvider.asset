@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: WalletProvider
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 1
   _money:
   - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
-    _value: 0
-  - _currency: {fileID: 11400000, guid: d5a0449a2ce0b484cab219ec5ac1bee3, type: 2}
     _value: 0

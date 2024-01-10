@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pistol_RechargeDuration
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: a68eaf4604b13164798ca36ab612aa3e, type: 2}
   _stat: {fileID: 11400000, guid: 667c592587ca81f478ac5afe4d1ff403, type: 2}
   _values:
-  - 0.5
+  - 0.1

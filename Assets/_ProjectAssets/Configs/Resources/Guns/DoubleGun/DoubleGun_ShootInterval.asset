@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoubleGun_ShootInterval
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 9d6ebd769028ed742833843b6a7c06f3, type: 2}
   _stat: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _values:

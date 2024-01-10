@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol_Damage
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: a68eaf4604b13164798ca36ab612aa3e, type: 2}
   _stat: {fileID: 11400000, guid: 015b0935807dffe4e946ff6e1b5123f8, type: 2}
-  _values: 0a000000
+  _values: 14000000

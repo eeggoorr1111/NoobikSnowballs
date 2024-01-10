@@ -134,12 +134,11 @@ public class DesktopPlayerShooting : IPreparedUpdatable, IDisposable, IPlayerSho
 
     private void OnShooted(Gun gun)
     {
-        _shellsLifetime.Shoot(  gun.CurrentShell,
-                                gun.ShootPoint,
-                                gun.Direction.WithY(0).normalized,
+        _shellsLifetime.Shoot(  gun,
                                 _unitShooting.PlayerId,
-                                _unitShooting.PlayerUnitId, 
-                                _unitShooting.Damage);
+                                _unitShooting.PlayerUnitId,
+                                _unitShooting.GetDamage(),
+                                _unitShooting.MaxDistance);
 
         if (!_isShooting)
         {

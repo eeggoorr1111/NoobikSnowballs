@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Colt_MoveSpeed
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 8499e199aa6cb8d478096a16a1d85025, type: 2}
   _stat: {fileID: 11400000, guid: b8907adf18cb7d74582fa5f905c07478, type: 2}
   _values:
-  - 5
+  - 6

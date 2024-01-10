@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelsCounterProvider
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 1
   _value: 0
   _defaultValue: 0
   _key: level

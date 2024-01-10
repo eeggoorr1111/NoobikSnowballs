@@ -149,6 +149,7 @@ Transform:
   - {fileID: 2195084564634211588}
   - {fileID: 1080666002126363073}
   - {fileID: 6310629995126350900}
+  - {fileID: 6303657745476929562}
   m_Father: {fileID: 6188870364713457004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7176928308288677450
@@ -396,6 +397,54 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _provider: {fileID: 0}
+--- !u!1 &7230580987201379639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6303657745476929562}
+  - component: {fileID: 7336091105486263062}
+  m_Layer: 0
+  m_Name: MaxDistance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6303657745476929562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7230580987201379639}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 117847202761974972}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7336091105486263062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7230580987201379639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478c4f0e851d4ff4380db175c4c77e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _changed:
+    m_PersistentCalls:
+      m_Calls: []
+  _value: 0
 --- !u!1 &7518005290315529587
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +505,7 @@ MonoBehaviour:
   _damage: {fileID: 6836209799539693328}
   _moveSpeed: {fileID: 6394945732855238522}
   _rechargeTimer: {fileID: 6373200006670584843}
+  _maxDistance: {fileID: 7336091105486263062}
 --- !u!114 &2271578865352791947
 MonoBehaviour:
   m_ObjectHideFlags: 0

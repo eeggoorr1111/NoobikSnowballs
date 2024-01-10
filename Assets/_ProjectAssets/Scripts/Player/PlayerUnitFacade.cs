@@ -6,10 +6,12 @@ using System;
 using Narratore;
 using System.Collections.Generic;
 using Narratore.Pools;
+using Narratore.Extensions;
 
 public interface IPlayerUnitRoot
 {
     Transform Root { get; }
+    int UnitId { get; }
 }
 
 public interface IPlayerUnitRootAndHp : IPlayerUnitRoot
@@ -27,7 +29,6 @@ public interface IPlayerMovableUnit : IPlayerUnitRoot
 public interface IPlayerPushableUnit : IPlayerUnitRoot
 {
     bool IsCanMove { get; set; }
-    int UnitId { get; }
 }
 
 public interface IWithHp
@@ -48,17 +49,19 @@ public interface IPlayerUnitShooting
     event Action Recharged;
 
 
-    IImpact Damage { get; }
     Vector3 Position { get; }
     int PlayerId { get; }
     int PlayerUnitId { get; }
     int LeftBullets { get; }
     int MaxBullets { get; }
     float RechargeProgress { get; }
+    float MaxDistance { get; }
 
 
     void TryShoot();
     void Recharge();
+    IImpact GetDamage();
+
 }
 
 
@@ -122,7 +125,6 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
     public Transform Root => _unit.Root;
     public TwoLegsLoopedRotators FootsAnimator => _unit.FootsAnimator;
     public ReadValue<float> MoveSpeed => _unit.MoveSpeed;
-    public IImpact Damage => new ShellDamage(PlayersIds.LocalPlayerId, _mainGunSpawner.Current.Damage.Get());
     public Vector3 Position => Root.position;
     public int PlayerId => _playerId;
     public int PlayerUnitId => _unit.Id;
@@ -132,6 +134,8 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
     public int LeftBullets => _guns[0].Gun.Magazine.Size.Current;
     public int MaxBullets => _guns[0].Gun.Magazine.Size.Max;
     public float RechargeProgress => _guns[0].RechargeTimer.Progress;
+    public float MaxDistance => _guns[0].MaxDistance;
+    public PlayerGunRoster MainGun => _mainGunSpawner.Current;
 
 
     public void TryShoot()
@@ -162,6 +166,14 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
 
         for (int i = 0; i < _guns.Count; i++)
             _guns[i].Gun.ShootedGun -= OnShooted;
+    }
+
+    public IImpact GetDamage()
+    {
+        if (MainGun.IsWithExplosion)
+            return new ExplosionImpact(MainGun.MinExplosionDamage, MainGun.Damage, MainGun.ExplosionRadius);
+        else
+            return new ShellDamage(PlayersIds.LocalPlayerId, MainGun.Damage);
     }
 
 

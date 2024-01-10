@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: F1_ShootInterval
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 304a4abde98748743bc58d83f6b26d34, type: 2}
   _stat: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _values:
-  - 0.1
+  - 0.07

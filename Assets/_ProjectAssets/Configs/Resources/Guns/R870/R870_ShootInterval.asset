@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: R870_ShootInterval
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 0d278754da18e654c85a34ffa471da57, type: 2}
   _stat: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _values:

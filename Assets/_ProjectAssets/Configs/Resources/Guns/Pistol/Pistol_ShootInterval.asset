@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pistol_ShootInterval
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: a68eaf4604b13164798ca36ab612aa3e, type: 2}
   _stat: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _values:
-  - 0.1
+  - 0.25

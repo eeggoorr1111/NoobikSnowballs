@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Steve_Hp
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: dec776d34c3c132499f7ca54109e4894, type: 2}
   _stat: {fileID: 11400000, guid: 4b6f3485f81aa0243954fdea8f21ba8d, type: 2}
   _values:
   - _item1: 0
-    _item2: 10
+    _item2: 24

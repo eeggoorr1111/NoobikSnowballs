@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crossbow_RechargeDuration
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: cb4d480536bef7b419b28db4d2f67fcd, type: 2}
   _stat: {fileID: 11400000, guid: 667c592587ca81f478ac5afe4d1ff403, type: 2}
   _values:

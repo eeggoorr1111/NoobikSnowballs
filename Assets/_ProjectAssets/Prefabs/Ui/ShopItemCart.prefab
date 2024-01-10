@@ -844,6 +844,7 @@ MonoBehaviour:
   _costLabel: {fileID: 8442165352358088341}
   _buyButton: {fileID: 1766976213190062964}
   _activateButton: {fileID: 2610758672713477449}
+  _name: {fileID: 1237395731175854227}
   _notBought:
   - {fileID: 4821626932170439341}
   _notActive:
@@ -1109,6 +1110,7 @@ GameObject:
   - component: {fileID: 4929336613671615191}
   - component: {fileID: 1560386960839490331}
   - component: {fileID: 8086692834592409371}
+  - component: {fileID: 1237395731175854227}
   m_Layer: 5
   m_Name: ItemName
   m_TagString: Untagged
@@ -1132,8 +1134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 103}
-  m_SizeDelta: {x: 0, y: 83.36304}
+  m_AnchoredPosition: {x: 14, y: 103}
+  m_SizeDelta: {x: -28, y: 83.36304}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &1560386960839490331
 CanvasRenderer:
@@ -1190,8 +1192,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.8
-  m_fontSizeBase: 27.8
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1232,6 +1234,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1237395731175854227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538243578232794526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c266a44f7184baa4698018a9357f9b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _key: 
+  _params: []
+  _fontSize: []
+  _replace: 
+  _on: 
+  _before: 
+  _after: 
 --- !u!1 &8872673726886587208
 GameObject:
   m_ObjectHideFlags: 0

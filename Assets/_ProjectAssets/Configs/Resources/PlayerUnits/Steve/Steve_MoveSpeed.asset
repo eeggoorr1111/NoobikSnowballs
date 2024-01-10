@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steve_MoveSpeed
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: dec776d34c3c132499f7ca54109e4894, type: 2}
   _stat: {fileID: 11400000, guid: b8907adf18cb7d74582fa5f905c07478, type: 2}
   _values:

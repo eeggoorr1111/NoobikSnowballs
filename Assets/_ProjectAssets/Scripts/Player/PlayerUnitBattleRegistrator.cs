@@ -1,5 +1,6 @@
 ﻿using Narratore.Solutions.Battle;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBattleRoster>
 {
@@ -9,19 +10,25 @@ public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBat
                                         EntitiesAspects<ReadHp> readHps,
                                         EntitiesAspects<Transform> transforms,
                                         EntitiesListsBounds bounds,
-                                        LootCollectors lootCollectors) : base(playerUnitsIds, entities, transforms)
+                                        LootCollectors lootCollectors,
+                                        EntitiesAspects<DamageProtection> protection,
+                                        EntitiesAspects<IDamageProtection> readProtection) : base(playerUnitsIds, entities, transforms)
     {
         _hps = hps;
         _readHps = readHps;
         _transforms = transforms;
         _bounds = bounds;
         _lootCollectors = lootCollectors;
+        _protection = protection;
+        _readProtection = readProtection;
     }
 
 
     private readonly EntitiesAspects<Hp> _hps;
     private readonly EntitiesAspects<ReadHp> _readHps;
     private readonly EntitiesAspects<Transform> _transforms;
+    private readonly EntitiesAspects<DamageProtection> _protection;
+    private readonly EntitiesAspects<IDamageProtection> _readProtection;
     private readonly EntitiesListsBounds _bounds;
     private readonly LootCollectors _lootCollectors;
 
@@ -31,6 +38,9 @@ public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBat
         _readHps.Set(unit.Id, unit.Hp);
         _transforms.Set(unit.Id, unit.Root);
         _bounds.Set(unit.Id, unit.Bounds);
+        _protection.Set(unit.Id, unit.ResurrectShield);
+        _readProtection.Set(unit.Id, unit.ResurrectShield);
+
         _lootCollectors[unit.LootCollider] = unit.Id;
     }
 
@@ -40,6 +50,9 @@ public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBat
         _readHps.Remove(unit.Id);
         _transforms.Remove(unit.Id);
         _bounds.Remove(unit.Id);
+        _protection.Remove(unit.Id);
+        _readProtection.Remove(unit.Id);
+
         _lootCollectors.Remove(unit.LootCollider);
     }
 }

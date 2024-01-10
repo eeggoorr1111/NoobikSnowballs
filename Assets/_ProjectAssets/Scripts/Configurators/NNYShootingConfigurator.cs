@@ -36,6 +36,9 @@ namespace Narratore.DI
         [Header("DESKTOP")]
         [SerializeField] private LayerMask _desktopShootLayerMask;
 
+        [Header("RESURRECT")]
+        [SerializeField] private float _resurrectShieldDuration = 3f;
+
         public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             base.Configure(builder, config, sampleData);
@@ -52,6 +55,7 @@ namespace Narratore.DI
                 throw new Exception("Error frist spawn gun");
 
 
+            builder.Register<ShieldResurrection>(Lifetime.Singleton).WithParameter(_resurrectShieldDuration).AsSelf().AsImplementedInterfaces();
             builder.RegisterEntryPoint<EnemiesPushing>(Lifetime.Singleton).WithParameter<IReadOnlyList<ShootingPushConfig>>(_shootingPushConfig);
 
             builder.RegisterInstance(_shootScreenArea).As<ITouchArea>();
@@ -87,7 +91,13 @@ namespace Narratore.DI
         }
 
 
-        protected override Type GetCombineDamageReciving() => typeof(NNYDamageReciving);
+        private void OnValidate()
+        {
+            foreach (var config in _shootingPushConfig)
+                config.OnValidate();
+        }
+
+        protected override Type GetCombineDamageSource() => typeof(NNYDamageSource);
         protected override Type GetCombineUnitsDeathSource() => typeof(NNYCombineUnitsDeath);
         protected override Type GetCombineExplosionSource() => typeof(NNYExplosionSource);
     }

@@ -1,6 +1,5 @@
 using Narratore;
 using Narratore.DI;
-using Narratore.MetaGame;
 using Narratore.Pools;
 using Narratore.Solutions.Battle;
 using Narratore.UI;
@@ -34,8 +33,8 @@ public class NNYLootConfigurator : LootConfigurator<NNYLootDroping, LootDeathSou
 
     protected override void RegisterSources(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
     {
-        builder.RegisterInstance(new MBPool<HealLootRoster>(_healPoolConfig, sampleData)).As<IDisposable>().AsSelf();
-        builder.RegisterInstance(new MBPool<CurrencyLootRoster>(_currencyPoolConfig, sampleData)).As<IDisposable>().AsSelf();
+        builder.RegisterInstance(new MBPools<HealLootRoster, HealLootRoster>(_healPoolConfig, sampleData)).As<IDisposable>().AsSelf();
+        builder.RegisterInstance(new MBPools<CurrencyLootRoster, CurrencyLootRoster>(_currencyPoolConfig, sampleData)).As<IDisposable>().AsSelf();
         builder.RegisterInstance(new MBPool<UICoinsFlyer>(_uiCoinsFlyerConfig, sampleData)).As<IMBPool<UICoinsFlyer>, IDisposable>();
 
         builder.Register<LootSource<HealLootRoster>>(Lifetime.Singleton).As<ILootSource, IDisposable>();

@@ -754,7 +754,7 @@ PrefabInstance:
     - target: {fileID: 3541889368917775602, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: d58bd11f89fe35345aacdd058fec15e7, type: 2}
+      objectReference: {fileID: 11400000, guid: d313736242818e9478c19fb889ed0d5e, type: 2}
     - target: {fileID: 4831656641867303641, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _key
       value: 
@@ -882,15 +882,15 @@ PrefabInstance:
     - target: {fileID: 6394945732855238522, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: d07892d9dc31af5489090c990667e357, type: 2}
+      objectReference: {fileID: 11400000, guid: 5379c59134a9fb54d898f1b49bfb2d92, type: 2}
     - target: {fileID: 6627821533974216007, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 1abc545b9b275ba4d8216655e8bbded0, type: 2}
+      objectReference: {fileID: 11400000, guid: 79a994e29f4d5494497ca06a45d83451, type: 2}
     - target: {fileID: 6836209799539693328, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 9f64e3c6c577ef540b85ee6521c6b51d, type: 2}
+      objectReference: {fileID: 11400000, guid: abe2ee32aa2eee4468d8b7656c7923d6, type: 2}
     - target: {fileID: 7518005290315529587, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_Name
       value: MP5
@@ -910,7 +910,7 @@ PrefabInstance:
     - target: {fileID: 8669851669368262711, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _provider
       value: 
-      objectReference: {fileID: 11400000, guid: 1248bd7df7ceb3544b5619c15c7a55c4, type: 2}
+      objectReference: {fileID: 11400000, guid: 83151d133281f384dbf4a077e80cd003, type: 2}
     - target: {fileID: 8819606156540928457, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_Enabled
       value: 1

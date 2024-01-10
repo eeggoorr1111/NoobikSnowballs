@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HuntingRifle_ShootInterval
   m_EditorClassIdentifier: 
   _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 2
+  _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: 9fb69838c1a1ff644a1c518af1f02495, type: 2}
   _stat: {fileID: 11400000, guid: c04f8ad5e4bc3664cab81d5de5459c78, type: 2}
   _values:

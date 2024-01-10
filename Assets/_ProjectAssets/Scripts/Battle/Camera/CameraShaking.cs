@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 public class CameraShaking : IDisposable, IInitializable
 {
-    public CameraShaking(Shaker shootingShaker, Shaker explosionShaker, IPlayerShooting playerShooting, IExplosionSource explosionSource)
+    public CameraShaking(Shaker shootingShaker, Shaker explosionShaker, IPlayerShooting playerShooting, IReadExplosionSource explosionSource)
     {
         _shootingShaker = shootingShaker;
         _explosionShaker = explosionShaker;
@@ -18,7 +18,7 @@ public class CameraShaking : IDisposable, IInitializable
     private readonly Shaker _shootingShaker;
     private readonly Shaker _explosionShaker;
     private readonly IPlayerShooting _playerShooting;
-    private readonly IExplosionSource _explosionSource;
+    private readonly IReadExplosionSource _explosionSource;
 
 
     public void Initialize()
@@ -38,5 +38,5 @@ public class CameraShaking : IDisposable, IInitializable
 
     private void OnStartedShoot() => _shootingShaker.ToShake();
     private void OnEndedShoot() => _shootingShaker.StopFadeOut();
-    private void OnExplosion(Vector3 _, ExplosionDamage __, ParticleSystem ___) => _explosionShaker.ToShake();
+    private void OnExplosion(ExplosionSource.Data _) => _explosionShaker.ToShake();
 }
