@@ -171,9 +171,9 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
     public IImpact GetDamage()
     {
         if (MainGun.IsWithExplosion)
-            return new ExplosionImpact(MainGun.MinExplosionDamage, MainGun.Damage, MainGun.ExplosionRadius);
+            return new ExplosionImpact(MainGun.MinExplosionDamage, MainGun.Damage, MainGun.ExplosionRadius, ImpactTargets.Enemies);
         else
-            return new ShellDamage(PlayersIds.LocalPlayerId, MainGun.Damage);
+            return new ShellDamage(PlayersIds.LocalPlayerId, MainGun.Damage, ImpactTargets.Enemies);
     }
 
 

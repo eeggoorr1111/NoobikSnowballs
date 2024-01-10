@@ -65,7 +65,7 @@ public class BotsShooting : EntitiesAspectsObserver<BotShootingConfig>, IBeginne
     private void OnShooted(BotShootingConfig config, int entityId)
     {
         ReadValue<int> damage = config.Damage[config.Gun.MagazineIndex];
-        IImpact impact = new ShellDamage(_botPlayerId, damage.Get());
+        IImpact impact = new ShellDamage(_botPlayerId, damage.Get(), ImpactTargets.Enemies);
 
         _shells.Shoot(config.Gun, _botPlayerId, entityId, impact, config.MaxDistance);
     }

@@ -54,8 +54,10 @@ MonoBehaviour:
   _physic: {fileID: 0}
   _powerScale: 0
   _duration: 0
+  _entity: {fileID: 3131663063308469692}
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
+    _targets: 1
     _radius: 1
     _minDamage: 6
     _maxDamage: 6

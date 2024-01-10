@@ -52,10 +52,8 @@ MonoBehaviour:
   _shattersCount: 1
   _shootVFXPrefabs: []
   _hitVFXPrefabs:
-  - {fileID: 4027315242708229750, guid: e4c7d62d57774c1459d9d2790b9ee068, type: 3}
-  - {fileID: 5276286569851536162, guid: 76c6ab805e917de4ebc53dee43e2ca2a, type: 3}
-  - {fileID: 3383948878581359678, guid: 71ce46f0427378b4a8a621d213b763a1, type: 3}
-  - {fileID: 7662639815776158940, guid: 4cf1f66a11ad34f458aa419965705d06, type: 3}
+  - {fileID: 5836269625227063328, guid: 474e4dc9fafd3ba419bac4af067647d2, type: 3}
+  - {fileID: 1890307824155228588, guid: b0872263ea22f0548b7f7022190cf8b0, type: 3}
   _overrideHitPrefabs: []
   _surfaceMarks: []
   _surface: {fileID: 0}
