@@ -139,7 +139,7 @@ MonoBehaviour:
   _entity: {fileID: 491564639172055718}
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
-    _targets: 1
+    _targets: 3
     _radius: 3
     _minDamage: 60
     _maxDamage: 60
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483295b1f08023648883918a80154ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shell: {fileID: 927877317090461971, guid: 0fbf536ec73d4fc4a9ab6c4163066499, type: 3}
+  _shell: {fileID: 927877317090461971, guid: 42830e39410e2ce4192be8fe0c47771d, type: 3}
   _size: {fileID: 7214171679036363129}
   _shootInterval: {fileID: 5226911523950772598}
   _rechargeDuration: {fileID: 5226911523950772598}

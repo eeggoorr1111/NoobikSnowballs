@@ -1,6 +1,5 @@
 ﻿using Narratore.Extensions;
 using Narratore.Helpers;
-using Narratore.Interfaces;
 using Narratore.Solutions.Battle;
 using Narratore.UI;
 using Narratore.WorkWithMesh;
@@ -10,14 +9,17 @@ using UnityEngine;
 
 namespace Narratore.DI
 {
+
+
     [System.Serializable]
     public class LevelAreaConfig
     {
-        public LevelAreaConfig(EntityCount outEnemies, float outEnemiesSpawnDelay, int outDamagePerSecond)
+        public LevelAreaConfig(EntityCount outEnemies, float outEnemiesSpawnDelay, int outDamagePerSecond, LevelOutDamageSourceKey damageSourceKey)
         {
             _outEnemies = outEnemies;
             _outEnemiesSpawnDelay = outEnemiesSpawnDelay;
             _outDamagePerSecond = outDamagePerSecond;
+            _damageSourceKey = damageSourceKey;
         }
 
         private LevelAreaConfig() { }
@@ -26,12 +28,13 @@ namespace Narratore.DI
         public EntityCount OutEnemies => _outEnemies;
         public float OutEnemiesSpawnDelay => _outEnemiesSpawnDelay;
         public int OutDamagePerSecond => _outDamagePerSecond;
+        public LevelOutDamageSourceKey DamageSourceKey => _damageSourceKey;
 
 
         [SerializeField] private EntityCount _outEnemies;
         [SerializeField] private float _outEnemiesSpawnDelay;
         [SerializeField] private int _outDamagePerSecond;
-
+        [SerializeField] private LevelOutDamageSourceKey _damageSourceKey;
         
     }
 
@@ -40,9 +43,10 @@ namespace Narratore.DI
         public LevelAreaHandler(MeshFrame area,
                                 LevelAreaConfig config,
                                 IPlayerUnitRootAndHp playerUnit,
-                                LoopedTextFadeAnimation warning, 
-                                IReadOnlyList<IUnitsSpawner> spawners, 
-                                IHeldPoints spawnPoints)
+                                LoopedTextFadeAnimation warning,
+                                IReadOnlyList<IUnitsSpawner> spawners,
+                                RandomOutCameraHeldPoints spawnPoints,
+                                IEntitiesAspects<DamageProtection> protection)
         {
             _config = config;
             _area = area;
@@ -55,6 +59,7 @@ namespace Narratore.DI
 
             _levelAreaBounds = new Bounds(center, _area.Size.To3D(Enums.TwoAxis.XZ, 10f));
             _secondCounter = new LoopedFloatCounter(0, 1, 0);
+            _protection = protection;
         }
 
 
@@ -66,6 +71,7 @@ namespace Narratore.DI
         private readonly LevelAreaConfig _config;
         private readonly IReadOnlyList<IUnitsSpawner> _spawners;
         private readonly IHeldPoints _spawnPoints;
+        private readonly IEntitiesAspects<DamageProtection> _protection;
 
         private CancellationTokenSource _spawning;
         private bool _isSpawned;
@@ -97,7 +103,14 @@ namespace Narratore.DI
                 float seconds = _secondCounter.ApplyDelta(Time.deltaTime);
 
                 if (seconds < secondsCache)
-                    _playerUnit.Hp.ApplyDelta(-_config.OutDamagePerSecond);
+                {
+                    int damage = _config.OutDamagePerSecond;
+
+                    if (_protection.TryGet(_playerUnit.UnitId, out DamageProtection protection))
+                        damage = protection.Reduce(_config.DamageSourceKey, damage);
+
+                    _playerUnit.Hp.ApplyDelta(-damage);
+                }
             }
         }
 

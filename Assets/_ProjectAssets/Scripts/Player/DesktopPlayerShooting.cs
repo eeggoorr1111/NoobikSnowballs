@@ -40,19 +40,18 @@ public class PlayerBulletsUiObserver : IInitializable, IDisposable, IBeginnedUpd
 
     public void Tick()
     {
+        _leftBulletsLabel.text = _unit.LeftBullets.ToString();
         _bulletsInfoPanel.anchoredPosition = (UiHelper.Convert(_unit.Position, _camera.Get, _camera.Transform, _canvas.scaleFactor) + new Vector3(0, 150, 0)).To2D();
     }
 
     public void Dispose()
     {
-        _unit.Shooted -= OnShooted;
         _unit.RechargeTick -= OnTickTimerRecharge;
         _unit.Recharged -= Recharged;
     }
 
     public void Initialize()
     {
-        _unit.Shooted += OnShooted;
         _unit.RechargeTick += OnTickTimerRecharge;
         _unit.Recharged += Recharged;
 
@@ -73,8 +72,6 @@ public class PlayerBulletsUiObserver : IInitializable, IDisposable, IBeginnedUpd
         _leftBulletsLabel.text = _unit.MaxBullets.ToString();
         _rechargeSlider.gameObject.SetActive(false);
     }
-
-    private void OnShooted() => _leftBulletsLabel.text = _unit.LeftBullets.ToString();
 }
 
 

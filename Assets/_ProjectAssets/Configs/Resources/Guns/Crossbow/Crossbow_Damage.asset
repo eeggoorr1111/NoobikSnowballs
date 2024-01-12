@@ -16,4 +16,4 @@ MonoBehaviour:
   _desiredBuildDataSource: 0
   _entity: {fileID: 11400000, guid: cb4d480536bef7b419b28db4d2f67fcd, type: 2}
   _stat: {fileID: 11400000, guid: 015b0935807dffe4e946ff6e1b5123f8, type: 2}
-  _values: 64000000
+  _values: 50000000

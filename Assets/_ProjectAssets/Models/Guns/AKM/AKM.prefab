@@ -836,6 +836,10 @@ PrefabInstance:
       propertyPath: RotationModule.x.minCurve.m_Curve.Array.data[3].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
+    - target: {fileID: 5145321040541491472, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _shell
+      value: 
+      objectReference: {fileID: 927877317090461971, guid: 68657fe99fd260a45a9d8770f0e7e4aa, type: 3}
     - target: {fileID: 5233603848909863823, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: _distance
       value: 0.15
@@ -892,6 +896,14 @@ PrefabInstance:
       propertyPath: _provider
       value: 
       objectReference: {fileID: 11400000, guid: 9f64e3c6c577ef540b85ee6521c6b51d, type: 2}
+    - target: {fileID: 6849147399383694975, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _provider
+      value: 
+      objectReference: {fileID: 11400000, guid: aea820fac3b06a64bb0f33b9038faa6e, type: 2}
+    - target: {fileID: 7336091105486263062, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _value
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7518005290315529587, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_Name
       value: AKM

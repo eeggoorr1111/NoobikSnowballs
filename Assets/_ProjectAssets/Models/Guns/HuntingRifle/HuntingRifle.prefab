@@ -640,6 +640,14 @@ PrefabInstance:
       propertyPath: _provider
       value: 
       objectReference: {fileID: 11400000, guid: 132b9af8e97143d45a7cdfb1d6f308aa, type: 2}
+    - target: {fileID: 6849147399383694975, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _provider
+      value: 
+      objectReference: {fileID: 11400000, guid: aa7379a24d6f5e14bb1fa0b6025dfb6a, type: 2}
+    - target: {fileID: 7336091105486263062, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
+      propertyPath: _value
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7518005290315529587, guid: 85c576cfe20a586489d0456daad5f541, type: 3}
       propertyPath: m_Name
       value: HuntingRifle

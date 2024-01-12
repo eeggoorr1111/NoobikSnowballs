@@ -52,7 +52,7 @@ namespace Narratore.DI
 
         private void RegisterSpawnPoints(IContainerBuilder builder)
         {
-            builder.Register<PlayerDirectionMoveHeldPoints>(Lifetime.Singleton).As<IHeldPoints>().WithParameter(_spawnPointsConfig);
+            builder.Register<PlayerDirectionMoveOutViewHeldPoints>(Lifetime.Singleton).As<IHeldPoints>().WithParameter(_spawnPointsConfig);
         }
 
         private void RegisterEnemiesMove(IContainerBuilder builder)

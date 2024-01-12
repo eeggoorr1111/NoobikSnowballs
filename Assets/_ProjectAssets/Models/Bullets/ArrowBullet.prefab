@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523235e7fe450b498018fe9f9d97241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.8, y: 0.8, z: 0.8}
+  _size: {x: 1.5, y: 1.5, z: 1.5}
   _offset: {x: 0, y: 0, z: 0}
   _transform: {fileID: 8627044900386752431}
   _isActive: 1

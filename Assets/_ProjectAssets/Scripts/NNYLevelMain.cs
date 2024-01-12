@@ -121,9 +121,10 @@ public sealed class NNYLevelMain : LevelMain
                 // Need return time scale before go to main menu
                 ContinueGame();
                 LosePlayer();
+
+                _isShootingWith2Hands.Set(false);
             }
 
-            _isShootingWith2Hands.Set(false);
             _loseWindow.Close();
         }
     }

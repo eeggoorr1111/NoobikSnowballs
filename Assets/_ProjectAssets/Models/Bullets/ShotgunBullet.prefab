@@ -48,15 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 30
   _scatterDegreezAmplitude: {x: 0, y: 25, z: 0}
-  _shattersCount: 5
+  _shattersCount: 6
   _shootVFXPrefabs:
   - {fileID: 127650916069959103, guid: c85d2959e063ec44f9bade916d09116c, type: 3}
   - {fileID: 715031509444008634, guid: 80101b30dec8ed54f8971534c2639d3b, type: 3}
   - {fileID: 6195692801097926086, guid: c7cca660f9af78d4ab90552fa7eea36e, type: 3}
   _hitVFXPrefabs:
-  - {fileID: 1058125289456110115, guid: 186e942c8fc48c241a87b60d4e0e1a7b, type: 3}
-  - {fileID: 6523772185042894029, guid: 41cfda931ba9f4c4e83168ae19c78519, type: 3}
-  - {fileID: 4278634404694979490, guid: 81eb66e5c59dafd4fa95acffda989622, type: 3}
+  - {fileID: 4729290087412436155, guid: 06e189978f4e5e641880625c323ed578, type: 3}
+  - {fileID: 585779319606308828, guid: 8a81a4ad896b25d4695015004c65fa37, type: 3}
+  - {fileID: 1710502735864280159, guid: 1381cef40eb9d7545a92241a162884de, type: 3}
   _overrideHitPrefabs: []
   _surfaceMarks: []
   _surface: {fileID: 0}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523235e7fe450b498018fe9f9d97241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.25, y: 0.25, z: 0.25}
+  _size: {x: 1, y: 1, z: 1}
   _offset: {x: 0, y: 0, z: 0}
   _transform: {fileID: 8627044900386752431}
   _isActive: 1

@@ -63,7 +63,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _ContrastAngle: 1.5
+    - _ContrastAngle: 1.7
     - _ContrastDistance: 0
     - _Cull: 2
     - _Cutoff: 0.5
@@ -80,9 +80,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SunPosX: 0
-    - _SunPosY: 100
-    - _SunPosZ: 0
+    - _SunPosX: 12.588
+    - _SunPosY: 0.5
+    - _SunPosZ: -11.17
     - _SunRadius: 100
     - _UVSec: 0
     - _ZWrite: 1

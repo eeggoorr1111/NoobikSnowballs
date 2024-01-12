@@ -20,49 +20,49 @@ MonoBehaviour:
     _status: 0
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
-      _value: 1000
+      _value: 0
   - _descriptor: {fileID: 11400000, guid: 8499e199aa6cb8d478096a16a1d85025, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 200
   - _descriptor: {fileID: 11400000, guid: 304a4abde98748743bc58d83f6b26d34, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 500
   - _descriptor: {fileID: 11400000, guid: 7818cec5c13c6e84683719b11cf57d5c, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: cb4d480536bef7b419b28db4d2f67fcd, type: 2}
-    _status: 1
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: 9d6ebd769028ed742833843b6a7c06f3, type: 2}
-    _status: 0
+    _status: 1
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: 9fb69838c1a1ff644a1c518af1f02495, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: 1feaa027812c28445817152ddcab224d, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: 3c4cda71c6a46114c8a8e00f85c4c864, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000
   - _descriptor: {fileID: 11400000, guid: 0d278754da18e654c85a34ffa471da57, type: 2}
-    _status: 0
+    _status: 2
     _cost:
     - _currency: {fileID: 11400000, guid: 3f90f197f58d05045818fdd2d4bedace, type: 2}
       _value: 1000

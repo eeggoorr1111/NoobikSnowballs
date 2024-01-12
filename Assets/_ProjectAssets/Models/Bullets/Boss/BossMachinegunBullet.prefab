@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 927877317090461971}
   - component: {fileID: 494580870198196194}
   m_Layer: 8
-  m_Name: BossSimpleBullet
+  m_Name: BossMachinegunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

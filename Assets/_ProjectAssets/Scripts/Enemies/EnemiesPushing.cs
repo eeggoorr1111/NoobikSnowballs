@@ -56,7 +56,8 @@ public class EnemiesPushing : IDisposable, IInitializable
         if (!_movable.TryGet(victimId, out MovableBot movable) ||
             !_transforms.TryGet(victimId, out Transform transf) ||
             !_entities.TryGet(victimId, out EntityRoster entity) ||
-            !TryGetConfig(shell, entity, out ShootingPushConfig config))
+            !TryGetConfig(shell, entity, out ShootingPushConfig config) ||
+            movable.IsStun)
         {
             return;
         }

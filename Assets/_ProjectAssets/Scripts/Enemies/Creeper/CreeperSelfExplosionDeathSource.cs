@@ -6,22 +6,25 @@ namespace Narratore.DI
 {
     public class CreeperSelfExplosionDeathSource : DeathSource, IBeginnedUpdatable
     {
-        public CreeperSelfExplosionDeathSource( DeadUnitsIds deadUnitsIds, 
-                                                IPlayerUnitRoot playerUnit, 
-                                                IEntitiesAspects<CreeperDeathExplosion> creepers, 
-                                                IEntitiesAspects<Transform> creepersTransform, 
-                                                float explosionDistance) : base(deadUnitsIds)
+        public CreeperSelfExplosionDeathSource(DeadUnitsIds deadUnitsIds,
+                                                IPlayerUnitRoot playerUnit,
+                                                IEntitiesAspects<CreeperDeathExplosion> creepers,
+                                                IEntitiesAspects<Transform> creepersTransform,
+                                                float explosionDistance,
+                                                IEntitiesAspects<DamageProtection> protection) : base(deadUnitsIds)
         {
             _playerUnit = playerUnit;
             _creepers = creepers;
             _creepersTransform = creepersTransform;
             _sqrExplosionDistance = explosionDistance * explosionDistance;
+            _protection = protection;
         }
 
 
         private readonly IPlayerUnitRoot _playerUnit;
         private readonly IEntitiesAspects<CreeperDeathExplosion> _creepers;
         private readonly IEntitiesAspects<Transform> _creepersTransform;
+        private readonly IEntitiesAspects<DamageProtection> _protection;
         private readonly float _sqrExplosionDistance;
 
 
@@ -29,6 +32,9 @@ namespace Narratore.DI
 
         public void Tick()
         {
+            if (_protection.TryGet(_playerUnit.UnitId, out DamageProtection protection) && protection.enabled)
+                return;
+
             Vector3 playerPosition = _playerUnit.Root.position;
             int[] ids = _creepers.All.Keys.ToArray();
 
