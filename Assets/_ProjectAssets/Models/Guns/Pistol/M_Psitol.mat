@@ -169,9 +169,9 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
-    - _SunPosX: 12.588
-    - _SunPosY: 0.5
-    - _SunPosZ: -11.17
+    - _SunPosX: 0
+    - _SunPosY: 100
+    - _SunPosZ: 0
     - _SunRadius: 100
     - _SupportDecals: 1
     - _SurfaceType: 0

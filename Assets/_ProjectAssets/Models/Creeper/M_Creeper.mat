@@ -81,9 +81,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SunPosX: 12.588
-    - _SunPosY: 0.5
-    - _SunPosZ: -11.17
+    - _SunPosX: 0
+    - _SunPosY: 100
+    - _SunPosZ: 0
     - _SunRadius: 100
     - _UVSec: 0
     - _ZWrite: 1

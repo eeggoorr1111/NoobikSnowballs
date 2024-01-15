@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 30
-  _scatterDegreezAmplitude: {x: 0, y: 15, z: 0}
+  _scatterDegreezAmplitude: {x: 0, y: 8, z: 0}
   _shattersCount: 1
   _shootVFXPrefabs:
   - {fileID: 4367124024206514592, guid: e2ac95d68649d0343928f0a040650277, type: 3}
@@ -66,7 +66,7 @@ MonoBehaviour:
   _isDestroyOnObstacleHit: 1
   _sqrErrorDisanceScaling: 0.05
   _collider: {fileID: 0}
-  _shellView: []
+  _trails: []
   _shellVFX: {fileID: 7072990579331239439}
   _isShowVFX: 1
   _timeStep: 0.016

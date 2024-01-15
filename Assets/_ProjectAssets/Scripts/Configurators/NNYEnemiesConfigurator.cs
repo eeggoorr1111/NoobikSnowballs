@@ -15,8 +15,6 @@ namespace Narratore.DI
         [Header("VIEW")]
         [SerializeField] private TMP_Text _enemiesCount;
 
-        [Header("SPAWN POINTS")]
-        [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig;
 
         [Header("ENEMIES")]
         [SerializeField] private BaseCreeperPoolConfig _baseConfig;
@@ -28,13 +26,11 @@ namespace Narratore.DI
         public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             builder.RegisterEntryPoint<SpawnedUnitsCounter>(Lifetime.Singleton).WithParameter(_enemiesCount);
-            builder.Register<UnitsWavesSpawner>(Lifetime.Singleton).As<IUnitsWavesSpawner>().WithParameter(PlayersIds.GetBotId(1));
 
             LevelSpawnWavesConfig[] levels = GetComponentsInChildren<LevelSpawnWavesConfig>();
             LoopedCounter counter = new LoopedCounter(0, levels.Length - 1, config.Level - 1);
             builder.RegisterInstance(levels[counter.Current].Waves).As<IReadOnlyList<SpawnWavesConfig>>();
 
-            RegisterSpawnPoints(builder);
             RegisterEnemiesMove(builder);
             RegisterEntitiesAspects(builder);
 
@@ -50,10 +46,7 @@ namespace Narratore.DI
         }
 
 
-        private void RegisterSpawnPoints(IContainerBuilder builder)
-        {
-            builder.Register<PlayerDirectionMoveOutViewHeldPoints>(Lifetime.Singleton).As<IHeldPoints>().WithParameter(_spawnPointsConfig);
-        }
+       
 
         private void RegisterEnemiesMove(IContainerBuilder builder)
         { 
@@ -73,7 +66,7 @@ namespace Narratore.DI
             builder.RegisterInstance(new MBPool<BaseCreeperRoster>(_baseConfig, sampleData)).As<IDisposable>().AsSelf();
             builder.Register<BaseCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<BaseCreeperRoster>>();
             builder.Register<PoolBattleEntitiesSource<BaseCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<BaseCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<BaseCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BaseCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100);
+            builder.Register<UnitsSpawner<BaseCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BaseCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
         }
 
         private void RegisterFastCreepers(IContainerBuilder builder, SampleData sampleData)
@@ -81,7 +74,7 @@ namespace Narratore.DI
             builder.RegisterInstance(new MBPool<FastCreeperRoster>(_fastConfig, sampleData)).As<IDisposable>().AsSelf();
             builder.Register<FastCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<FastCreeperRoster>>();
             builder.Register<PoolBattleEntitiesSource<FastCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<FastCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<FastCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<FastCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100);
+            builder.Register<UnitsSpawner<FastCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<FastCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
         }
 
         private void RegisterBossCreepers(IContainerBuilder builder, SampleData sampleData)
@@ -89,7 +82,7 @@ namespace Narratore.DI
             builder.RegisterInstance(new MBPool<BossCreeperRoster>(_bossConfig, sampleData)).As<IDisposable>().AsSelf();
             builder.Register<BossCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<BossCreeperRoster>>();
             builder.Register<PoolBattleEntitiesSource<BossCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<BossCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<BossCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BossCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100);
+            builder.Register<UnitsSpawner<BossCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BossCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
         }
     }
 }

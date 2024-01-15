@@ -67,6 +67,8 @@ MonoBehaviour:
   _sqrErrorDisanceScaling: 0.05
   _collider: {fileID: 0}
   _shellView: []
+  _trails:
+  - {fileID: 5806974228623264013}
   _shellVFX: {fileID: 7072990579331239439}
   _isShowVFX: 1
   _timeStep: 0.016
@@ -168,6 +170,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a93b4abcb41794f87c2b475981338a, type: 3}
+--- !u!96 &5806974228623264013 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 1195728218626027665, guid: 79a93b4abcb41794f87c2b475981338a, type: 3}
+  m_PrefabInstance: {fileID: 4615785210710948252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &7072990579331239439 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2460899732631091091, guid: 79a93b4abcb41794f87c2b475981338a, type: 3}

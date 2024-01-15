@@ -1,8 +1,6 @@
-using Narratore;
 using Narratore.CameraTools;
 using Narratore.Enums;
 using Narratore.Extensions;
-using Narratore.Input;
 using System;
 using UnityEngine;
 
@@ -22,14 +20,13 @@ public interface ICameraMover
 }
 
 
-public class PlayerCharacterMover : IPreparedUpdatable, IPlayerUnitRotator, IPlayerLastMoveDirection, ICameraMover
+public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection, ICameraMover
 {
     public event Action Moved;
 
 
-    public PlayerCharacterMover(Joystick joystick, IPlayerMovableUnit unit, ICurrentCameraGetter camera)
+    public PlayerCharacterMover(IPlayerMovableUnit unit, ICurrentCameraGetter camera)
     {
-        _joystick = joystick;
         _unit = unit;
         _camera = camera;
         _cameraOffset = _camera.Position - _unit.Root.position;
@@ -41,7 +38,7 @@ public class PlayerCharacterMover : IPreparedUpdatable, IPlayerUnitRotator, IPla
     public Vector3 LastMoveDirection { get; private set; }
 
 
-    private readonly Joystick _joystick;
+    
     private readonly IPlayerMovableUnit _unit;
     private readonly ICurrentCameraGetter _camera;
     private readonly Vector3 _cameraOffset;
@@ -49,11 +46,11 @@ public class PlayerCharacterMover : IPreparedUpdatable, IPlayerUnitRotator, IPla
     
 
     public void UpdateCameraPos() => _camera.Transform.position = _unit.Root.position + _cameraOffset;
-    public void Tick()
+    public void SetInput(Vector2? input)
     {
-        if (_joystick.TryMoveStick(out Vector2 offset, true))
+        if (input.HasValue)
         {
-            Vector3 direction = offset.To3D(TwoAxis.XZ, 0).normalized;
+            Vector3 direction = input.Value.To3D(TwoAxis.XZ, 0).normalized;
             Vector3 cachePosition = _unit.Root.position;
 
             _unit.Root.position += direction * _unit.MoveSpeed.Get() * Time.deltaTime;

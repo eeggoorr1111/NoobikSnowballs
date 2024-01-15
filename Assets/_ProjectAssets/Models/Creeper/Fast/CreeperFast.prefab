@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1600034206500586877, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.07
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 1926519598165002210, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6965306894446095098, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
+      propertyPath: _size.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7326352272393008056, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       propertyPath: _ease
       value: 5
@@ -394,11 +398,11 @@ MonoBehaviour:
   _dropLoot:
     _lootSamples:
     - _item1: {fileID: 6824013783450091575, guid: 0eff44418453c5843bec41a3bea3fa52, type: 3}
-      _item2: 1
+      _item2: 2
     - _item1: {fileID: 8628644474817721858, guid: 216bddeb5176f3d4da81769005095a45, type: 3}
-      _item2: 1
+      _item2: 2
     - _item1: {fileID: 0}
-      _item2: 8
+      _item2: 6
 --- !u!114 &1999408012256351303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6475952469480177633, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
