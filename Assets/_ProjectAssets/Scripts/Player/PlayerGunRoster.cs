@@ -2,7 +2,6 @@
 using Narratore.MetaGame;
 using Narratore.Solutions.Battle;
 using Narratore.Solutions.Timer;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -18,6 +17,7 @@ public class PlayerGunRoster : UpgradableShopItem
     public int MinExplosionDamage => _minExplosionDamage.Get();
     public float ExplosionRadius => _exposionRadius.Get();
     public bool IsWithExplosion => _minExplosionDamage != null && _exposionRadius != null;
+    public ShootArea ShootArea => _shootArea;
 
 
     [Header("PLAYER GUN*")]
@@ -28,6 +28,7 @@ public class PlayerGunRoster : UpgradableShopItem
     [SerializeField] private FloatStat _moveSpeed;
     [SerializeField] private GunRechargeTimer _rechargeTimer;
     [SerializeField] private ReadValue<float> _maxDistance;
+    [SerializeField] private ShootArea _shootArea;
 
     [Header("EXPLOSION")]
     [SerializeField] private ReadValue<int> _minExplosionDamage;

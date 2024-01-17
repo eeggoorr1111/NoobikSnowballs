@@ -3,6 +3,7 @@ using Narratore.CameraTools;
 using Narratore.Extensions;
 using UnityEngine;
 
+
 public class DesktopPlayerUnitRotator : IBeginnedUpdatable
 {
     public DesktopPlayerUnitRotator(ICurrentCameraGetter camera, 

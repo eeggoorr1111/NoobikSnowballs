@@ -136,8 +136,9 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.9
-  preloadedAssets: []
+  bundleVersion: 1.1
+  preloadedAssets:
+  - {fileID: 11400000, guid: 3a0ba99608181fd4ca73754ac4eb54aa, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -547,8 +548,8 @@ PlayerSettings:
     GAMEREADY_AUTOCALL_DELAY: 
     OVERLAY_BACKGROUND_COLOR: 
     PROGRESS_BAR_BACKGROUND_COLOR: 
-    PROGRESS_BAR_BORDER_COLOR: 
-    PROGRESS_BAR_FILL_COLOR: 
+    PROGRESS_BAR_BORDER_COLOR: white
+    PROGRESS_BAR_FILL_COLOR: white
     PROJECT_ID: 10070
     SHOW_PRELOADER_AD: 
     TOKEN: SzwpMcarRk21ettqPj0ixXv13vQjRLVD

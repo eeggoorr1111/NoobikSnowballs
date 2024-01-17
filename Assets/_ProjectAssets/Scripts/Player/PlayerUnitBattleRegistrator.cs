@@ -1,6 +1,5 @@
 ﻿using Narratore.Solutions.Battle;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBattleRoster>
 {

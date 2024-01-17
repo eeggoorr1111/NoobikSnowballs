@@ -6,6 +6,7 @@ using System;
 using Narratore;
 using System.Collections.Generic;
 using Narratore.Pools;
+using Narratore.WorkWithMesh;
 using Narratore.Extensions;
 
 public interface IPlayerUnitRoot
@@ -56,6 +57,7 @@ public interface IPlayerUnitShooting
     int MaxBullets { get; }
     float RechargeProgress { get; }
     float MaxDistance { get; }
+    IReadOnlyList<ShootArea> ShootAreas { get; }
 
 
     void TryShoot();
@@ -88,7 +90,8 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
                             PlayerGunSpawner secondGunSpawner,
                             PlayerUnitBattleRegistrator registrator,
                             IsShootingWith2Hands isShootingWith2Hand,
-                            SampleData sampleData)
+                            SampleData sampleData,
+                            DeviceType deviceType)
     {
         _unitSpawner = unit;
         _mainGunSpawner = mainGunSpawner;
@@ -97,6 +100,7 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
         _secondGunSpawner = secondGunSpawner;
         _isShootingWith2Hand = isShootingWith2Hand;
         _sampleData = sampleData;
+        _deviceType = deviceType;
 
         _unitSpawner.Spawned += OnRespawnedUnit;
         _unitSpawner.Spawning += OnRespawningUnit;
@@ -104,6 +108,7 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
         _isShootingWith2Hand.Changed += OnChangedCountHands;
 
         _guns = new(2);
+        _shootAreas = new(2);
 
         OnRespawnedGunWithoutCommonRespawn();
         OnRespawnedUnit();
@@ -116,14 +121,17 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
     private readonly PlayerUnitBattleRegistrator _registrator;
     private readonly ReadBoolProvider _isShootingWith2Hand;
     private readonly SampleData _sampleData;
+    private readonly DeviceType _deviceType;
     private readonly int _playerId;
 
     private PlayerUnitBattleRoster _unit;
     private List<PlayerGunRoster> _guns;
+    private List<ShootArea> _shootAreas;
 
 
     public Transform Root => _unit.Root;
     public TwoLegsLoopedRotators FootsAnimator => _unit.FootsAnimator;
+    public IReadOnlyList<ShootArea> ShootAreas => _shootAreas;
     public ReadValue<float> MoveSpeed => _unit.MoveSpeed;
     public Vector3 Position => Root.position;
     public int PlayerId => _playerId;
@@ -199,14 +207,20 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
         _guns.Clear();
         _guns.Add(_mainGunSpawner.Current);
 
+        _shootAreas.Clear();
+        _shootAreas.Add(_mainGunSpawner.Current.ShootArea);
+
         _guns[0].RechargeTimer.Ticked += OnRechargeTick;
         _guns[0].RechargeTimer.Elapsed += OnRecharged;
 
         if (_isShootingWith2Hand.Value && _secondGunSpawner.TrySpawn())
+        {
             _guns.Add(_secondGunSpawner.Current);
+            _shootAreas.Add(_secondGunSpawner.Current.ShootArea);
+        }
 
-        foreach (var gun in _guns)
-            gun.Gun.ShootedGun += OnShooted;
+        for (int i = 0; i < _guns.Count; i++)
+            _guns[i].Gun.ShootedGun += OnShooted;
     }
 
     private void OnRespawnedUnit()
@@ -216,6 +230,9 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
         _unit.Hp.Changed += OnChangedHp;
         _registrator.Register(_unit, _playerId);
         _sampleData.Set(_unit, _unitSpawner.CurrentPrefab.BattleRoster);
+
+        if (_deviceType == DeviceType.Handheld)
+            _unit.Hp.SetLevel(1);
 
         OnRespawned();
     }
@@ -257,6 +274,10 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
         _unit.MoveSpeed.SetStat(mainGun.MoveSpeed);
 
         mainGun.Recoil.SetTarget(_unit.GunRecoilTarget);
+
+        if (_deviceType == DeviceType.Handheld)
+            for (int i = 0; i < _shootAreas.Count; i++)
+                _shootAreas[i].SetPosition(_guns[i].Gun.ShootPoint.position.WithY(0.05f));
     }
 
     private void OnShooted(Gun gun)

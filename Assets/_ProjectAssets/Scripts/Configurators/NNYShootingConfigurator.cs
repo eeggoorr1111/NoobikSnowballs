@@ -53,6 +53,7 @@ namespace Narratore.DI
                 .WithParameter(_unitSpawner)
                 .WithParameter("mainGunSpawner", _mainGunSpawner)
                 .WithParameter("secondGunSpawner", _secondGunSpawner)
+                .WithParameter(config.DeviceType)
                 .WithParameter(_isShootingWith2Hands);
 
             builder.RegisterEntryPoint<PlayerBulletsUiObserver>(Lifetime.Singleton).As<IBeginnedUpdatable>()

@@ -139,5 +139,5 @@ MonoBehaviour:
   _collectionNotifer: {fileID: 1197049426143544510}
   _collectVfxSample: {fileID: 5355853000616711227, guid: 94a1294938515b74bbc46e48a9b69b6d, type: 3}
   _data:
-    _value: 6
+    _value: 12
     _isRandom: 0
