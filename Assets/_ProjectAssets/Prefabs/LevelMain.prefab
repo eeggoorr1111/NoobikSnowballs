@@ -17587,7 +17587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -500.00006, y: -500}
+  m_AnchoredPosition: {x: -500, y: -499.99994}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2150297098666634746
@@ -23591,12 +23591,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recordLevelModeKey: {fileID: 11400000, guid: 4264335076801c246a2fd7e6f40cb805, type: 2}
   _recordSpawnWaves:
-  - _entities:
-    - _item1: {fileID: 3131663063308469692, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-      _item2: 1
-    _entitiesInterval: 0
-    _betweenEntitiesInterval: 0
-    _afterWaveDelay: 0
+    _entities:
+    - _item1: {fileID: 3131663063308469692, guid: f265632db2557f84bb170a09673d8c81, type: 3}
+      _item2: 5
+    - _item1: {fileID: 8876720475514883136, guid: 7413d53b27e08b649adf79157f3e75c5, type: 3}
+      _item2: 5
+    - _item1: {fileID: 491564639172055718, guid: e4f8e25819bdf814b85870d6a05cc2f8, type: 3}
+      _item2: 0
+    _entitiesInterval:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 1
+      m_PostInfinity: 1
+      m_RotationOrder: 4
+    _betweenEntitiesInterval:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5
+        value: 3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 1
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _afterWaveDelay:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 3
+        inSlope: 0
+        outSlope: Infinity
+        tangentMode: 97
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 3
+        value: 10
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   _enemiesCount: {fileID: 2577734132767524084}
   _baseConfig:
     _sample: {fileID: 3131663063308469692, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
@@ -23617,7 +23690,7 @@ MonoBehaviour:
     _poolParent: {fileID: 2668276423300655054}
     _whenItemActiveParent: {fileID: 363754461574425042}
     _isCustomActivateDeactivate: 0
-    _startItemsCount: 5
+    _startItemsCount: 1
     _startItems: []
   _creeperExplosionDistance: 0.75
 --- !u!1 &2874920519843427660
@@ -35841,13 +35914,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1918642041852483242}
+  - {fileID: 7615992196425669888}
   - {fileID: 2211728101711952935}
   - {fileID: 7485091157714445906}
   - {fileID: 8793559361317580823}
   - {fileID: 2049809171984340339}
   - {fileID: 392039953277194008}
   - {fileID: 8929925425477591174}
-  - {fileID: 7615992196425669888}
   - {fileID: 5927683400895328781}
   - {fileID: 4287074770242095671}
   - {fileID: 1374257398195768056}
@@ -121802,7 +121875,7 @@ MonoBehaviour:
     _poolParent: {fileID: 3459044961890244996}
     _whenItemActiveParent: {fileID: 2985815081237658913}
     _isCustomActivateDeactivate: 0
-    _startItemsCount: 25
+    _startItemsCount: 5
   _shellOverride: []
   _vfxPoolsConfig:
     _samples:
@@ -121817,7 +121890,7 @@ MonoBehaviour:
     _poolParent: {fileID: 2766892778197744058}
     _whenItemActiveParent: {fileID: 4369062100082259353}
     _isCustomActivateDeactivate: 0
-    _startItemsCount: 5
+    _startItemsCount: 2
   _shootingHitVfxConfig:
     _isPhysicRotate: 0
     _offset: 0.1
@@ -121827,9 +121900,7 @@ MonoBehaviour:
     _rayMargin: 0.5
     _rayDistance: 1
   _waveExplosionDelay: 0.15
-  _explosionConfig:
-    _damageSourceKey: {fileID: 11400000, guid: 4ce5b0c11c04a2f4182b4e3d22496095, type: 2}
-    _damageTarget: 0
+  _explosionKey: {fileID: 11400000, guid: 4ce5b0c11c04a2f4182b4e3d22496095, type: 2}
   _shootingKey: {fileID: 11400000, guid: a5d35637164bda341b6d0b295f0d578c, type: 2}
   _shootingPushConfig:
   - _key: PistolBullet->CreeperBase
@@ -127205,8 +127276,8 @@ MonoBehaviour:
   _config:
     _rawLevel: 1
     _isOuterStarter: 0
-    _deviceType: 1
-    _mode: {fileID: 0}
+    _deviceType: 3
+    _mode: {fileID: 11400000, guid: 4264335076801c246a2fd7e6f40cb805, type: 2}
   _mbGameStateEventsHandlers: {fileID: 4791108622574308193}
   _parentConfigurators: {fileID: 2818894941055527298}
   _loseWindow: {fileID: 4740282416365968920}

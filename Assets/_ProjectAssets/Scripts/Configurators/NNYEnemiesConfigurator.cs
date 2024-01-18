@@ -14,7 +14,7 @@ namespace Narratore.DI
     {
         [Header("RECORD MODE")]
         [SerializeField] private LevelModeKey _recordLevelModeKey;
-        [SerializeField] private SpawnWavesConfig[] _recordSpawnWaves;
+        [SerializeField] private SpawnCurveWavesConfig _recordSpawnWaves;
 
         [Header("VIEW")]
         [SerializeField] private TMP_Text _enemiesCount;
