@@ -1,7 +1,7 @@
 ﻿using Narratore;
 using Narratore.UI;
 
-public class DesktopPlayerShooting : IPreparedUpdatable
+public class DesktopPlayerShooting : IBeginnedUpdatable
 {
     public DesktopPlayerShooting(PlayerShooting shooting, TouchArea touchArea)
     {

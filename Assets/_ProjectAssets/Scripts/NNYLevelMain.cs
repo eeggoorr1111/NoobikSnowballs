@@ -1,5 +1,6 @@
 using Narratore;
 using Narratore.Abstractions;
+using Narratore.DI;
 using Narratore.Helpers;
 using Narratore.Interfaces;
 using Narratore.MetaGame;
@@ -14,31 +15,29 @@ public sealed class NNYLevelMain : LevelMain
 {
     public NNYLevelMain(IUnitsWavesSpawner spawner,
                         LevelConfig config,
-                        PlayerCharacterMover playerMover,
-                        IPlayerShooting playerShooting,
                         ShopWindow shopWindow,
                         LoseWindow loseWindow,
                         WinWindow winWindow,
                         IWithHp playerUnit,
-                        GameStateUpdatables updatables,
                         LevelResultData resultData,
                         WalletProvider wallet,
                         CurrencyDescriptor currency,
                         IsShootingWith2Hands isShootingWith2Hands,
-                        GameStateEvents events,
-                        ShieldResurrection shield) : base(config, updatables, events)
+                        GameStateEventsHandlers events,
+                        ShieldResurrection shield,
+                        TouchArea touchArea,
+                        RecordResultWindow recordResultWindow,
+                        RecordProvider recordCounter) : base(config, events)
     {
         _spawner = spawner;
-        _playerMover = playerMover;
-        _playerShooting = playerShooting;
         _loseConditionUnit = playerUnit;
 
         _loseWindow = loseWindow;
         _shopWindow = shopWindow;
         _winWindow = winWindow;
 
-        _playerMover.Moved += OnCatchedPlayerInput;
-        _playerShooting.GettedCommandShoot += OnCatchedPlayerInput;
+        _touchArea = touchArea;
+        _touchArea.GettedInput += OnCatchedPlayerInput;
 
         _shopWindow.Open();
         _resultData = resultData;
@@ -46,19 +45,21 @@ public sealed class NNYLevelMain : LevelMain
         _currency = currency;
         _isShootingWith2Hands = isShootingWith2Hands;
         _shield = shield;
+        _recordResultWindow = recordResultWindow;
+        _recordCounter = recordCounter;
     }
 
 
     private readonly IUnitsWavesSpawner _spawner;
-    private readonly PlayerCharacterMover _playerMover;
-    private readonly IPlayerShooting _playerShooting;
     private readonly IWithHp _loseConditionUnit;
+    private readonly TouchArea _touchArea;
     private readonly ShopWindow _shopWindow;
     private readonly LoseWindow _loseWindow;
     private readonly WinWindow _winWindow;
+    private readonly RecordResultWindow _recordResultWindow;
     private readonly IsShootingWith2Hands _isShootingWith2Hands;
     private readonly ShieldResurrection _shield;
-
+    private readonly CounterProvider _recordCounter;
     private readonly LevelResultData _resultData;
     private readonly WalletProvider _wallet;
     private readonly CurrencyDescriptor _currency;
@@ -78,9 +79,10 @@ public sealed class NNYLevelMain : LevelMain
 
     private void OnCatchedPlayerInput()
     {
-        _playerMover.Moved -= OnCatchedPlayerInput;
-        _playerShooting.GettedCommandShoot -= OnCatchedPlayerInput;
+        if (Config.DeviceType == DeviceType.Handheld)
+            _touchArea.gameObject.SetActive(false);
 
+        _touchArea.GettedInput -= OnCatchedPlayerInput;
         CatchUserInput();
     }
 
@@ -90,48 +92,72 @@ public sealed class NNYLevelMain : LevelMain
 
         if (_loseConditionUnit.Hp.Current <= 0)
         {
-            bool isAviableAds = Application.isEditor ? true : RewardedAds.Instance.IsCanShow();
+            if (Config.Mode == null)
+                LoseDefaultModeHandler();
+            else
+                LoseRecordModeHandler();
+        }
+    }
 
-            _loseWindow.Open(isAviableAds);
-            PauseGame();
+    private async void LoseRecordModeHandler()
+    {
+        PauseGame();
 
-            LoseWindow.Result result = await _loseWindow.LoseWindowTask;
-            if (result == LoseWindow.Result.Resurrect)
-            {
-                if (Application.isEditor)
-                    _loseConditionUnit.Hp.Maximize();
-                else
-                {
-                    if (RewardedAds.Instance.TryShow())
-                        await RewardedAds.Instance.ShowingTask;
+        _recordResultWindow.Open(_spawner.Killed, _recordCounter.Value);
+        await _recordResultWindow.ShowingTask;
 
-                    _loseConditionUnit.Hp.Maximize();
-                }
+        if (_spawner.Killed > _recordCounter.Value)
+            _recordCounter.Change(_spawner.Killed);
 
-                _shield.Create();
-                ContinueGame();
-            }
+        _isShootingWith2Hands.Set(false);
+
+        ContinueGame();
+        LosePlayer();
+    }
+
+    private async void LoseDefaultModeHandler()
+    {
+        bool isAviableAds = Application.isEditor ? true : RewardedAds.Instance.IsCanShow();
+
+        _loseWindow.Open(isAviableAds);
+        PauseGame();
+
+        LoseWindow.Result result = await _loseWindow.LoseWindowTask;
+        if (result == LoseWindow.Result.Resurrect)
+        {
+            if (Application.isEditor)
+                _loseConditionUnit.Hp.Maximize();
             else
             {
-                _isEndedGame = true;
+                if (RewardedAds.Instance.TryShow())
+                    await RewardedAds.Instance.ShowingTask;
 
-                if (!Application.isEditor && FullscreenAds.Instance.TryShow())
-                    await FullscreenAds.Instance.ShowingTask;
-
-                // Need return time scale before go to main menu
-                ContinueGame();
-                LosePlayer();
-
-                _isShootingWith2Hands.Set(false);
+                _loseConditionUnit.Hp.Maximize();
             }
 
-            _loseWindow.Close();
+            _shield.Create();
+            ContinueGame();
         }
+        else
+        {
+            _isEndedGame = true;
+
+            if (!Application.isEditor && FullscreenAds.Instance.TryShow())
+                await FullscreenAds.Instance.ShowingTask;
+
+            // Need return time scale before go to main menu
+            ContinueGame();
+            LosePlayer();
+
+            _isShootingWith2Hands.Set(false);
+        }
+
+        _loseWindow.Close();
     }
 
     private async void OnDeadEnemy(IWithId unit)
     {
-        if (_isEndedGame) return;
+        if (_isEndedGame || Config.Mode != null) return;
 
         if (_spawner.LivingCount == 0 && _spawner.LeftSpawnCount == 0)
         {
@@ -189,11 +215,8 @@ public sealed class NNYLevelMain : LevelMain
 
     public override void Dispose()
     {
-        _playerMover.Moved -= OnCatchedPlayerInput;
-        _playerShooting.GettedCommandShoot -= OnCatchedPlayerInput;
-
+        _touchArea.GettedInput -= OnCatchedPlayerInput;
         _loseConditionUnit.DecreasedHp -= OnDecreasedHp;
-
         _spawner.Dead -= OnDeadEnemy;
 
         _cts?.Dispose();

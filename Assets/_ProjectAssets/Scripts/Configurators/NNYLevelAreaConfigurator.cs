@@ -6,6 +6,8 @@ using VContainer;
 
 namespace Narratore.DI
 {
+
+
     public class NNYLevelAreaConfigurator : Configurator
     {
         [SerializeField] private MeshFrame _area;

@@ -8,11 +8,15 @@ namespace Narratore.DI
     public class NNYLevelUiConfigurator : Configurator
     {
         [SerializeField] private ShopWindow _shopWindow;
+        [SerializeField] private InfoCanvas _infoCanvas;
 
 
         public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             builder.RegisterInstance(_shopWindow);
+
+            builder.Register<InfoCanvasHandler>(Lifetime.Singleton).As<IBegunGameHandler>()
+                .WithParameter(_infoCanvas);
         }
     }
 }

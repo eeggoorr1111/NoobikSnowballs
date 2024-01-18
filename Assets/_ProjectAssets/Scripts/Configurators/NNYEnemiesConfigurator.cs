@@ -12,6 +12,10 @@ namespace Narratore.DI
 {
     public class NNYEnemiesConfigurator : Configurator
     {
+        [Header("RECORD MODE")]
+        [SerializeField] private LevelModeKey _recordLevelModeKey;
+        [SerializeField] private SpawnWavesConfig[] _recordSpawnWaves;
+
         [Header("VIEW")]
         [SerializeField] private TMP_Text _enemiesCount;
 
@@ -28,8 +32,10 @@ namespace Narratore.DI
             builder.RegisterEntryPoint<SpawnedUnitsCounter>(Lifetime.Singleton).WithParameter(_enemiesCount);
 
             LevelSpawnWavesConfig[] levels = GetComponentsInChildren<LevelSpawnWavesConfig>();
-            LoopedCounter counter = new LoopedCounter(0, levels.Length - 1, config.Level - 1);
-            builder.RegisterInstance(levels[counter.Current].Waves).As<IReadOnlyList<SpawnWavesConfig>>();
+            LoopedCounter counter = new LoopedCounter(0, levels.Length - 1, config.RawLevel);
+            IReadOnlyList<SpawnWavesConfig> waves = levels[counter.Current].Waves;
+
+            builder.RegisterInstance(new NNYSpawnData(_recordSpawnWaves, waves, _recordLevelModeKey, config)).As<ISpawnData>();
 
             RegisterEnemiesMove(builder);
             RegisterEntitiesAspects(builder);

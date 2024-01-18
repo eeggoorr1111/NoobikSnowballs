@@ -3,7 +3,6 @@ using Narratore.Pools;
 using Narratore.UI;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Narratore.DI
 {
@@ -14,6 +13,7 @@ namespace Narratore.DI
         [SerializeField] private TouchArea _gameTouchArea;
         [SerializeField] private CustomCursor _customCursor;
         [SerializeField] private GameObject _tapToStartLabel;
+        [SerializeField] private GameObject _clickToStartLabel;
 
         [Header("DESKTOP")]
         [SerializeField] private LayerMask _desktopShootLayerMask;
@@ -40,22 +40,27 @@ namespace Narratore.DI
                    
                 if (config.DeviceType == DeviceType.Desktop)
                 {
-                    builder.Register<DesktopPlayerShooting>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(_gameTouchArea);
+                    if (config.IsOuterStarter)
+                        _clickToStartLabel.gameObject.SetActive(true);
+
+                    builder.Register<DesktopPlayerShooting>(Lifetime.Singleton).AsImplementedInterfaces();
                     builder.Register<DesktopPlayerUnitRotator>(Lifetime.Singleton)
                         .WithParameter(_desktopShootLayerMask)
                         .AsImplementedInterfaces();
                 }
                 else
                 {
+                    if (config.IsOuterStarter)
+                        _tapToStartLabel.gameObject.SetActive(true);
+
                     builder.Register<MobilePlayerUnitRotator>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(_rotateJoystick);
                     builder.Register<MobilePlayerShooting>(Lifetime.Singleton).AsImplementedInterfaces();
-                    builder.RegisterEntryPoint<MobileLevelStarter>(Lifetime.Singleton)
-                        .WithParameter(_gameTouchArea)
-                        .WithParameter(_tapToStartLabel);
+                    builder.Register<MobileShootingAreaActivator>(Lifetime.Singleton).As<IBegunGameHandler>();
                 }
 
 
                 builder.Register<PlayerCharacterJoystickMover>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces().WithParameter(_moveJoystick);
+                builder.RegisterInstance(_gameTouchArea);
             }
         }
     }
