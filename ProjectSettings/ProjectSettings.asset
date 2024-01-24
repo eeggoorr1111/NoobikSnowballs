@@ -136,7 +136,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 1.1
+  bundleVersion: 2.0
   preloadedAssets:
   - {fileID: 11400000, guid: 3a0ba99608181fd4ca73754ac4eb54aa, type: 2}
   metroInputSource: 0
@@ -845,7 +845,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    WebGL: GAME_PUSH
+    WebGL: GAME_PUSH;GA_ANALYTICS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
