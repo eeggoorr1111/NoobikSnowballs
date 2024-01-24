@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3fc8f28194f2949b4f6c413233b2ad, type: 3}
   m_Name: GunsShopProvider
   m_EditorClassIdentifier: 
-  _desiredEditorDataSource: 0
+  _editorSource: 0
+  _defaultSource: 0
   _desiredBuildDataSource: 1
   _defaultItem: {fileID: 11400000, guid: a68eaf4604b13164798ca36ab612aa3e, type: 2}
   _items:

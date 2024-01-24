@@ -1,4 +1,5 @@
-﻿using Narratore.AI;
+﻿using Cysharp.Threading.Tasks;
+using Narratore.AI;
 using Narratore.Pools;
 using Narratore.Solutions.Battle;
 using System;
@@ -10,10 +11,10 @@ using VContainer.Unity;
 
 namespace Narratore.DI
 {
-    public class NNYEnemiesConfigurator : Configurator
+    public class NNYEnemiesConfigurator : LevelConfigurator
     {
         [Header("RECORD MODE")]
-        [SerializeField] private LevelModeKey _recordLevelModeKey;
+        [SerializeField] private LevelModeDescriptor _recordLevelModeKey;
         [SerializeField] private SpawnCurveWavesConfig _recordSpawnWaves;
 
         [Header("VIEW")]
@@ -21,8 +22,7 @@ namespace Narratore.DI
 
 
         [Header("ENEMIES")]
-        [SerializeField] private BaseCreeperPoolConfig _baseConfig;
-        [SerializeField] private FastCreeperPoolConfig _fastConfig;
+        [SerializeField] private CreeperPoolConfig[] _configs;
         [SerializeField] private BossCreeperPoolConfig _bossConfig;
         [SerializeField] private float _creeperExplosionDistance;
 
@@ -40,8 +40,7 @@ namespace Narratore.DI
             RegisterEnemiesMove(builder);
             RegisterEntitiesAspects(builder);
 
-            RegisterBaseCreepers(builder, sampleData);
-            RegisterFastCreepers(builder, sampleData);
+            RegisterCreepers(builder, sampleData);
             RegisterBossCreepers(builder, sampleData);
 
             builder.Register<CreeperSelfExplosionDeathSource>(Lifetime.Singleton)
@@ -67,28 +66,30 @@ namespace Narratore.DI
             builder.Register<EntitiesAspects<BotShootingConfig>>(Lifetime.Singleton).AsSelf().As<IEntitiesAspects<BotShootingConfig>>();
         }
 
-        private void RegisterBaseCreepers(IContainerBuilder builder, SampleData sampleData)
-        {
-            builder.RegisterInstance(new MBPool<BaseCreeperRoster>(_baseConfig, sampleData)).As<IDisposable>().AsSelf();
-            builder.Register<BaseCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<BaseCreeperRoster>>();
-            builder.Register<PoolBattleEntitiesSource<BaseCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<BaseCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<BaseCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BaseCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
-        }
 
-        private void RegisterFastCreepers(IContainerBuilder builder, SampleData sampleData)
+
+        private void RegisterCreepers(IContainerBuilder builder, SampleData sampleData)
         {
-            builder.RegisterInstance(new MBPool<FastCreeperRoster>(_fastConfig, sampleData)).As<IDisposable>().AsSelf();
-            builder.Register<FastCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<FastCreeperRoster>>();
-            builder.Register<PoolBattleEntitiesSource<FastCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<FastCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<FastCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<FastCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
+            builder.Register<CreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<CreeperRoster>>();
+
+            for (int i = 0; i < _configs.Length; i++)
+            {
+                var pool = new MBPool<CreeperRoster>(_configs[i], sampleData);
+
+                builder.Register<PoolSpawner<CreeperRoster>>(Lifetime.Scoped).As<ISpawner<CreeperRoster>, ISpawner, IDisposable>()
+                    .WithParameter(pool)
+                    .WithParameter(0);
+            }
         }
 
         private void RegisterBossCreepers(IContainerBuilder builder, SampleData sampleData)
         {
-            builder.RegisterInstance(new MBPool<BossCreeperRoster>(_bossConfig, sampleData)).As<IDisposable>().AsSelf();
+            var pool = new MBPool<BossCreeperRoster>(_bossConfig, sampleData);
+
             builder.Register<BossCreeperBattleRegistrator>(Lifetime.Singleton).As<EntityBattleRegistrator<BossCreeperRoster>>();
-            builder.Register<PoolBattleEntitiesSource<BossCreeperRoster>>(Lifetime.Singleton).As<IBattleEntitiesSource<BossCreeperRoster>, IDisposable>();
-            builder.Register<UnitsSpawner<BossCreeperRoster>>(Lifetime.Singleton).As<IUnitsSpawner<BossCreeperRoster>, IUnitsSpawner, IDisposable>().WithParameter(100000);
+            builder.Register<PoolSpawner<BossCreeperRoster>>(Lifetime.Scoped).As<ISpawner<BossCreeperRoster>, ISpawner, IDisposable>()
+                .WithParameter(0)
+                .WithParameter(pool);
         }
     }
 }

@@ -15,6 +15,7 @@ public class NNYLootConfigurator : LootConfigurator<NNYLootDroping, LootDeathSou
 
     [Header("CURRENCY")]
     [SerializeField] private CurrencyLootPoolConfig _currencyPoolConfig;
+    [SerializeField] private CurrencyLootPoolConfig _currencyBossPoolConfig;
     [SerializeField] private UiCoinsFlyerPoolConfig _uiCoinsFlyerConfig;
     
 
@@ -33,12 +34,23 @@ public class NNYLootConfigurator : LootConfigurator<NNYLootDroping, LootDeathSou
 
     protected override void RegisterSources(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
     {
-        builder.RegisterInstance(new MBPools<HealLootRoster, HealLootRoster>(_healPoolConfig, sampleData)).As<IDisposable>().AsSelf();
-        builder.RegisterInstance(new MBPools<CurrencyLootRoster, CurrencyLootRoster>(_currencyPoolConfig, sampleData)).As<IDisposable>().AsSelf();
+        var healPool = new MBPool<HealLootRoster>(_healPoolConfig, sampleData);
+        var currencyLoot = new MBPool<CurrencyLootRoster>(_currencyPoolConfig, sampleData);
+        var currencyBossLoot = new MBPool<CurrencyLootRoster>(_currencyBossPoolConfig, sampleData);
+
         builder.RegisterInstance(new MBPool<UICoinsFlyer>(_uiCoinsFlyerConfig, sampleData)).As<IMBPool<UICoinsFlyer>, IDisposable>();
 
-        builder.Register<LootSource<HealLootRoster>>(Lifetime.Singleton).As<ILootSource, IDisposable>();
-        builder.Register<LootSource<CurrencyLootRoster>>(Lifetime.Singleton).As<ILootSource, IDisposable>();
+        builder.Register<LootSpawner<HealLootRoster>>(Lifetime.Scoped).As<ILootSpawner, IDisposable>()
+            .WithParameter(0)
+            .WithParameter(healPool);
+
+        builder.Register<LootSpawner<CurrencyLootRoster>>(Lifetime.Scoped).As<ILootSpawner, IDisposable>()
+            .WithParameter(0)
+            .WithParameter(currencyLoot);
+
+        builder.Register<LootSpawner<CurrencyLootRoster>>(Lifetime.Scoped).As<ILootSpawner, IDisposable>()
+            .WithParameter(0)
+            .WithParameter(currencyBossLoot);
     }
 
     protected override void RegisterBattleRegistrators(IContainerBuilder builder, LevelConfig config, SampleData sampleData)

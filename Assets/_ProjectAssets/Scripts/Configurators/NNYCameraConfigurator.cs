@@ -8,7 +8,7 @@ using Narratore.Pools;
 
 namespace Narratore.DI
 {
-    public class NNYCameraConfigurator : Configurator
+    public class NNYCameraConfigurator : LevelConfigurator
     {
         [SerializeField] private Transform _cameraRoot;
         [SerializeField] private Shaker _cameraExplosionShaker; 

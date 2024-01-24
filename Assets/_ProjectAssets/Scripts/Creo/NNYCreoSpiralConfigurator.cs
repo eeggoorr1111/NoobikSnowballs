@@ -5,7 +5,7 @@ using Narratore.Pools;
 using UnityEngine;
 using Narratore.Solutions.Battle;
 
-public class NNYCreoSpiralConfigurator : Configurator
+public class NNYCreoSpiralConfigurator : LevelConfigurator
 {
     [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig;
     [SerializeField] private CreoSpiralPlayerUnitConfig _playerUnitConfig;

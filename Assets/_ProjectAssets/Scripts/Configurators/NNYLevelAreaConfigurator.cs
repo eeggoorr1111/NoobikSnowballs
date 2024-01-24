@@ -8,7 +8,7 @@ namespace Narratore.DI
 {
 
 
-    public class NNYLevelAreaConfigurator : Configurator
+    public class NNYLevelAreaConfigurator : LevelConfigurator
     {
         [SerializeField] private MeshFrame _area;
         [SerializeField] private LoopedTextFadeAnimation _warning;

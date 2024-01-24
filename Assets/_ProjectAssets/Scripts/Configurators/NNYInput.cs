@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Narratore.DI
 {
-    public class NNYInput : Configurator
+    public class NNYInput : LevelConfigurator
     {
         [SerializeField] private Joystick _moveJoystick;
         [SerializeField] private Joystick _rotateJoystick;

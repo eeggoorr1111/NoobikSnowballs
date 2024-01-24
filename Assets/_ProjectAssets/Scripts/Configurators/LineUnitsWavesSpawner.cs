@@ -17,7 +17,7 @@ namespace Narratore.DI
         public event Action<IWithId> Dead;
 
 
-        public LineUnitsWavesSpawner(IReadOnlyList<IUnitsSpawner> spawners, IReadOnlyList<SpawnWavesConfig> waves, IHeldPoints spawnPoints, int playerId, IPlayerUnitRotator unitRotator, IPlayerUnitRoot unit)
+        public LineUnitsWavesSpawner(IReadOnlyList<ISpawner> spawners, IReadOnlyList<SpawnWavesConfig> waves, IHeldPoints spawnPoints, int playerId, IPlayerUnitRotator unitRotator, IPlayerUnitRoot unit)
         {
             _waves = waves;
             _spawnPoints = spawnPoints;
@@ -26,7 +26,7 @@ namespace Narratore.DI
             _spawners = new();
             for (int i = 0; i < spawners.Count; i++)
             {
-                IUnitsSpawner spawner = spawners[i];
+                ISpawner spawner = spawners[i];
 
                 _spawners[spawner.Sample] = spawner;
                 spawner.Dead += OnDead;
@@ -65,7 +65,7 @@ namespace Narratore.DI
 
 
 
-        private readonly Dictionary<EntityRoster, IUnitsSpawner> _spawners;
+        private readonly Dictionary<EntityRoster, ISpawner> _spawners;
         private readonly IReadOnlyList<SpawnWavesConfig> _waves;
         private readonly IHeldPoints _spawnPoints;
         private readonly int _playerId;

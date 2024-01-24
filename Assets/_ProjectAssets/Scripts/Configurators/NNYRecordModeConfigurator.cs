@@ -43,7 +43,7 @@ namespace Narratore.DI
     }
 
 
-    public class NNYRecordModeConfigurator : Configurator
+    public class NNYRecordModeConfigurator : LevelConfigurator
     {
         [SerializeField] private RecordResultWindow _window;
         [SerializeField] private RecordProvider _record;

@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f622c4ba8d06a684795f92c011f64b5b, type: 3}
-  m_Name: RecordLevelModeKey
+  m_Script: {fileID: 11500000, guid: 9982d90720054b74c890413c54bb4729, type: 3}
+  m_Name: RecordLevelMode
   m_EditorClassIdentifier: 
+  _key: level_mode_record
+  _entityImage: {fileID: 0}
+  _entityName: 

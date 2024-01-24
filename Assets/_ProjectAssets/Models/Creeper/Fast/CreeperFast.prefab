@@ -54,7 +54,7 @@ MonoBehaviour:
   _physic: {fileID: 0}
   _powerScale: 0
   _duration: 0
-  _entity: {fileID: 8876720475514883136}
+  _entity: {fileID: 213068061896275313}
   _explosionCenter: {fileID: 7891395295030419645}
   _damage:
     _targets: 3
@@ -367,14 +367,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6390420638070819296, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8876720475514883136}
+      addedObject: {fileID: 213068061896275313}
   m_SourcePrefab: {fileID: 100100000, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
 --- !u!1 &1931819105333584454 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6390420638070819296, guid: 9271968cf5894444c9e8a7673df6793f, type: 3}
   m_PrefabInstance: {fileID: 4782935555047549862}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8876720475514883136
+--- !u!114 &213068061896275313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1931819105333584454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98a644502d546514eafd70a478a2d825, type: 3}
+  m_Script: {fileID: 11500000, guid: fa7f0eea6902b9947b6b35afbd61ab53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0

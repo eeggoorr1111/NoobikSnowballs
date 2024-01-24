@@ -3,19 +3,6 @@ using Narratore.Solutions.Battle;
 using UnityEngine;
 
 
-public class BaseCreeperBattleRegistrator : CreeperBattleRegistrator<BaseCreeperRoster>
-{
-    public BaseCreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds, EntitiesAspects<Transform> transforms, EntitiesAspects<IShootingKillable> shootingKillable, EntitiesAspects<IExplosionKillable> explosionKillable, EntitiesAspects<ExplosionUnitDeath> explosionDeath, EntitiesAspects<MovableBot> bots, EntitiesListsBounds bounds, EntitiesAspects<Hp> hps, EntitiesAspects<ReadHp> readHps, MultyExplosionSource explosionSource, EntitiesAspects<CreeperDeathExplosion> creeperDeath, EntitiesAspects<EntityRoster> entities, EntitiesAspects<DropLootData> lootDrop, EntitiesAspects<IDropLootData> readLootDrop) : base(playerUnitsIds, transforms, shootingKillable, explosionKillable, explosionDeath, bots, bounds, hps, readHps, explosionSource, creeperDeath, entities, lootDrop, readLootDrop)
-    {
-    }
-}
-
-public class FastCreeperBattleRegistrator : CreeperBattleRegistrator<FastCreeperRoster>
-{
-    public FastCreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds, EntitiesAspects<Transform> transforms, EntitiesAspects<IShootingKillable> shootingKillable, EntitiesAspects<IExplosionKillable> explosionKillable, EntitiesAspects<ExplosionUnitDeath> explosionDeath, EntitiesAspects<MovableBot> bots, EntitiesListsBounds bounds, EntitiesAspects<Hp> hps, EntitiesAspects<ReadHp> readHps, MultyExplosionSource explosionSource, EntitiesAspects<CreeperDeathExplosion> creeperDeath, EntitiesAspects<EntityRoster> entities, EntitiesAspects<DropLootData> lootDrop, EntitiesAspects<IDropLootData> readLootDrop) : base(playerUnitsIds, transforms, shootingKillable, explosionKillable, explosionDeath, bots, bounds, hps, readHps, explosionSource, creeperDeath, entities, lootDrop, readLootDrop)
-    {
-    }
-}
 
 public class BossCreeperBattleRegistrator : CreeperBattleRegistrator<BossCreeperRoster>
 {
@@ -57,6 +44,13 @@ public class BossCreeperBattleRegistrator : CreeperBattleRegistrator<BossCreeper
     }
 }
 
+
+public class CreeperBattleRegistrator : CreeperBattleRegistrator<CreeperRoster>
+{
+    public CreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds, EntitiesAspects<Transform> transforms, EntitiesAspects<IShootingKillable> shootingKillable, EntitiesAspects<IExplosionKillable> explosionKillable, EntitiesAspects<ExplosionUnitDeath> explosionDeath, EntitiesAspects<MovableBot> bots, EntitiesListsBounds bounds, EntitiesAspects<Hp> hps, EntitiesAspects<ReadHp> readHps, MultyExplosionSource explosionSource, EntitiesAspects<CreeperDeathExplosion> creeperDeath, EntitiesAspects<EntityRoster> entities, EntitiesAspects<DropLootData> lootDrop, EntitiesAspects<IDropLootData> readLootDrop) : base(playerUnitsIds, transforms, shootingKillable, explosionKillable, explosionDeath, bots, bounds, hps, readHps, explosionSource, creeperDeath, entities, lootDrop, readLootDrop)
+    {
+    }
+}
 
 public abstract class CreeperBattleRegistrator<T> : EntityBattleRegistrator<T>
     where T : CreeperRoster

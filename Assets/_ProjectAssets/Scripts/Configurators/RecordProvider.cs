@@ -3,7 +3,7 @@
 namespace Narratore.DI
 {
     [CreateAssetMenu(fileName = "RecordProvider", menuName = "NNY/RecordProvider")]
-    public class RecordProvider : CounterProvider
+    public class RecordProvider : IntProvider
     {
 
     }

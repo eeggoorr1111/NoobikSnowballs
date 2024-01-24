@@ -6,7 +6,7 @@ using UnityEngine;
 using VContainer;
 
 
-public class NNYWalletConfigurator : Configurator
+public class NNYWalletConfigurator : LevelConfigurator
 {
     [SerializeField] private WalletProvider _wallet;
     [SerializeField] private CurrencyDescriptor _currency;

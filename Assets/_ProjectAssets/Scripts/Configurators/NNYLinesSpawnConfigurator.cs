@@ -7,7 +7,7 @@ namespace Narratore.DI
 {
 
 
-    public class NNYLinesSpawnConfigurator : Configurator
+    public class NNYLinesSpawnConfigurator : LevelConfigurator
     {
         [Header("SPAWN POINTS")]
         [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig;

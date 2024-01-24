@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class NNYLootDroping : LootDroping
 {
-    public NNYLootDroping(LootDeathSources death, IEntitiesAspects<IDropLootData> dropData, IReadOnlyList<ILootSource> sources, int lootOwnerPlayer, IEntitiesAspects<Transform> transforms) : 
-        base(death, dropData, sources, lootOwnerPlayer, transforms)
+    public NNYLootDroping(  LootDeathSources death, 
+                            IEntitiesAspects<IDropLootData> dropData, 
+                            IReadOnlyList<ILootSpawner> spawners, 
+                            int lootOwnerPlayer, 
+                            IEntitiesAspects<Transform> transforms) : 
+        base(death, dropData, spawners, lootOwnerPlayer, transforms)
     {
     }
 }

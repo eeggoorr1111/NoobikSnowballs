@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Narratore.DI
 {
-    public class NNYSpawnConfigurator :Configurator
+    public class NNYSpawnConfigurator :LevelConfigurator
     {
         [Header("SPAWN POINTS")]
         [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig; 

@@ -17,16 +17,26 @@ public class EnemiesPushing : IDisposable, IInitializable
                             ISampleData sampleData,
                             IEntitiesAspects<EntityRoster> entities)
     {
-        _shootingPushConfig = shootingPushConfigs;
         _transforms = transforms;
         _movable = movable;
         _shells = shells;
         _sampleData = sampleData;
         _entities = entities;
+
+        _shootingPushConfig = new Dictionary<Component, Dictionary<Component, ShootingPushConfig>>();
+
+        foreach (var config in shootingPushConfigs)
+        {
+            if (!_shootingPushConfig.ContainsKey(config.Shell))
+                _shootingPushConfig[config.Shell] = new Dictionary<Component, ShootingPushConfig>();
+
+            foreach (var enemy in config.Entities)
+                _shootingPushConfig[config.Shell][enemy] = config;
+        }
     }
 
 
-    private readonly IReadOnlyList<ShootingPushConfig> _shootingPushConfig;
+    private readonly Dictionary<Component, Dictionary<Component, ShootingPushConfig>> _shootingPushConfig;
     private readonly IEntitiesAspects<Transform> _transforms;
     private readonly IEntitiesAspects<EntityRoster> _entities;
     private readonly IEntitiesAspects<MovableBot> _movable;
@@ -79,13 +89,11 @@ public class EnemiesPushing : IDisposable, IInitializable
             !_sampleData.TryGetSample(entity, out Component entitySample)) 
             return false;
 
-        for (int i = 0; i < _shootingPushConfig.Count; i++)
-            if (_shootingPushConfig[i].Shell == shellSample &&
-                _shootingPushConfig[i].Entity == entitySample)
-            {
-                config = _shootingPushConfig[i];
-                return true;
-            }
+        if (_shootingPushConfig.ContainsKey(shellSample) && _shootingPushConfig[shellSample].ContainsKey(entitySample))
+        {
+            config = _shootingPushConfig[shellSample][entitySample];
+            return true;
+        }
 
         return false;
     }

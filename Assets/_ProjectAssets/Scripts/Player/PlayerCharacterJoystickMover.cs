@@ -2,7 +2,7 @@
 using Narratore.Input;
 using UnityEngine;
 
-public class PlayerCharacterJoystickMover : IPreparedUpdatable
+public class PlayerCharacterJoystickMover : IBeginnedUpdatable
 {
     public PlayerCharacterJoystickMover(PlayerCharacterMover mover, Joystick joystick)
     {

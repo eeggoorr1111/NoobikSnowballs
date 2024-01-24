@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b929407e202444d80284a1fefb1c9f, type: 3}
   m_Name: RecordProvider
   m_EditorClassIdentifier: 
-  _desiredEditorDataSource: 0
-  _desiredBuildDataSource: 1
+  _editorSource: 0
+  _defaultSource: 0
+  _desiredBuildDataSource: 2
   _value: 0
   _defaultValue: 0
-  _key: record
+  _key: score

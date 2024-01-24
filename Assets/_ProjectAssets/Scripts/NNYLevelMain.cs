@@ -11,6 +11,7 @@ using System.Threading;
 using UnityEngine;
 
 
+
 public sealed class NNYLevelMain : LevelMain
 {
     public NNYLevelMain(IUnitsWavesSpawner spawner,
@@ -27,7 +28,9 @@ public sealed class NNYLevelMain : LevelMain
                         ShieldResurrection shield,
                         TouchArea touchArea,
                         RecordResultWindow recordResultWindow,
-                        RecordProvider recordCounter) : base(config, events)
+                        RecordProvider recordCounter,
+                        FullscreenAds fullscreenAds,
+                        RewardedAds rewardedAds) : base(config, events)
     {
         _spawner = spawner;
         _loseConditionUnit = playerUnit;
@@ -47,6 +50,8 @@ public sealed class NNYLevelMain : LevelMain
         _shield = shield;
         _recordResultWindow = recordResultWindow;
         _recordCounter = recordCounter;
+        _fullscreenAds = fullscreenAds;
+        _rewardedAds = rewardedAds;
     }
 
 
@@ -59,10 +64,12 @@ public sealed class NNYLevelMain : LevelMain
     private readonly RecordResultWindow _recordResultWindow;
     private readonly IsShootingWith2Hands _isShootingWith2Hands;
     private readonly ShieldResurrection _shield;
-    private readonly CounterProvider _recordCounter;
+    private readonly IntProvider _recordCounter;
     private readonly LevelResultData _resultData;
     private readonly WalletProvider _wallet;
     private readonly CurrencyDescriptor _currency;
+    private readonly FullscreenAds _fullscreenAds;
+    private readonly RewardedAds _rewardedAds;
 
     private CancellationTokenSource _cts;
     private bool _isEndedGame;
@@ -117,7 +124,7 @@ public sealed class NNYLevelMain : LevelMain
 
     private async void LoseDefaultModeHandler()
     {
-        bool isAviableAds = Application.isEditor ? true : RewardedAds.Instance.IsCanShow();
+        bool isAviableAds = Application.isEditor ? true : _rewardedAds.IsCanShow();
 
         _loseWindow.Open(isAviableAds);
         PauseGame();
@@ -125,15 +132,10 @@ public sealed class NNYLevelMain : LevelMain
         LoseWindow.Result result = await _loseWindow.LoseWindowTask;
         if (result == LoseWindow.Result.Resurrect)
         {
-            if (Application.isEditor)
-                _loseConditionUnit.Hp.Maximize();
-            else
-            {
-                if (RewardedAds.Instance.TryShow())
-                    await RewardedAds.Instance.ShowingTask;
+            if (_rewardedAds.TryShow())
+                await _rewardedAds.ShowingTask;
 
-                _loseConditionUnit.Hp.Maximize();
-            }
+            _loseConditionUnit.Hp.Maximize();
 
             _shield.Create();
             ContinueGame();
@@ -142,8 +144,8 @@ public sealed class NNYLevelMain : LevelMain
         {
             _isEndedGame = true;
 
-            if (!Application.isEditor && FullscreenAds.Instance.TryShow())
-                await FullscreenAds.Instance.ShowingTask;
+            if (_fullscreenAds.TryShow())
+                await _fullscreenAds.ShowingTask;
 
             // Need return time scale before go to main menu
             ContinueGame();
@@ -167,7 +169,7 @@ public sealed class NNYLevelMain : LevelMain
             bool isCanceled = await UniTaskHelper.Delay(3f, _cts.Token);
             if (isCanceled) return;
 
-            bool isAviableAds = Application.isEditor ? true : RewardedAds.Instance.IsCanShow();
+            bool isAviableAds = Application.isEditor ? true : _rewardedAds.IsCanShow();
             _winWindow.Open(isAviableAds);
             PauseGame();
 
@@ -175,15 +177,10 @@ public sealed class NNYLevelMain : LevelMain
             int award = _resultData.Coins;
             if (result == WinWindow.Result.AdsContinue)
             {
-                if (Application.isEditor)
-                    award = _resultData.RewardAdsCoins;
-                else
-                {
-                    if (RewardedAds.Instance.TryShow())
-                        await RewardedAds.Instance.ShowingTask;
+                if (_rewardedAds.TryShow())
+                    await _rewardedAds.ShowingTask;
 
-                    award = _resultData.RewardAdsCoins;
-                }
+                award = _resultData.RewardAdsCoins;
             }
 
             _winWindow.CoinsFlyer.ToFly(award);
@@ -200,8 +197,8 @@ public sealed class NNYLevelMain : LevelMain
             isCanceled = await UniTaskHelper.Delay(1f, true, _cts.Token);
             if (isCanceled) return;
 
-            if (!Application.isEditor && result == WinWindow.Result.Continue && FullscreenAds.Instance.TryShow())
-                await FullscreenAds.Instance.ShowingTask;
+            if (result == WinWindow.Result.Continue && _fullscreenAds.TryShow())
+                await _fullscreenAds.ShowingTask;
 
             _winWindow.Close();
             _isShootingWith2Hands.Set(false);

@@ -44,7 +44,7 @@ namespace Narratore.DI
                                 LevelAreaConfig config,
                                 IPlayerUnitRootAndHp playerUnit,
                                 LoopedTextFadeAnimation warning,
-                                IReadOnlyList<IUnitsSpawner> spawners,
+                                IReadOnlyList<ISpawner> spawners,
                                 RandomOutCameraHeldPoints spawnPoints,
                                 IEntitiesAspects<DamageProtection> protection)
         {
@@ -69,7 +69,7 @@ namespace Narratore.DI
         private readonly Bounds _levelAreaBounds;
         private readonly LoopedTextFadeAnimation _warning;
         private readonly LevelAreaConfig _config;
-        private readonly IReadOnlyList<IUnitsSpawner> _spawners;
+        private readonly IReadOnlyList<ISpawner> _spawners;
         private readonly IHeldPoints _spawnPoints;
         private readonly IEntitiesAspects<DamageProtection> _protection;
 
@@ -122,7 +122,7 @@ namespace Narratore.DI
             bool isCanceled = await UniTaskHelper.Delay(_config.OutEnemiesSpawnDelay, _spawning.Token);
             if (isCanceled) return;
 
-            if (TryGetSpawner(out IUnitsSpawner spawner))
+            if (TryGetSpawner(out ISpawner spawner))
             {
                 for (int i = 0; i < _config.OutEnemies.Item2; i++)
                     spawner.Spawn(PlayersIds.GetBotId(2), _spawnPoints.Get());
@@ -133,7 +133,7 @@ namespace Narratore.DI
             _isSpawned = true;
         }
 
-        private bool TryGetSpawner(out IUnitsSpawner spawner)
+        private bool TryGetSpawner(out ISpawner spawner)
         {
             spawner = null;
             foreach (var check in _spawners)

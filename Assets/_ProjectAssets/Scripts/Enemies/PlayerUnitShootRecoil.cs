@@ -78,7 +78,7 @@ public class PlayerUnitShootRecoil : IDisposable, IInitializable
 
         for (int i = 0; i < _shootingPushConfig.Count; i++)
             if (_shootingPushConfig[i].Shell == shellSample &&
-                _shootingPushConfig[i].Entity == entitySample)
+                _shootingPushConfig[i].Entities == entitySample)
             {
                 config = _shootingPushConfig[i];
                 return true;

@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Narratore.DI
 {
-    public class NNYLevelUiConfigurator : Configurator
+    public class NNYLevelUiConfigurator : LevelConfigurator
     {
         [SerializeField] private ShopWindow _shopWindow;
         [SerializeField] private InfoCanvas _infoCanvas;
