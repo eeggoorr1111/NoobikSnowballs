@@ -12,7 +12,7 @@ using Narratore.Extensions;
 public interface IPlayerUnitRoot
 {
     Transform Root { get; }
-    int UnitId { get; }
+    int EntityId { get; }
 }
 
 public interface IPlayerUnitRootAndHp : IPlayerUnitRoot
@@ -31,17 +31,6 @@ public interface IPlayerPushableUnit : IPlayerUnitRoot
 {
     bool IsCanMove { get; set; }
 }
-
-public interface IWithHp
-{
-    event Action DecreasedHp;
-    event Action ChangedHp;
-
-
-    int UnitId { get; }
-    Hp Hp { get; }
-}
-
 public interface IPlayerUnitShooting
 {
     event Action<Gun> ShootedGun;
@@ -136,7 +125,7 @@ public class PlayerUnitFacade : IPlayerUnitRoot,
     public Vector3 Position => Root.position;
     public int PlayerId => _playerId;
     public int PlayerUnitId => _unit.Id;
-    public int UnitId => PlayerUnitId;
+    public int EntityId => PlayerUnitId;
     public Hp Hp => _unit.Hp;
     public bool IsCanMove { get; set; }
     public int LeftBullets => _guns[0].Gun.Magazine.Size.Current;

@@ -1570,8 +1570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d649129e696cc4ca45e0f29986ffc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _recordLevelModeKey: {fileID: 0}
-  _button: {fileID: 0}
 --- !u!1 &1849564479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2058,7 @@ GameObject:
   - component: {fileID: 2023210845}
   - component: {fileID: 2023210847}
   - component: {fileID: 2023210848}
-  - component: {fileID: 2023210850}
+  - component: {fileID: 2023210849}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -2128,7 +2126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handleSeed: 0
   _isUseHandleSeed: 0
---- !u!114 &2023210850
+--- !u!114 &2023210849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2137,12 +2135,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2023210844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be4187f7d0a14574486d76ff80e558c2, type: 3}
+  m_Script: {fileID: 11500000, guid: b490b63b44b63624186606c64f0edd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
     TypeName: 
-  autoRun: 0
+  autoRun: 1
   autoInjectGameObjects: []
   _parentConfigurators: {fileID: 1398291626}
   _gameLoopConfig:
@@ -2152,11 +2150,25 @@ MonoBehaviour:
     _isShowMainMenuAfterTransion: 1
     _openingShop: 0
     _upgradeChecker: {fileID: 0}
+    _isAwaitUserInputForBegunLevel: 1
+    _isNextLevelAfterLose: 0
     _audioListener: {fileID: 0}
     _levelCounter: {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
     _startedLevelsCounter: {fileID: 11400000, guid: 10338b80fe1c22741b8d23b7f663ef5b, type: 2}
     _levelsInfo: {fileID: 11400000, guid: c5f1a0b403771784ca6f17ceba18943c, type: 2}
     _levelsLoader: {fileID: 2119252918}
+  _dataConfig:
+    _lang: {fileID: 11400000, guid: 1c3ea106460111a4d8c15274acb041b5, type: 2}
+    _device: {fileID: 11400000, guid: 0b982e840ed1af1428af5db945f0dda0, type: 2}
+    _int:
+    - {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
+    - {fileID: 11400000, guid: 9180bff2d7e24ec4c8280d4bc1a06b05, type: 2}
+    - {fileID: 11400000, guid: 10338b80fe1c22741b8d23b7f663ef5b, type: 2}
+    _wallets:
+    - {fileID: 11400000, guid: 39fef53b78a1c8b4f9c92971f16edaed, type: 2}
+    _shops:
+    - {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
+    - {fileID: 11400000, guid: 66d56858059e61243b73760e9b2aa2c8, type: 2}
   _isWithAwardStubRewarded: 1
   _config:
     _sendEvents: 60

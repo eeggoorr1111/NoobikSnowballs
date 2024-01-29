@@ -35843,7 +35843,7 @@ MonoBehaviour:
   _waves:
   - _entities:
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-      _item2: 5
+      _item2: 3
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
       _item2: 5
     _entitiesInterval: 1
@@ -53399,7 +53399,7 @@ MonoBehaviour:
   _waves:
   - _entities:
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-      _item2: 10
+      _item2: 5
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
       _item2: 10
     _entitiesInterval: 0.5
@@ -69436,7 +69436,7 @@ MonoBehaviour:
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
       _item2: 5
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-      _item2: 7
+      _item2: 5
     _entitiesInterval: 0.5
     _betweenEntitiesInterval: 6
     _afterWaveDelay: 0
@@ -80312,7 +80312,7 @@ MonoBehaviour:
     - _item1: {fileID: 213068061896275313, guid: 3a75ca42d344c344190c10e5d5216e28, type: 3}
       _item2: 5
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
-      _item2: 15
+      _item2: 10
     - _item1: {fileID: 2486874525558589941, guid: c9aabdec7b7f206469c437e75b8b2691, type: 3}
       _item2: 5
     _entitiesInterval: 0.5
@@ -127307,7 +127307,19 @@ MonoBehaviour:
   _winWindow: {fileID: 4902773019038752024}
   _langProvider: {fileID: 11400000, guid: 1c3ea106460111a4d8c15274acb041b5, type: 2}
   _translator: {fileID: 11400000, guid: 27eb8bc71a033934d8fff80e5843e26d, type: 2}
-  _isWithRewaredStubAds: 0
+  _isWithRewaredStubAds: 1
+  _dataConfig:
+    _lang: {fileID: 11400000, guid: 1c3ea106460111a4d8c15274acb041b5, type: 2}
+    _device: {fileID: 11400000, guid: 0b982e840ed1af1428af5db945f0dda0, type: 2}
+    _int:
+    - {fileID: 11400000, guid: a207cf91e5c39974c9e3f33803746054, type: 2}
+    - {fileID: 11400000, guid: 9180bff2d7e24ec4c8280d4bc1a06b05, type: 2}
+    - {fileID: 11400000, guid: 10338b80fe1c22741b8d23b7f663ef5b, type: 2}
+    _wallets:
+    - {fileID: 11400000, guid: 39fef53b78a1c8b4f9c92971f16edaed, type: 2}
+    _shops:
+    - {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
+    - {fileID: 11400000, guid: 66d56858059e61243b73760e9b2aa2c8, type: 2}
 --- !u!1001 &389562390264055101
 PrefabInstance:
   m_ObjectHideFlags: 0

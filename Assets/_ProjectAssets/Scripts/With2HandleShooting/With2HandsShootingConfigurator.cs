@@ -9,7 +9,7 @@ public class With2HandsShootingConfigurator : MainSceneConfigurator
     [SerializeField] private IsShootingWith2Hands _provider;
     [SerializeField] private Button _button;
 
-    public override void Configure(IContainerBuilder builder)
+    public override void Configure(IContainerBuilder builder, bool isDebugApi, bool isDebugData)
     {
         builder.RegisterEntryPoint<ShootingWith2HandsHandler>(Lifetime.Singleton)
             .WithParameter(_button)

@@ -106,7 +106,7 @@ namespace Narratore.DI
                 {
                     int damage = _config.OutDamagePerSecond;
 
-                    if (_protection.TryGet(_playerUnit.UnitId, out DamageProtection protection))
+                    if (_protection.TryGet(_playerUnit.EntityId, out DamageProtection protection))
                         damage = protection.Reduce(_config.DamageSourceKey, damage);
 
                     _playerUnit.Hp.ApplyDelta(-damage);

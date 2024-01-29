@@ -17,9 +17,10 @@ namespace Narratore.DI
 
         public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
+            builder.RegisterInstance(_area);
+
             builder.Register<RandomOutCameraHeldPoints>(Lifetime.Singleton).WithParameter(_heldPointsConfig).AsSelf();
             builder.Register<LevelAreaHandler>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces()
-                .WithParameter(_area)
                 .WithParameter(_config)
                 .WithParameter(_warning);
         }

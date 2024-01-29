@@ -30,7 +30,7 @@ MonoBehaviour:
   secretKey:
   - 7320937f711d3b7cc9e74e14d06dd30ca1546629
   Build:
-  - 2.0
+  - 3.0
   SelectedPlatformOrganization:
   - Caesar Shotgun
   SelectedPlatformStudio:

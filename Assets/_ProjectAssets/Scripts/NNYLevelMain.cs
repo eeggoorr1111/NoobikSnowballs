@@ -20,7 +20,6 @@ public sealed class NNYLevelMain : LevelMain
                         LoseWindow loseWindow,
                         WinWindow winWindow,
                         IWithHp playerUnit,
-                        LevelResultData resultData,
                         WalletProvider wallet,
                         CurrencyDescriptor currency,
                         IsShootingWith2Hands isShootingWith2Hands,
@@ -43,7 +42,6 @@ public sealed class NNYLevelMain : LevelMain
         _touchArea.GettedInput += OnCatchedPlayerInput;
 
         _shopWindow.Open();
-        _resultData = resultData;
         _wallet = wallet;
         _currency = currency;
         _isShootingWith2Hands = isShootingWith2Hands;
@@ -53,6 +51,9 @@ public sealed class NNYLevelMain : LevelMain
         _fullscreenAds = fullscreenAds;
         _rewardedAds = rewardedAds;
     }
+
+
+    public override float Relation => 1f;
 
 
     private readonly IUnitsWavesSpawner _spawner;
@@ -65,7 +66,6 @@ public sealed class NNYLevelMain : LevelMain
     private readonly IsShootingWith2Hands _isShootingWith2Hands;
     private readonly ShieldResurrection _shield;
     private readonly IntProvider _recordCounter;
-    private readonly LevelResultData _resultData;
     private readonly WalletProvider _wallet;
     private readonly CurrencyDescriptor _currency;
     private readonly FullscreenAds _fullscreenAds;
@@ -174,13 +174,13 @@ public sealed class NNYLevelMain : LevelMain
             PauseGame();
 
             WinWindow.Result result = await _winWindow.WinWindowTask;
-            int award = _resultData.Coins;
+            int award = 100;
             if (result == WinWindow.Result.AdsContinue)
             {
                 if (_rewardedAds.TryShow())
                     await _rewardedAds.ShowingTask;
 
-                award = _resultData.RewardAdsCoins;
+                award = 300;
             }
 
             _winWindow.CoinsFlyer.ToFly(award);

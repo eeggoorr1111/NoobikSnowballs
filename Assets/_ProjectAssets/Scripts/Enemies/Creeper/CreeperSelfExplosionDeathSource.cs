@@ -32,7 +32,7 @@ namespace Narratore.DI
 
         public void Tick()
         {
-            if (_protection.TryGet(_playerUnit.UnitId, out DamageProtection protection) && protection.enabled)
+            if (_protection.TryGet(_playerUnit.EntityId, out DamageProtection protection) && protection.enabled)
                 return;
 
             Vector3 playerPosition = _playerUnit.Root.position;

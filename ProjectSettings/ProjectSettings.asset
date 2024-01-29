@@ -23,8 +23,8 @@ PlayerSettings:
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 0
   m_SplashScreenDrawMode: 0
-  m_SplashScreenBackgroundAnimationZoom: 1
-  m_SplashScreenLogoAnimationZoom: 1
+  m_SplashScreenBackgroundAnimationZoom: 0
+  m_SplashScreenLogoAnimationZoom: 0
   m_SplashScreenBackgroundLandscapeAspect: 1
   m_SplashScreenBackgroundPortraitAspect: 1
   m_SplashScreenBackgroundLandscapeUvs:
@@ -136,7 +136,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 2.0
+  bundleVersion: 3.0
   preloadedAssets:
   - {fileID: 11400000, guid: 3a0ba99608181fd4ca73754ac4eb54aa, type: 2}
   metroInputSource: 0
@@ -845,7 +845,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    WebGL: GAME_PUSH;GA_ANALYTICS
+    WebGL: GAME_PUSH;GAME_ANALYTICS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -865,7 +865,7 @@ PlayerSettings:
     Stadia: 1
     Standalone: 3
     VisionOS: 1
-    WebGL: 4
+    WebGL: 3
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1

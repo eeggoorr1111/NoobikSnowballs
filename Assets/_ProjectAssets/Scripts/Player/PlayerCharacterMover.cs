@@ -1,18 +1,17 @@
 using Narratore.CameraTools;
 using Narratore.Enums;
 using Narratore.Extensions;
+using Narratore.WorkWithMesh;
 using System;
 using UnityEngine;
+
 
 public interface IPlayerUnitRotator
 {
     void Rotate(Vector3 forward);
 }
 
-public interface IPlayerLastMoveDirection
-{
-    Vector3 LastMoveDirection { get; }
-}
+
 
 public interface ICameraMover
 {
@@ -25,12 +24,13 @@ public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection
     public event Action Moved;
 
 
-    public PlayerCharacterMover(IPlayerMovableUnit unit, ICurrentCameraGetter camera)
+    public PlayerCharacterMover(IPlayerMovableUnit unit, ICurrentCameraGetter camera, MeshFrame area)
     {
         _unit = unit;
         _camera = camera;
         _cameraOffset = _camera.Position - _unit.Root.position;
 
+        _levelAreaBounds = new Bounds(area.transform.position, area.Size.To3D(TwoAxis.XZ, 10f));
         LastMoveDirection = Vector3.forward;
     }
 
@@ -42,6 +42,7 @@ public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection
     private readonly IPlayerMovableUnit _unit;
     private readonly ICurrentCameraGetter _camera;
     private readonly Vector3 _cameraOffset;
+    private readonly Bounds _levelAreaBounds;
     private bool _isMoving;
     
 
@@ -52,8 +53,12 @@ public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection
         {
             Vector3 direction = input.Value.To3D(TwoAxis.XZ, 0).normalized;
             Vector3 cachePosition = _unit.Root.position;
+            Vector3 newPosition = _unit.Root.position + direction * _unit.MoveSpeed.Get() * Time.deltaTime;
 
-            _unit.Root.position += direction * _unit.MoveSpeed.Get() * Time.deltaTime;
+            if (!_levelAreaBounds.Contains(newPosition))
+                return;
+
+            _unit.Root.position = newPosition;
             UpdateCameraPos();
 
             if (!_isMoving)

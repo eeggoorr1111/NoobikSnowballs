@@ -54,7 +54,7 @@ public class PlayerUnitShootRecoil : IDisposable, IInitializable
 
     private void OnShooted(ShootData data)
     {
-        if (!_entities.TryGet(_pushable.UnitId, out EntityRoster entity) ||
+        if (!_entities.TryGet(_pushable.EntityId, out EntityRoster entity) ||
             !TryGetConfig(data.Sample, entity, out ShootingPushConfig config))
         {
             return;

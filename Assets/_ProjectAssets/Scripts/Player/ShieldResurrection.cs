@@ -22,7 +22,7 @@ public class ShieldResurrection : IDisposable
 
     public async void Create()
     {
-        if (_protection.TryGet(_unit.UnitId, out DamageProtection protection))
+        if (_protection.TryGet(_unit.EntityId, out DamageProtection protection))
         {
             _cts = new CancellationTokenSource();
             protection.Enable();
