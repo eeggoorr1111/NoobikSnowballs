@@ -37,7 +37,7 @@ public class EnemiesMover : IBeginnedUpdatable
             targetForward = targetForward.normalized;
 
             float dot = Vector2.Dot(targetForward, (targetPoint - position).normalized);
-            float axceleration = Mathf.Lerp(bot.AxselerationRange.x, bot.AxselerationRange.y, dot.Normalized(0.95f, 1));
+            float axceleration = Mathf.Lerp(bot.AxselerationRange.x, bot.AxselerationRange.y, dot.Normalized(0.95f, 1)) * Time.deltaTime;
 
             bot.Speed.ApplyDelta(axceleration);
 

@@ -1,59 +1,97 @@
 ﻿using Narratore;
 using Narratore.Solutions.Battle;
-using System.Collections.Generic;
+using Narratore.UI;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MobilePlayerShooting : IPreparedUpdatable
+public class MobilePlayerShooting : IBeginnedUpdatable, IDisposable, IBegunGameHandler
 {
-    public MobilePlayerShooting(IEntitiesAspects<Transform> transfomrs, IPlayerUnitShooting playerUnitShooting, PlayerShooting shooting, PlayerEntitiesIds ids, IEntitiesListsBounds bounds)
+    public MobilePlayerShooting(IEntitiesAspects<Transform> transfomrs,
+                                IPlayerUnitShooting playerUnit,
+                                PlayerShooting shooting,
+                                PlayerEntitiesIds ids,
+                                IPlayerUnitRotator rotator,
+                                TouchArea shootArea,
+                                Button rechargeButton)
     {
         _transfomrs = transfomrs;
-        _playerUnitShooting = playerUnitShooting;
+        _playerUnit = playerUnit;
         _shooting = shooting;
         _ids = ids;
-        _bounds = bounds;
+        _rotator = rotator;
+        _shootArea = shootArea;
+        _rechargeButton = rechargeButton;
+
+        _rechargeButton.onClick.AddListener(Recharge);
+        _playerUnit.Shooted += OnShooted;
+        _playerUnit.Recharged += OnRecharged;
+
+        OnRecharged();
+
+
     }
 
 
     private readonly IEntitiesAspects<Transform> _transfomrs;
-    private readonly IEntitiesListsBounds _bounds;
-    private readonly IPlayerUnitShooting _playerUnitShooting;
+    private readonly IPlayerUnitShooting _playerUnit;
     private readonly PlayerEntitiesIds _ids;
+    private readonly IPlayerUnitRotator _rotator;
     private readonly PlayerShooting _shooting;
+    private readonly TouchArea _shootArea;
+    private readonly Button _rechargeButton;
 
-   
+
+    public void BegunGame(LevelConfig config)
+    {
+        _shootArea.gameObject.SetActive(true);
+    }
+
+    public void Dispose()
+    {
+        _rechargeButton.onClick.RemoveListener(Recharge);
+        _playerUnit.Shooted -= OnShooted;
+        _playerUnit.Recharged -= OnRecharged;
+    }
+
     public void Tick()
     {
-        bool isShoot = false;
+        if (_shootArea.IsHold)
+            _rotator.Rotate(GetDirection());
+
+        _shooting.SetInput(_shootArea.IsHold);
+    }
+
+
+    private Vector3 GetDirection()
+    {
+        Vector3 unitPosition = _playerUnit.Position;
+        Vector3 nearestPosition = unitPosition + _rotator.Forward;
+        float minDistance = float.MaxValue;
 
         foreach (var pair in _transfomrs.All)
         {
             int entityId = pair.Key;
-            if (_ids.TryGetOwner(entityId, out int ownerId) && ownerId == PlayersIds.GetBotId(1) && 
-                _bounds.TryGet(entityId, out IReadOnlyList<MovableBounds> bounds))
+            if (_ids.TryGetOwner(entityId, out int ownerId) && ownerId == PlayersIds.GetBotId(1) &&
+                _transfomrs.TryGet(entityId, out Transform aspect))
             {
-                if (IsUnitInShootArea(pair.Value, bounds[0]))
+                Vector3 entityPosition = aspect.position;
+                float sqrMagnitude = (entityPosition - unitPosition).sqrMagnitude;
+                if (sqrMagnitude < minDistance)
                 {
-                    isShoot = true;
-                    break;
+                    minDistance = sqrMagnitude;
+                    nearestPosition = entityPosition;
                 }
             }
         }
 
-        _shooting.SetInput(isShoot);
+        return (nearestPosition  - unitPosition).normalized;
     }
 
+    private void Recharge() => _playerUnit.Recharge();
 
-    private bool IsUnitInShootArea(Transform unitTransf, MovableBounds bounds)
-    {
-        float radius = Mathf.Max(bounds.Bounds.size.x, bounds.Bounds.size.z) / 2;
-        for (int i = 0; i < _playerUnitShooting.ShootAreas.Count; i++)
-        {
-            ShootArea area = _playerUnitShooting.ShootAreas[i];
-            if (area.IsInside(unitTransf.position, radius))
-                return true;
-        }
+    private void OnRecharged() => _rechargeButton.gameObject.SetActive(false);
 
-        return false;
-    }
+    private void OnShooted() =>
+        _rechargeButton.gameObject.SetActive(true);
 }

@@ -116,7 +116,7 @@ public sealed class NNYLevelMain : LevelMain
         if (_spawner.Killed > _recordCounter.Value)
             _recordCounter.Change(_spawner.Killed);
 
-        _isShootingWith2Hands.Set(false);
+        //_isShootingWith2Hands.Set(false);
 
         ContinueGame();
         LosePlayer();
@@ -151,7 +151,7 @@ public sealed class NNYLevelMain : LevelMain
             ContinueGame();
             LosePlayer();
 
-            _isShootingWith2Hands.Set(false);
+            //_isShootingWith2Hands.Set(false);
         }
 
         _loseWindow.Close();
@@ -201,7 +201,7 @@ public sealed class NNYLevelMain : LevelMain
                 await _fullscreenAds.ShowingTask;
 
             _winWindow.Close();
-            _isShootingWith2Hands.Set(false);
+            //_isShootingWith2Hands.Set(false);
 
             // Need return time scale before go to main menu
             ContinueGame();

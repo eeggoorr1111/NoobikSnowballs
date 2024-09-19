@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777b15915159fc745b88952a80eb12aa, type: 3}
   m_Name: FastCreeper_Hp
   m_EditorClassIdentifier: 
-  _desiredEditorDataSource: 0
+  _editorSource: 0
+  _defaultSource: 0
   _desiredBuildDataSource: 0
+  _key: 
   _entity: {fileID: 11400000, guid: f335ffa7c627ed34b8bca22b675c3031, type: 2}
   _stat: {fileID: 11400000, guid: 4b6f3485f81aa0243954fdea8f21ba8d, type: 2}
   _values:
   - _item1: 0
-    _item2: 60
+    _item2: 80

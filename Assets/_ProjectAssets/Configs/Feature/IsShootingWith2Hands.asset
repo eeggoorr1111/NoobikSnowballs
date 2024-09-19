@@ -16,5 +16,5 @@ MonoBehaviour:
   _defaultSource: 0
   _desiredBuildDataSource: 1
   _key: is_shoot_with2_hands
-  _value: 0
-  _defaultValue: 0
+  _value: 1
+  _defaultValue: 1

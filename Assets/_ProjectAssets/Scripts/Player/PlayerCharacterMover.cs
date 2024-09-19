@@ -8,6 +8,9 @@ using UnityEngine;
 
 public interface IPlayerUnitRotator
 {
+    Vector3 Forward { get; }
+
+
     void Rotate(Vector3 forward);
 }
 
@@ -36,9 +39,11 @@ public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection
 
 
     public Vector3 LastMoveDirection { get; private set; }
+    public Vector3 Forward => _unit.Root.forward;
 
 
-    
+
+
     private readonly IPlayerMovableUnit _unit;
     private readonly ICurrentCameraGetter _camera;
     private readonly Vector3 _cameraOffset;
