@@ -19,7 +19,7 @@ namespace Narratore.DI
 
 
 
-        protected override void ChangedState(InfoCanvasState state)
+        protected override void ChangingState(InfoCanvasState state)
         {
             if (state == InfoCanvasState.DefaultCounter)
             {

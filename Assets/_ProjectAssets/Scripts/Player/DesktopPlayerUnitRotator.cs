@@ -4,7 +4,7 @@ using Narratore.Extensions;
 using UnityEngine;
 
 
-public class DesktopPlayerUnitRotator : IBeginnedUpdatable
+public class DesktopPlayerUnitRotator : IBeginnedTickable
 {
     public DesktopPlayerUnitRotator(ICurrentCameraGetter camera, 
                                     IPlayerUnitRotator unitRotator, 

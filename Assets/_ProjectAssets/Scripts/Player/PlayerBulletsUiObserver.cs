@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer.Unity;
 
-public class PlayerBulletsUiObserver : IInitializable, IDisposable, IBeginnedUpdatable
+public class PlayerBulletsUiObserver : IInitializable, IDisposable, IBeginnedTickable
 {
     public PlayerBulletsUiObserver( IPlayerUnitShooting unit, 
                                     TMP_Text leftBulletsLabel, 

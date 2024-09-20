@@ -11,7 +11,7 @@ public class NNYCreoSpiralConfigurator : LevelConfigurator
     [SerializeField] private CreoSpiralPlayerUnitConfig _playerUnitConfig;
 
 
-    public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
+    protected override void ConfigureImpl(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
     {
         builder.Register<CircleHeldPoints>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter(_spawnPointsConfig);
         builder.Register<UnitsWavesSpawner>(Lifetime.Singleton).As<IUnitsWavesSpawner>().WithParameter(PlayersIds.GetBotId(1));

@@ -1,137 +1,71 @@
+using Narratore;
 using Narratore.DI;
 using Narratore.Solutions.Battle;
-using UnityEngine;
-
 
 
 public class BossCreeperBattleRegistrator : CreeperBattleRegistrator<BossCreeperRoster>
 {
-    public BossCreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds, 
-                                        EntitiesAspects<Transform> transforms, 
-                                        EntitiesAspects<IShootingKillable> shootingKillable, 
-                                        EntitiesAspects<IExplosionKillable> explosionKillable, 
-                                        EntitiesAspects<ExplosionUnitDeath> explosionDeath, 
-                                        EntitiesAspects<MovableBot> bots, 
-                                        EntitiesListsBounds bounds, 
-                                        EntitiesAspects<Hp> hps, 
-                                        EntitiesAspects<ReadHp> readHps, 
-                                        MultyExplosionSource explosionSource, 
-                                        EntitiesAspects<CreeperDeathExplosion> creeperDeath, 
-                                        EntitiesAspects<EntityRoster> entities, 
-                                        EntitiesAspects<DropLootData> lootDrop, 
-                                        EntitiesAspects<IDropLootData> readLootDrop, 
-                                        EntitiesAspects<BotShootingConfig> shooting) : base(playerUnitsIds, transforms, shootingKillable, explosionKillable, explosionDeath, bots, bounds, hps, readHps, explosionSource, creeperDeath, entities, lootDrop, readLootDrop)
+    public BossCreeperBattleRegistrator(NNY_BattleData data, Registrators registrators) : base(data, registrators)
     {
-        _shooting = shooting;
     }
 
+    private new readonly NNY_BattleData _data;
 
-    private readonly EntitiesAspects<BotShootingConfig> _shooting;
-
-
-    protected override void RegisterImpl(BossCreeperRoster unit)
+    protected override void UnregisterImpl(BossCreeperRoster entity, bool isClear)
     {
-        base.RegisterImpl(unit);
+        base.UnregisterImpl(entity, isClear);
 
-        _shooting.Set(unit.Id, unit.Shooting);
+        _data.EntityBotShoot.Remove(entity.Id);
     }
 
-    protected override void UnregisterImpl(BossCreeperRoster unit)
+    protected override void RegisterImpl(BossCreeperRoster entity, int playerId, IReadHeldPoint spawnPoint = null)
     {
-        base.UnregisterImpl(unit);
+        base.RegisterImpl(entity, playerId, spawnPoint);
 
-        _shooting.Remove(unit.Id);
+        _data.EntityBotShoot.Set(entity.Id, entity.Shooting);
     }
 }
 
 
 public class CreeperBattleRegistrator : CreeperBattleRegistrator<CreeperRoster>
 {
-    public CreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds, EntitiesAspects<Transform> transforms, EntitiesAspects<IShootingKillable> shootingKillable, EntitiesAspects<IExplosionKillable> explosionKillable, EntitiesAspects<ExplosionUnitDeath> explosionDeath, EntitiesAspects<MovableBot> bots, EntitiesListsBounds bounds, EntitiesAspects<Hp> hps, EntitiesAspects<ReadHp> readHps, MultyExplosionSource explosionSource, EntitiesAspects<CreeperDeathExplosion> creeperDeath, EntitiesAspects<EntityRoster> entities, EntitiesAspects<DropLootData> lootDrop, EntitiesAspects<IDropLootData> readLootDrop) : base(playerUnitsIds, transforms, shootingKillable, explosionKillable, explosionDeath, bots, bounds, hps, readHps, explosionSource, creeperDeath, entities, lootDrop, readLootDrop)
+    public CreeperBattleRegistrator(NNY_BattleData data, Registrators registrators) : base(data, registrators)
     {
     }
 }
 
-public abstract class CreeperBattleRegistrator<T> : EntityBattleRegistrator<T>
+public abstract class CreeperBattleRegistrator<T> : EntityRoster.BattleRegistrator<T>
     where T : CreeperRoster
 {
-    protected CreeperBattleRegistrator(PlayerEntitiesIds playerUnitsIds,
-                                        EntitiesAspects<Transform> transforms,
-                                        EntitiesAspects<IShootingKillable> shootingKillable,
-                                        EntitiesAspects<IExplosionKillable> explosionKillable,
-                                        EntitiesAspects<ExplosionUnitDeath> explosionDeath,
-                                        EntitiesAspects<MovableBot> bots,
-                                        EntitiesListsBounds bounds,
-                                        EntitiesAspects<Hp> hps,
-                                        EntitiesAspects<ReadHp> readHps,
-                                        MultyExplosionSource explosionSource,
-                                        EntitiesAspects<CreeperDeathExplosion> creeperDeath,
-                                        EntitiesAspects<EntityRoster> entities,
-                                        EntitiesAspects<DropLootData> lootDrop,
-                                        EntitiesAspects<IDropLootData> readLootDrop) : base(playerUnitsIds, entities, transforms)
+    protected CreeperBattleRegistrator(NNY_BattleData data, Registrators registrators) : base(data, registrators)
     {
-        _transforms = transforms;
-        _shootingKillable = shootingKillable;
-        _explosionKillable = explosionKillable;
-        _explosionDeath = explosionDeath;
-        _bounds = bounds;
-        _hps = hps;
-        _readHps = readHps;
-        _explosionSource = explosionSource;
-        _bots = bots;
-        _creeperDeath = creeperDeath;
-        _lootDrop = lootDrop;
-        _readLootDrop = readLootDrop;
+
     }
 
 
-    private readonly EntitiesAspects<IShootingKillable> _shootingKillable;
-    private readonly EntitiesAspects<IExplosionKillable> _explosionKillable;
-    private readonly EntitiesAspects<ExplosionUnitDeath> _explosionDeath;
-    private readonly EntitiesAspects<CreeperDeathExplosion> _creeperDeath;
-    private readonly EntitiesAspects<Transform> _transforms;
-    private readonly EntitiesAspects<MovableBot> _bots;
-    private readonly EntitiesListsBounds _bounds;
-    private readonly EntitiesAspects<Hp> _hps;
-    private readonly EntitiesAspects<ReadHp> _readHps;
-    private readonly EntitiesAspects<DropLootData> _lootDrop;
-    private readonly EntitiesAspects<IDropLootData> _readLootDrop;
-    private readonly MultyExplosionSource _explosionSource;
+    private new readonly NNY_BattleData _data;
 
-
-    protected override void UnregisterImpl(T unit)
+    protected override void RegisterImpl(T entity, int playerId, IReadHeldPoint spawnPoint = null)
     {
-        _transforms.Remove(unit.Id);
-        _bounds.Remove(unit.Id);
-        _readHps.Remove(unit.Id);
-        _hps.Remove(unit.Id);
-        _shootingKillable.Remove(unit.Id);
-        _explosionKillable.Remove(unit.Id);
-        _explosionDeath.Remove(unit.Id);
-        _bots.Remove(unit.Id);
-        _creeperDeath.Remove(unit.Id);
-        _lootDrop.Remove(unit.Id);
-        _readLootDrop.Remove(unit.Id);
-
-        _explosionSource.Remove(unit.CreeperDeath);
+        _data.EntityRoot.Set(entity.Id, entity.Root);
+        _data.EntityBounds.Set(entity.Id, entity.Bounds);
+        _data.EntityHp.Set(entity.Id, entity.Hp);
+        _data.EntityReadHp.Set(entity.Id, entity.Hp);
+        _data.EntityPushKillable.Set(entity.Id, entity.CreeperDeath);
+        _data.EntityDropLootData.Set(entity.Id, entity.DropLoot);
+        _data.EntityReadDropLootData.Set(entity.Id, entity.DropLoot);
+        _data.EntityMovableBot.Set(entity.Id, entity.Bot);
     }
 
-    protected override void RegisterImpl(T unit)
+    protected override void UnregisterImpl(T entity, bool isClear)
     {
-        unit.Hp.Maximize();
-
-        _transforms.Set(unit.Id, unit.Root);
-        _bounds.Set(unit.Id, unit.Bounds);
-        _readHps.Set(unit.Id, unit.Hp);
-        _hps.Set(unit.Id, unit.Hp);
-        _shootingKillable.Set(unit.Id, unit.CreeperDeath);
-        _explosionKillable.Set(unit.Id, unit.CreeperDeath);
-        _explosionDeath.Set(unit.Id, unit.CreeperDeath);
-        _creeperDeath.Set(unit.Id, unit.CreeperDeath);
-        _bots.Set(unit.Id, unit.Bot);
-        _lootDrop.Set(unit.Id, unit.DropLoot);
-        _readLootDrop.Set(unit.Id, unit.DropLoot);
-
-        _explosionSource.TryAdd(unit.CreeperDeath);
+        _data.EntityRoot.Remove(entity.Id);
+        _data.EntityBounds.Remove(entity.Id);
+        _data.EntityHp.Remove(entity.Id);
+        _data.EntityReadHp.Remove(entity.Id);
+        _data.EntityPushKillable.Remove(entity.Id);
+        _data.EntityDropLootData.Remove(entity.Id);
+        _data.EntityReadDropLootData.Remove(entity.Id);
+        _data.EntityMovableBot.Remove(entity.Id);
     }
 }

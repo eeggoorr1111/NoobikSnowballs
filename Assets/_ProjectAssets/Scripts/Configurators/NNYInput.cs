@@ -21,7 +21,7 @@ namespace Narratore.DI
         [SerializeField] private LayerMask _desktopShootLayerMask;
 
 
-        public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
+        protected override void ConfigureImpl(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             if (enabled)
             {

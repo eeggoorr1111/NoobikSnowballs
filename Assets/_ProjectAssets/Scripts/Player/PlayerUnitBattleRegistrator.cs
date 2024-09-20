@@ -1,57 +1,38 @@
-﻿using Narratore.Solutions.Battle;
-using UnityEngine;
+﻿using Narratore.DI;
+using Narratore.Solutions.Battle;
 
-public class PlayerUnitBattleRegistrator : EntityBattleRegistrator<PlayerUnitBattleRoster>
+public class PlayerUnitBattleRegistrator : EntityRoster.BattleRegistrator<PlayerUnitRoster>
 {
-    public PlayerUnitBattleRegistrator(PlayerEntitiesIds playerUnitsIds,
-                                        EntitiesAspects<EntityRoster> entities,
-                                        EntitiesAspects<Hp> hps,
-                                        EntitiesAspects<ReadHp> readHps,
-                                        EntitiesAspects<Transform> transforms,
-                                        EntitiesListsBounds bounds,
-                                        LootCollectors lootCollectors,
-                                        EntitiesAspects<DamageProtection> protection,
-                                        EntitiesAspects<IDamageProtection> readProtection) : base(playerUnitsIds, entities, transforms)
+    public PlayerUnitBattleRegistrator(BattleData data, Registrators registrators, PlayerUnitFacade unit) : base(data, registrators)
     {
-        _hps = hps;
-        _readHps = readHps;
-        _transforms = transforms;
-        _bounds = bounds;
-        _lootCollectors = lootCollectors;
-        _protection = protection;
-        _readProtection = readProtection;
+        _unit = unit;
     }
 
+    private readonly PlayerUnitFacade _unit;
 
-    private readonly EntitiesAspects<Hp> _hps;
-    private readonly EntitiesAspects<ReadHp> _readHps;
-    private readonly EntitiesAspects<Transform> _transforms;
-    private readonly EntitiesAspects<DamageProtection> _protection;
-    private readonly EntitiesAspects<IDamageProtection> _readProtection;
-    private readonly EntitiesListsBounds _bounds;
-    private readonly LootCollectors _lootCollectors;
-
-    protected override void RegisterImpl(PlayerUnitBattleRoster unit)
+    protected override void RegisterImpl(PlayerUnitRoster entity, int playerId, IReadHeldPoint spawnPoint = null)
     {
-        _hps.Set(unit.Id, unit.Hp);
-        _readHps.Set(unit.Id, unit.Hp);
-        _transforms.Set(unit.Id, unit.Root);
-        _bounds.Set(unit.Id, unit.Bounds);
-        _protection.Set(unit.Id, unit.ResurrectShield);
-        _readProtection.Set(unit.Id, unit.ResurrectShield);
+        _data.EntityHp.Set(entity.Id, entity.Hp);
+        _data.EntityReadHp.Set(entity.Id, entity.Hp);
+        _data.EntityRoot.Set(entity.Id, entity.Root);
+        _data.EntityBounds.Set(entity.Id, entity.Bounds);
+        _data.EntityProtectMods.Set(entity.Id, entity.ProtectMods);
+        _data.EntityAttackMods.Set(entity.Id, entity.AttackMods);
+        _data.EntityEquipment.Set(entity.Id, entity.Equipment);
 
-        _lootCollectors[unit.LootCollider] = unit.Id;
+        _unit.SetUnit(entity);
     }
 
-    protected override void UnregisterImpl(PlayerUnitBattleRoster unit)
+    protected override void UnregisterImpl(PlayerUnitRoster entity, bool isClear)
     {
-        _hps.Remove(unit.Id);
-        _readHps.Remove(unit.Id);
-        _transforms.Remove(unit.Id);
-        _bounds.Remove(unit.Id);
-        _protection.Remove(unit.Id);
-        _readProtection.Remove(unit.Id);
+        _data.EntityHp.Remove(entity.Id);
+        _data.EntityReadHp.Remove(entity.Id);
+        _data.EntityRoot.Remove(entity.Id);
+        _data.EntityBounds.Remove(entity.Id);
+        _data.EntityProtectMods.Remove(entity.Id);
+        _data.EntityAttackMods.Remove(entity.Id);
+        _data.EntityEquipment.Remove(entity.Id);
 
-        _lootCollectors.Remove(unit.LootCollider);
+        _unit.TryRemoveUnit();
     }
 }

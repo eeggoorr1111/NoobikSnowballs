@@ -5,7 +5,7 @@ using Narratore.Extensions;
 using UnityEngine;
 
 
-public class SpiralPlayerUnitBot : IPreparedUpdatable
+public class SpiralPlayerUnitBot : IPreparedTickable
 {
     public SpiralPlayerUnitBot(PlayerShooting shooting, CreoSpiralPlayerUnitConfig config, PlayerCharacterMover characterMover)
     {

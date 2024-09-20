@@ -3,13 +3,9 @@ using UnityEngine;
 
 namespace Narratore.DI
 {
-    public class CreeperDeathExplosion : ExplosionUnitDeath
+    public class CreeperDeathExplosion : EntityDeath, IPushKillable
     {
-        public void Death()
-        {
-            IExplosionKillable shootingKillable = this;
-            shootingKillable.Death(Vector3.zero, 0);
-        }
+        public void Death(Vector3 impulse) => ToDeath(true);
     }
 }
 

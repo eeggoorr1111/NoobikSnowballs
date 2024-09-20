@@ -11,7 +11,7 @@ public class RecordModeConfigurator : MainSceneConfigurator
     [SerializeField] private LevelModeDescriptor _recordLevelMode;
 
 
-    public override void Configure(IContainerBuilder builder, bool isDebugApi, bool isDebugData)
+    public override void Configure(IContainerBuilder builder, DebugModules debugModules)
     {
         builder.RegisterEntryPoint<RecordModeStarter>(Lifetime.Singleton)
             .WithParameter(_button)

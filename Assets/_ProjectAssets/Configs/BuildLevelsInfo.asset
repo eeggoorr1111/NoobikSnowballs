@@ -15,6 +15,7 @@ MonoBehaviour:
   _shopSceneIndex: -1
   _tutorSceneIndex: -1
   _firstLevelSceneIndex: 1
+  _lvlsOrder: {fileID: 11400000, guid: 330118c3982b10240bdd9ec6a9d13272, type: 2}
   _bioms:
   - _key: (True) Winter
     _name: Winter

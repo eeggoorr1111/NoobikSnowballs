@@ -1,7 +1,7 @@
 ﻿using Narratore;
 using Narratore.UI;
 
-public class DesktopPlayerShooting : IBeginnedUpdatable
+public class DesktopPlayerShooting : IBeginnedTickable
 {
     public DesktopPlayerShooting(PlayerShooting shooting, TouchArea touchArea)
     {

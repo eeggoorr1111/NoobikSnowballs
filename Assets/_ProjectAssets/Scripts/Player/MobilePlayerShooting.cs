@@ -5,9 +5,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobilePlayerShooting : IBeginnedUpdatable, IDisposable, IBegunGameHandler
+public class MobilePlayerShooting : IBeginnedTickable, IDisposable, IBegunGameHandler
 {
-    public MobilePlayerShooting(IEntitiesAspects<Transform> transfomrs,
+    public MobilePlayerShooting(IEntity<Transform> transfomrs,
                                 IPlayerUnitShooting playerUnit,
                                 PlayerShooting shooting,
                                 PlayerEntitiesIds ids,
@@ -33,7 +33,7 @@ public class MobilePlayerShooting : IBeginnedUpdatable, IDisposable, IBegunGameH
     }
 
 
-    private readonly IEntitiesAspects<Transform> _transfomrs;
+    private readonly IEntity<Transform> _transfomrs;
     private readonly IPlayerUnitShooting _playerUnit;
     private readonly PlayerEntitiesIds _ids;
     private readonly IPlayerUnitRotator _rotator;
@@ -72,7 +72,7 @@ public class MobilePlayerShooting : IBeginnedUpdatable, IDisposable, IBegunGameH
         foreach (var pair in _transfomrs.All)
         {
             int entityId = pair.Key;
-            if (_ids.TryGetOwner(entityId, out int ownerId) && ownerId == PlayersIds.GetBotId(1) &&
+            if (_ids.TryGetPlayer(entityId, out int ownerId) && ownerId == PlayersIds.GetBotId(1) &&
                 _transfomrs.TryGet(entityId, out Transform aspect))
             {
                 Vector3 entityPosition = aspect.position;

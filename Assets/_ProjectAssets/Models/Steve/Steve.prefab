@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: _gunSpawner
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 660723351475266599, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _secondHandState
+      value: 
+      objectReference: {fileID: 6895792786677881157}
     - target: {fileID: 811507680945180278, guid: f481107acb654234ab9bfef86011b148, type: 3}
       propertyPath: playOnAwake
       value: 1
@@ -807,6 +811,14 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7316512226463003075, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _slots.Array.data[0]._parent
+      value: 
+      objectReference: {fileID: 4783322086843844194}
+    - target: {fileID: 7316512226463003075, guid: f481107acb654234ab9bfef86011b148, type: 3}
+      propertyPath: _slots.Array.data[1]._parent
+      value: 
+      objectReference: {fileID: 2938177515603402116}
     - target: {fileID: 8337453216864927489, guid: f481107acb654234ab9bfef86011b148, type: 3}
       propertyPath: m_Enabled
       value: 0

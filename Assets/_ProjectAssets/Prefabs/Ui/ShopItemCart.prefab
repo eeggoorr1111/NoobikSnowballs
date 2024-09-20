@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 1
+  _isInvert: 0
   _object: {fileID: 2660667335574565527}
 --- !u!1 &2832784231990941509
 GameObject:
@@ -853,7 +854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1747488216250608844}
-  - component: {fileID: 7340238383587705808}
+  - component: {fileID: 158305018090548492}
   - component: {fileID: 8515875305901903741}
   - component: {fileID: 3748263677777585383}
   m_Layer: 5
@@ -887,7 +888,7 @@ RectTransform:
   m_AnchoredPosition: {x: 138.46002, y: -362.2}
   m_SizeDelta: {x: 249, y: 394}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7340238383587705808
+--- !u!114 &158305018090548492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -896,22 +897,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4539105103856998054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239b3b81573387648a137aeadd5aa211, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e38accbaf435b4479f281eb26a55adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _state: 0
+  _activateConfig: []
   _descriptor: {fileID: 0}
-  _status: 0
   _currencyIcon: {fileID: 7691742785789337740}
   _itemImage: {fileID: 6894939055051607349}
   _costLabel: {fileID: 8442165352358088341}
+  _name: {fileID: 1237395731175854227}
   _buyButton: {fileID: 1316960803143717778}
   _activateButton: {fileID: 7347998463619960032}
-  _name: {fileID: 1237395731175854227}
-  _notBought:
-  - {fileID: 4821626932170439341}
-  _notActive:
-  - {fileID: 1835196107643436287}
-  _active: []
 --- !u!222 &8515875305901903741
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1041,6 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
+  _isInvert: 0
   _object: {fileID: 5958865316837532644}
 --- !u!1 &6956531240146584077
 GameObject:

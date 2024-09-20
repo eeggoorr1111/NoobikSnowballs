@@ -10,7 +10,7 @@ namespace Narratore.DI
         [Header("SPAWN POINTS")]
         [SerializeField] private RandomOutCameraHeldPointsConfig _spawnPointsConfig; 
         
-        public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
+        protected override void ConfigureImpl(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             if (enabled)
             {

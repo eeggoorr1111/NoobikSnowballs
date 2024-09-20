@@ -27,7 +27,7 @@ public class PlayerCharacterMover : IPlayerUnitRotator, IPlayerLastMoveDirection
     public event Action Moved;
 
 
-    public PlayerCharacterMover(IPlayerMovableUnit unit, ICurrentCameraGetter camera, MeshFrame area)
+    public PlayerCharacterMover(IPlayerMovableUnit unit, ICurrentCameraGetter camera, MeshFrameGenerator area)
     {
         _unit = unit;
         _camera = camera;

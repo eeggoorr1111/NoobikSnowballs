@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc8e0a600f157e46810c9a173686219, type: 3}
+  m_Name: Providers
+  m_EditorClassIdentifier: 
+  _lang: {fileID: 11400000, guid: 1c3ea106460111a4d8c15274acb041b5, type: 2}
+  _device: {fileID: 11400000, guid: 0b982e840ed1af1428af5db945f0dda0, type: 2}
+  _audio: {fileID: 0}
+  _lvlsOrder: {fileID: 11400000, guid: 330118c3982b10240bdd9ec6a9d13272, type: 2}
+  _playerWallet: {fileID: 11400000, guid: 39fef53b78a1c8b4f9c92971f16edaed, type: 2}
+  _upgrades: {fileID: 11400000, guid: 4f9b9e8677be22148afa3a07ea4c631e, type: 2}
+  _dailyAwards: {fileID: 0}
+  _shops:
+  - {fileID: 11400000, guid: 0e12ba600db6d814d8a25555a3ea4fa8, type: 2}
+  _int: []
+  _float: []
+  _bool: []
+  _remoteInt: []
+  _remoteFloat: []
+  _remoteBool: []

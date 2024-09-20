@@ -6,9 +6,9 @@ using UnityEngine;
 using Narratore;
 
 
-public class EnemiesMover : IBeginnedUpdatable
+public class EnemiesMover : IBeginnedTickable
 {
-    public EnemiesMover(IEntitiesAspects<MovableBot> bots, SeekSteering seek, IPlayerUnitRoot playerUnit)
+    public EnemiesMover(IEntity<MovableBot> bots, SeekSteering seek, IPlayerUnitRoot playerUnit)
     {
         _bots = bots;
         _rootCharacter = playerUnit.Root;
@@ -16,7 +16,7 @@ public class EnemiesMover : IBeginnedUpdatable
     }
 
 
-    private readonly IEntitiesAspects<MovableBot> _bots;
+    private readonly IEntity<MovableBot> _bots;
     private readonly Transform _rootCharacter;
     private readonly SeekSteering _seek;
     

@@ -63,7 +63,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _ContrastAngle: 1.7
+    - _ContrastAngle: 2
     - _ContrastDistance: 0
     - _Cull: 2
     - _Cutoff: 0.5

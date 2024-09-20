@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class CreeperRoster : EntityRoster
 {
-    public override event UnityAction OutBattle
+    public override event UnityAction<bool> OutBattle
     {
         add { _death.Ended += value; }
         remove { _death.Ended -= value; }
@@ -16,7 +16,7 @@ public class CreeperRoster : EntityRoster
 
     public Hp Hp => _hp;
     public IReadOnlyList< MovableBounds > Bounds => _bounds;
-    public ReadValue<float> Speed => _speed;
+    public MBReadValue<float> Speed => _speed;
     public CreeperDeathExplosion CreeperDeath => _death;
     public MovableBot Bot => _bot;
     public DropLootData DropLoot => _dropLoot;
@@ -25,7 +25,7 @@ public class CreeperRoster : EntityRoster
     [SerializeField] private Hp _hp;
     [SerializeField] private MovableBounds[] _bounds;
     [SerializeField] private CreeperDeathExplosion _death;
-    [SerializeField] private ReadValue<float> _speed;
+    [SerializeField] private MBReadValue<float> _speed;
     [SerializeField] private MovableBot _bot;
     [SerializeField] private DropLootData _dropLoot;
 }

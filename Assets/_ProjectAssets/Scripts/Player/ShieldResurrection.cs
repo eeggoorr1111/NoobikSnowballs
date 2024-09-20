@@ -1,12 +1,13 @@
 using Narratore.Helpers;
 using Narratore.Solutions.Battle;
+using Narratore.Solutions.Battle.Impacts;
 using System;
 using System.Threading;
 using UnityEngine;
 
 public class ShieldResurrection : IDisposable
 {
-    public ShieldResurrection(IEntitiesAspects<DamageProtection> protection, float shieldDuration, IPlayerUnitRoot unit)
+    public ShieldResurrection(IEntity<EntityImpactsMods> protection, float shieldDuration, IPlayerUnitRoot unit)
     {
         _protection = protection;
         _shieldDuration = shieldDuration;
@@ -14,7 +15,7 @@ public class ShieldResurrection : IDisposable
     }
 
 
-    private readonly IEntitiesAspects<DamageProtection> _protection;
+    private readonly IEntity<EntityImpactsMods> _protection;
     private readonly float _shieldDuration;
     private readonly IPlayerUnitRoot _unit;
     private CancellationTokenSource _cts;
@@ -22,15 +23,15 @@ public class ShieldResurrection : IDisposable
 
     public async void Create()
     {
-        if (_protection.TryGet(_unit.EntityId, out DamageProtection protection))
+        if (_protection.TryGet(_unit.EntityId, out EntityImpactsMods protection))
         {
             _cts = new CancellationTokenSource();
-            protection.Enable();
+            //protection.Enable();
 
             bool isCanceled = await UniTaskHelper.Delay(_shieldDuration, _cts.Token);
             if (isCanceled) return;
 
-            protection.Disable();
+            //protection.Disable();
         }
         else
             Debug.LogError("Fail create resurrect shield for player unit. Not found unit protection");

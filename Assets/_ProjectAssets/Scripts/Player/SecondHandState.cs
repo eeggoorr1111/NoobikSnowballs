@@ -16,7 +16,7 @@ public class SecondHandState : Switcheble<SecondHandState.StateKey>
     [SerializeField] private Vector3 _freeElbowRotate;
 
 
-    protected override void ChangedState(StateKey state)
+    protected override void ChangingState(StateKey state)
     {
         if (state == StateKey.Free)
         {

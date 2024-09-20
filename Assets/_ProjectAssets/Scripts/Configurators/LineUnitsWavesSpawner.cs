@@ -13,8 +13,8 @@ namespace Narratore.DI
 {
     public class LineUnitsWavesSpawner : IDisposable, IUnitsWavesSpawner
     {
-        public event Action<IWithId> Spawned;
-        public event Action<IWithId> Dead;
+        public event Action<IWithReadId> Spawned;
+        public event Action<IWithReadId> Dead;
 
 
         public LineUnitsWavesSpawner(IReadOnlyList<ISpawner> spawners, IReadOnlyList<SpawnWavesConfig> waves, IHeldPoints spawnPoints, int playerId, IPlayerUnitRotator unitRotator, IPlayerUnitRoot unit)
@@ -173,7 +173,7 @@ namespace Narratore.DI
         private Vector3 ToSpawn(EntityRoster entity)
         {
             IHeldPoint point = _spawnPoints.Get();
-            IWithId unit = _spawners[entity].Spawn(_playerId, point);
+            IWithReadId unit = _spawners[entity].Spawn(_playerId, point);
 
             _living.Add(unit.Id);
             SpawnedCount++;
@@ -182,7 +182,7 @@ namespace Narratore.DI
             return point.Position;
         }
 
-        private void OnDead(IWithId unit)
+        private void OnDead(IWithReadId unit)
         {
             if (_living.Contains(unit.Id))
             {

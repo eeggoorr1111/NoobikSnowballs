@@ -11,11 +11,11 @@ using VContainer.Unity;
 public class EnemiesPushing : IDisposable, IInitializable
 {
     public EnemiesPushing(  IReadOnlyList<ShootingPushConfig> shootingPushConfigs,
-                            IEntitiesAspects<Transform> transforms,
-                            IEntitiesAspects<MovableBot> movable,
+                            IEntity<Transform> transforms,
+                            IEntity<MovableBot> movable,
                             ShellsLifetime shells,
                             ISampleData sampleData,
-                            IEntitiesAspects<EntityRoster> entities)
+                            IEntity<EntityRoster> entities)
     {
         _transforms = transforms;
         _movable = movable;
@@ -37,9 +37,9 @@ public class EnemiesPushing : IDisposable, IInitializable
 
 
     private readonly Dictionary<Component, Dictionary<Component, ShootingPushConfig>> _shootingPushConfig;
-    private readonly IEntitiesAspects<Transform> _transforms;
-    private readonly IEntitiesAspects<EntityRoster> _entities;
-    private readonly IEntitiesAspects<MovableBot> _movable;
+    private readonly IEntity<Transform> _transforms;
+    private readonly IEntity<EntityRoster> _entities;
+    private readonly IEntity<MovableBot> _movable;
     private readonly ShellsLifetime _shells;
     private readonly ISampleData _sampleData;
     private readonly Dictionary<int, Tween> _pushings = new();
@@ -47,12 +47,12 @@ public class EnemiesPushing : IDisposable, IInitializable
 
     public void Initialize()
     {
-        _shells.HitToUnit += OnHit;
+        _shells.HitToUnitBounds += OnHit;
     }
 
     public void Dispose()
     {
-        _shells.HitToUnit -= OnHit;
+        _shells.HitToUnitBounds -= OnHit;
 
         foreach (var pair in _pushings)
             pair.Value.TryKill();
@@ -72,7 +72,7 @@ public class EnemiesPushing : IDisposable, IInitializable
             return;
         }
 
-        Vector3 afterPushPosition = transf.position + shell.Forward.WithY(0) * config.PushDistance;
+        Vector3 afterPushPosition = transf.position + shell.FlyDirection.WithY(0) * config.PushDistance;
 
         if (_pushings.ContainsKey(victimId))
             _pushings[victimId].TryKill();

@@ -15,7 +15,7 @@ using VContainer.Unity;
 public class PlayerUnitShootRecoil : IDisposable, IInitializable
 {
     public PlayerUnitShootRecoil(IReadOnlyList<ShootingPushConfig> shootingPushConfig,
-                                    IEntitiesAspects<EntityRoster> entities,
+                                    IEntity<EntityRoster> entities,
                                     IPlayerPushableUnit pushable,
                                     ShellsLifetime shells,
                                     ISampleData sampleData,
@@ -31,7 +31,7 @@ public class PlayerUnitShootRecoil : IDisposable, IInitializable
 
 
     private readonly IReadOnlyList<ShootingPushConfig> _shootingPushConfig;
-    private readonly IEntitiesAspects<EntityRoster> _entities;
+    private readonly IEntity<EntityRoster> _entities;
     private readonly IPlayerPushableUnit _pushable;
     private readonly ShellsLifetime _shells;
     private readonly ISampleData _sampleData;
@@ -60,7 +60,7 @@ public class PlayerUnitShootRecoil : IDisposable, IInitializable
             return;
         }
 
-        Vector3 afterPushPosition = _pushable.Root.position - data.GunDirection.WithY(0) * config.PushDistance;
+        Vector3 afterPushPosition = _pushable.Root.position - data.Direction.WithY(0) * config.PushDistance;
 
         _pushing.TryKill();
         _pushing = _pushable.Root.DOMove(afterPushPosition, config.PushDuration)

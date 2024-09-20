@@ -36,7 +36,7 @@ namespace Narratore.DI
 
        
 
-        private void OnKilled(IWithId _)
+        private void OnKilled(IWithReadId _)
         {
             _label.ChangeParams(_spawner.Killed.ToString());
         }
@@ -50,7 +50,7 @@ namespace Narratore.DI
         [SerializeField] private LocalizableLabel _scoreLabel;
 
 
-        public override void Configure(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
+        protected override void ConfigureImpl(IContainerBuilder builder, LevelConfig config, SampleData sampleData)
         {
             builder.RegisterInstance(_window);
             builder.RegisterInstance(_record);
